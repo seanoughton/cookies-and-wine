@@ -11,7 +11,7 @@
 CSV.foreach("db/csv/wines.csv") do |row|
   			new_wine = Wine.create(
   				wine_name: row[0],
-  				grape_varietal: row[1], 
+  				grape_varietal: row[1],
   				origin: row[2],
   				description: row[3]
   				)
@@ -22,7 +22,7 @@ CSV.foreach("db/csv/wines.csv") do |row|
 CSV.foreach("db/csv/cookies.csv") do |row|
   			new_wine = Cookie.create(
   				cookie_name: row[0],
-  				description: row[1], 
+  				description: row[1],
   				link: row[2]
   				)
 		end
@@ -36,19 +36,9 @@ CSV.foreach("db/csv/cookies.csv") do |row|
 @user.save
 
 #PAIRINGS
-CSV.foreach("db/csv/cookies.csv") do |row|
-        new_wine = Cookie.create(
-          cookie_name: row[0],
-          description: row[1], 
-          link: row[2]
-          )
-    end
-
-
-
 
 @pair1 = Pairing.new
-@pair1.user = @user
+@pair1.user = User.first
 @pair1.wine = Wine.first
 @pair1.cookie = Cookie.first
 @pair1.name = "first pairing"
@@ -57,3 +47,9 @@ CSV.foreach("db/csv/cookies.csv") do |row|
 
 
 
+#COMMENTS
+@comment = Comment.new
+@comment.body = "this is a test comment"
+@comment.user = User.first
+@comment.pairing = Pairing.first
+@comment.save

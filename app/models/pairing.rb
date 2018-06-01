@@ -5,5 +5,5 @@ class Pairing < ApplicationRecord
 	belongs_to :wine
 	belongs_to :cookie
 	belongs_to :user
-	belongs_to :comments
+	has_many :comments
 end
