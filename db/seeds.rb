@@ -37,13 +37,14 @@ CSV.foreach("db/csv/cookies.csv") do |row|
 
 #PAIRINGS
 
-@pair1 = Pairing.new
-@pair1.user = User.first
-@pair1.wine = Wine.first
-@pair1.cookie = Cookie.first
-@pair1.name = "first pairing"
-@pair1.rating = 5
-@pair1.save
+CSV.foreach("db/csv/pairings.csv") do |row|
+  			new_pairing = Pairing.create(
+  				rating: row[0],
+  				wine_id: row[1],
+  				cookie_id: row[2],
+          user_id: row[3]
+  				)
+		end
 
 
 

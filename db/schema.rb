@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 2018_06_01_180708) do
   end
 
   create_table "pairings", force: :cascade do |t|
-    t.string "name"
     t.integer "rating"
     t.integer "wine_id"
     t.integer "cookie_id"

@@ -2,3 +2,40 @@
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
   <input type=submit value='logout'>
 <% end %>
+
+<h3> Here are all of the pairings </h3>
+<ul>
+  <%@pairings.each do |pairing| %>
+    <li><%=pairing.wine.wine_name%> paired with <%=pairing.cookie.cookie_name%> with a rating of <%=pairing.rating%>.</li>
+  <%end%>
+</ul>
+
+<h3> Sort/Search Pairings <h3>
+  <h5>Highest Rated Pairing</h5>
+  <h5>Most Commented Pairing</h5>
+  <h5>Newest Pairing</h5>
+
+
+
+<h3> Find a pairing for a specific cookie </h3>
+
+<h3> Find a pairing for a specific wine </h3>
+
+<h3> Create a pairing </h3>
+
+<h3> Here are all of the wines </h3>
+<ul>
+  <%@wines.each do |wine| %>
+    <li><%=wine.wine_name%> | <%=wine.id%></li>
+
+  <%end%>
+</ul>
+
+
+
+<h3> Here are all of the cookies </h3>
+<ul>
+  <%@cookies.each do |cookie| %>
+    <li><%=cookie.cookie_name%> | <%=cookie.id%></li>
+  <%end%>
+</ul>

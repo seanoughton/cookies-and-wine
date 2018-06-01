@@ -1,0 +1,6 @@
+<h3> Here are all of the pairings </h3>
+<ul>
+  <%@pairings.each do |pairing| %>
+    <li><%=pairing.wine.wine_name%> paired with <%=pairing.cookie.cookie_name%> with a rating of <%=pairing.rating%>.</li>
+  <%end%>
+</ul>
