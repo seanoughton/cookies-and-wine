@@ -1,0 +1,13 @@
+<h2> Here is your Wine </h2>
+
+<h3> <%= @wine.wine_name %> </h3>
+<h3> <%= @wine.description %> </h3>
+<h3> <%= @wine.origin %> </h3>
+<h3> <%= @wine.grape_varietal %> </h3>
+
+
+  <h3> Add Another Wine </h3>
+
+  <h3> Here is a link to all of the wines </h3>
+
+  <%= link_to 'all wines', wines_path(@wines)%>

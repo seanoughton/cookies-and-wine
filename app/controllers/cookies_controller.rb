@@ -1,6 +1,7 @@
 class CookiesController < ApplicationController
 
   def index
+    @cookies = Cookie.all
   end
 
 
@@ -9,14 +10,13 @@ class CookiesController < ApplicationController
   end
 
   def create
-    @cookie = Cookie.new(cookie_params)
-    @cookie.user = current_user
-    @cookie.save
+    @cookie = Cookie.create(cookie_params)
     redirect_to @cookie
   end
 
   def show
     @cookie = Cookie.find(params[:id])
+    @cookies = Cookie.all
   end
 
 
@@ -28,7 +28,7 @@ class CookiesController < ApplicationController
 
   private
   def cookie_params
-    params.require(:cookie).permit(:name, :description, :link)
+    params.require(:cookie).permit(:cookie_name, :description, :link)
   end
 
 end

@@ -12,7 +12,6 @@ class PairingsController < ApplicationController
     @pairing = Pairing.new(pairing_params)
     @pairing.user = current_user
     @pairing.save
-    #redirect_to controller: 'pairings', action: 'show'
     redirect_to @pairing
   end
 
