@@ -2,7 +2,6 @@ class CreatePairings < ActiveRecord::Migration[5.2]
   def change
     create_table :pairings do |t|
     	t.string :name
-    	t.string :description
     	t.integer :rating
     	t.integer :wine_id
     	t.integer :cookie_id
