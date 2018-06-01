@@ -1,0 +1,9 @@
+<h1> Here is your pairing </h1>
+
+<h3>
+<%= @pairing.wine.wine_name%> is paired with <%= @pairing.cookie.cookie_name %>.
+</h3>
+
+<h4> Create another pairing </h4>
+<h4> See the list of pairings <h4>
+  <%= link_to 'all pairings', pairings_path(@pairings)%>

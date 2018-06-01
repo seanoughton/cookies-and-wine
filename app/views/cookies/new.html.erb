@@ -1,0 +1,15 @@
+<h2> Add a new cookie <h2>
+
+  <%= form_for @cookie  do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :cookie_name %>
+  <br>
+
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  <br>
+    <%= f.label :link %>
+    <%= f.text_field :link %>
+  <br>
+    <%= f.submit %>
+  <% end %>
