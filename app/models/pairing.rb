@@ -7,7 +7,7 @@ class Pairing < ApplicationRecord
 	belongs_to :user
 	has_many :comments
 
-	#ACTIVE RECOR SCOPE METHODS (MODEL CLASS METHODS)
+	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
 	def self.highest_rated
 		where("rating > '4'")
 	end
@@ -27,10 +27,7 @@ class Pairing < ApplicationRecord
 		order(created_at: :asc).limit(1)
 	end
 
-	#PAIRINGS FOR A SPECIFIC COOKIE - returns all wines paired with a specific cookie
-	def self.wines_with_this_cookie
 
-	end
 
 	#PAIRINGS FOR A SPECIFIC WINE
 

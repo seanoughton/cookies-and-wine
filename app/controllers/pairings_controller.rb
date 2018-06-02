@@ -11,6 +11,7 @@ class PairingsController < ApplicationController
   def create
     @pairing = Pairing.new(pairing_params)
     @pairing.user = current_user
+    @pairing.rating = 1
     @pairing.save
     redirect_to @pairing
   end
@@ -18,9 +19,15 @@ class PairingsController < ApplicationController
   def show
      @pairing = Pairing.find(params[:id])
      @pairings = Pairing.all
+     @ratings = [1,2,3,4,5]
   end
 
   def update
+    byebug
+    #store all of the ratings as an array and the average them
+    @pairing = Pairing.find(params[:id])
+    @rating = params[:pairing][:rating].to_i
+    @pairing.rating = @pairing.rating + @rating
   end
 
   def destroy
@@ -29,7 +36,7 @@ class PairingsController < ApplicationController
   private
 
   def pairing_params
-    params.require(:pairing).permit(:rating, :cookie_id, :wine_id)
+    params.require(:pairing).permit(:cookie_id, :wine_id)
   end
 
 end

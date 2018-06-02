@@ -1,11 +1,7 @@
 <h1> Create a Pairing </h1>
 
 <%= form_for @pairing  do |f| %>
-  <%= f.label :rating %>
-  <%= f.text_field :rating %>
-  <br />
 
-<!-- Need a dropdown list of wines and of cookies that will send through a wine_id and a cookie_id -->
   <%= f.label :Wine %>
   <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%>
   <br>
