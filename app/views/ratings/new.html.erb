@@ -3,7 +3,7 @@
 <h3> Rate this pairing </h3>
 
 <%= form_for(@rating) do |f| %>
-  <%= pairing_id_field(@rating) %>
+  <%= rating_pairing_id_field(@rating) %>
   <br>
   <%= f.label :rating_value %>
   <%= f.select :rating_value, ['1', '2', '3','4','5']%>

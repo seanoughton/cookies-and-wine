@@ -18,7 +18,6 @@ class PairingsController < ApplicationController
   def show
      @pairing = Pairing.find(params[:id])
      @pairings = Pairing.all
-     @rating = Rating.new
   end
 
   def update

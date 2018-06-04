@@ -30,10 +30,16 @@ class Pairing < ApplicationRecord
 
 
 	def rating #returns the average of all of the ratings of an instance of a pairing
-		rating_values = self.ratings.collect do |rating|
-			rating.rating_value
+		#test for edge cases where the pairing does not have a rating
+		if self.ratings.empty?
+			rating = 0
+		else
+			rating_values = self.ratings.collect do |rating|
+				rating.rating_value
+			end
+			rating = rating_values.sum/rating_values.count
 		end
-		rating_values.sum/rating_values.count
+		rating
 	end
 
 

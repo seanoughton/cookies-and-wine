@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :comments
   resources :pairings do
     resources :ratings
+    resources :comments
   end
   resources :wines
   resources :cookies

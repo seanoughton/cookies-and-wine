@@ -8,11 +8,9 @@
 
 
 <%= link_to "Add Rating", new_pairing_rating_path(@pairing) %>
+<%= link_to "Add a Comment", new_pairing_comment_path(@pairing) %>
 
-
-
-<h3> Comment on this pairing </h3>
 
 <h4> Create another pairing </h4>
-<h4> See the list of pairings <h4>
-  <%= link_to 'all pairings', pairings_path(@pairings)%>
+
+<%= link_to 'all pairings', pairings_path(@pairings)%>
