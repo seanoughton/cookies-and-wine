@@ -3,13 +3,19 @@
   <input type=submit value='logout'>
 <% end %>
 
-<h3> Sort/Search Pairings <h3>
-  <h5>Highest Rated Pairing</h5>
-  <h5>Most Commented Pairing</h5>
+
+<%= link_to 'Highest Rated Pairing', pairing_url(@highest_rated_pairing)%><br>
+
+<%= link_to 'Most Commented Pairing', pairing_url(@most_commented_pairing)%><br>
+
   <h5>Newest Pairing</h5>
 
-<h3> Find a pairing for a specific cookie </h3>
+  <h3> Sort/Search Pairings <h3>
 
-<h3> Find a pairing for a specific wine </h3>
+<%= link_to 'all pairings', pairings_path(@pairings)%><br>
 
-<h3> Create a pairing </h3>
+<%= link_to 'Find a pairing for a specific cookie', cookies_url%> <br>
+
+<%= link_to 'Find a pairing for a specific wine', wines_url%> <br>
+
+<%= link_to 'Create a Pairing', new_pairing_url%>

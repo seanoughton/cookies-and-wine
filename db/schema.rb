@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 2018_06_04_161250) do
   end
 
   create_table "pairings", force: :cascade do |t|
+    t.integer "comment_count"
+    t.integer "user_rating"
     t.integer "wine_id"
     t.integer "cookie_id"
     t.integer "user_id"

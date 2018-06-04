@@ -10,7 +10,8 @@ class Pairing < ApplicationRecord
 
 	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
 	def self.highest_rated
-		where("rating > '4'")
+		#where("rating > 3")
+		order(user_rating: :desc).limit(1).first
 	end
 
 	def self.lowest_rated
@@ -18,6 +19,8 @@ class Pairing < ApplicationRecord
 	end
 
 	def self.most_commented
+		#each pairing has a collection of comments
+	
 	end
 
 	def self.newest
@@ -29,7 +32,7 @@ class Pairing < ApplicationRecord
 	end
 
 
-	def rating #returns the average of all of the ratings of an instance of a pairing
+	def updated_rating #averages the rating and updates the database
 		#test for edge cases where the pairing does not have a rating
 		if self.ratings.empty?
 			rating = 0
@@ -38,8 +41,9 @@ class Pairing < ApplicationRecord
 				rating.rating_value
 			end
 			rating = rating_values.sum/rating_values.count
+			self.user_rating = rating #assigns the new rating
 		end
-		rating
+		self.save
 	end
 
 

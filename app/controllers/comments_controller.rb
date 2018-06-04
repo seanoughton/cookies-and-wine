@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user = current_user
     @comment.save
-    @pairing = Pairing.find(params[:rating][:pairing_id])
+    @pairing = Pairing.find(params[:comment][:pairing_id])
     redirect_to pairing_path(@pairing)
   end
 

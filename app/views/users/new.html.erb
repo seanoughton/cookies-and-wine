@@ -1,3 +1,5 @@
+<h2> Sign Up </h2>
+
 <%= form_for @user, controller: 'users', action: 'create' do |f| %>
   <%= f.label :name %>
   <%= f.text_field :user_name %>
@@ -10,3 +12,8 @@
 
   <%= f.submit "create" %>
 <% end %>
+<br>
+<br>
+<h2> Or Log In</h2>
+
+<%= link_to "Log In", '/login' %><br>

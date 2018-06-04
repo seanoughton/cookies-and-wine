@@ -1,16 +1,27 @@
+<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+  <input type=submit value='logout'>
+<% end %>
+
 <h1> Here is your pairing </h1>
 
 <h3>
 <%= @pairing.wine.wine_name%> is paired with <%= @pairing.cookie.cookie_name %>.
 </h3>
 
-<h3> Rating: <%=@pairing.rating%></h3>
+<h3> Rating: <%=@pairing.user_rating%></h3>
+
+<h3> Comments: </h3>
+<ul>
+<%@comments.each do |comment|%>
+  <li><%=comment.body%></li>
+<%end%>
+</ul>
 
 
-<%= link_to "Add Rating", new_pairing_rating_path(@pairing) %>
-<%= link_to "Add a Comment", new_pairing_comment_path(@pairing) %>
+<%= link_to "Add Rating", new_pairing_rating_path(@pairing) %><br>
+<%= link_to "Add a Comment", new_pairing_comment_path(@pairing) %><br>
+
+<%= link_to "Create another pairing", new_pairing_path %><br>
 
 
-<h4> Create another pairing </h4>
-
-<%= link_to 'all pairings', pairings_path(@pairings)%>
+<%= link_to 'All Pairings', pairings_path(@pairings)%>
