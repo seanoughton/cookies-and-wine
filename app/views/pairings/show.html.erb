@@ -4,12 +4,12 @@
 <%= @pairing.wine.wine_name%> is paired with <%= @pairing.cookie.cookie_name %>.
 </h3>
 
-<h3> Rate this pairing </h3>
-<%= form_for @pairing  do |f| %>
-  <%= f.label :rating %>
-  <%= f.select :rating, ['1', '2', '3','4','5']%>
-  <%= f.submit %>
-<% end %>
+<h3> Rating: <%=@pairing.rating%></h3>
+
+
+<%= link_to "Add Rating", new_pairing_rating_path(@pairing) %>
+
+
 
 <h3> Comment on this pairing </h3>
 

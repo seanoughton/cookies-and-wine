@@ -29,6 +29,14 @@ class Pairing < ApplicationRecord
 	end
 
 
+	def rating #returns the average of all of the ratings of an instance of a pairing
+		rating_values = self.ratings.collect do |rating|
+			rating.rating_value
+		end
+		rating_values.sum/rating_values.count
+	end
+
+
 
 	#PAIRINGS FOR A SPECIFIC WINE
 

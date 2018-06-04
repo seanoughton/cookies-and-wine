@@ -11,7 +11,6 @@ class PairingsController < ApplicationController
   def create
     @pairing = Pairing.new(pairing_params)
     @pairing.user = current_user
-    @pairing.rating = 1
     @pairing.save
     redirect_to @pairing
   end
@@ -19,7 +18,7 @@ class PairingsController < ApplicationController
   def show
      @pairing = Pairing.find(params[:id])
      @pairings = Pairing.all
-     @ratings = [1,2,3,4,5]
+     @rating = Rating.new
   end
 
   def update

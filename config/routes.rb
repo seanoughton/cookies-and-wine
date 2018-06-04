@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :ratings
   root 'users#new'
   resources :comments
-  resources :pairings
+  resources :pairings do
+    resources :ratings
+  end
   resources :wines
   resources :cookies
   resources :users
