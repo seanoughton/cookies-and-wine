@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :ratings
   root 'users#new'
   resources :comments
   resources :pairings
