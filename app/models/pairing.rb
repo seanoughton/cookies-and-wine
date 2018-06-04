@@ -19,19 +19,18 @@ class Pairing < ApplicationRecord
 	end
 
 	def self.most_commented
-		#each pairing has a collection of comments
-	
+		order(comment_count: :desc).first
 	end
 
 	def self.newest
-		order(created_at: :desc).limit(1)
+		order(created_at: :desc).first
 	end
 
 	def self.oldest
-		order(created_at: :asc).limit(1)
+		order(created_at: :asc).first
 	end
 
-
+#INSTANCE METHODS
 	def updated_rating #averages the rating and updates the database
 		#test for edge cases where the pairing does not have a rating
 		if self.ratings.empty?
@@ -43,6 +42,11 @@ class Pairing < ApplicationRecord
 			rating = rating_values.sum/rating_values.count
 			self.user_rating = rating #assigns the new rating
 		end
+		self.save
+	end
+
+	def updated_comment_count
+		self.comment_count += 1
 		self.save
 	end
 
