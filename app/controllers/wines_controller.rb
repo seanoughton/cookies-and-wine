@@ -17,6 +17,7 @@ class WinesController < ApplicationController
   def show
     @wine = Wine.find(params[:id])
     @wines = Wine.all
+    @pairing = Pairing.new(wine_id: params[:id])
   end
 
 

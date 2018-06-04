@@ -1,14 +1,30 @@
-<h2> Here is your Cookie </h2>
 
-<h3> <%= @cookie.cookie_name %> </h3>
-<h3> <%= @cookie.description %> </h3>
+<h3> <%= @cookie.cookie_name.titlecase %> </h3>
+<h3>Description: <%= @cookie.description.titlecase %> </h3>
 <h3> Here is the recipe: <%=link_to @cookie.link, @cookie.link %>
 
-  <h3> Create Another Cookie </h3>
-  <!-- link to create new cookie -->
+  <h3> Here are all of the wines it pairs with:</h3>
+<ul>
+  <%@cookie.wines.each do |wine|%>
+  <li>
+    <%= link_to wine.wine_name, wine_path(wine) %>
+  </li>
+  <%end%>
+</ul>
+
+  <%= link_to 'Add a new Cookie', new_cooky_path%>
+
   <h3> Create a Pairing with this Cookie</h3>
-  <!-- nested resources -->
+  <%= form_for @pairing  do |f| %>
 
-  <h3> Here is a link to all of the cookies </h3>
+    <%= f.label :Wine %>
+    <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%>
+    <%= f.hidden_field :cookie_id, value: @cookie.id %>
+    <br />
 
-  <%= link_to 'all cookies', cookies_path(@cookies)%>
+    <%= f.submit %>
+  <% end %> <br><br>
+
+  <%= link_to 'All Cookies', cookies_path%><br>
+    <%= link_to 'All Wines', wines_path%><br>
+    <%= link_to 'All Pairings', pairings_path%>

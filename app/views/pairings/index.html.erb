@@ -1,7 +1,9 @@
 <h3> Here are all of the pairings </h3>
 <ul>
   <%@pairings.each do |pairing| %>
-    <li><%=pairing.wine.wine_name%> paired with <%=pairing.cookie.cookie_name%> with a rating of
+    <li>
+  <%= link_to pairing.wine.wine_name, pairing_path(pairing) %>
+      is paired with <%=link_to pairing.cookie.cookie_name.titlecase, cooky_path(pairing.cookie)%>.  Rating:
       <%=pairing.user_rating%>
   </li>
   <%end%>

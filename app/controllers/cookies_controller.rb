@@ -17,6 +17,7 @@ class CookiesController < ApplicationController
   def show
     @cookie = Cookie.find(params[:id])
     @cookies = Cookie.all
+    @pairing = Pairing.new(cookie_id: params[:id])
   end
 
 
