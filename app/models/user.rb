@@ -5,4 +5,5 @@ class User < ApplicationRecord
 	#RELATIONSHIPS
 	has_many :pairings
 	has_many :comments
+	has_many :ratings
 end

@@ -6,6 +6,7 @@ class Pairing < ApplicationRecord
 	belongs_to :cookie
 	belongs_to :user
 	has_many :comments
+	has_many :ratings
 
 	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
 	def self.highest_rated
