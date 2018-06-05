@@ -2,6 +2,7 @@ class Wine < ApplicationRecord
 
 	#VALIDATIONS
 	validates :wine_name, presence: true
+	validates :wine_name, uniqueness: true
 	validates :grape_varietal, presence: true
 	validates :origin, presence: true
 	validates :description, presence: true

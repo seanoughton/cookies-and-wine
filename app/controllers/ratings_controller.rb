@@ -13,13 +13,14 @@ class RatingsController < ApplicationController
   def create
     @rating = Rating.new(rating_params)
     @rating.user = current_user
-    @rating.save
-    #at this point the pairing has had this rating added to it's collection of ratings
-    #when you create a rating you have to update the pairings rating
-    @pairing = Pairing.find(params[:rating][:pairing_id])
-    #@pairing.ratings << @rating
-    @pairing.updated_rating
-    redirect_to pairing_path(@pairing)
+    if @rating.valid?
+      @rating.save
+      @pairing = Pairing.find(params[:rating][:pairing_id])
+      @pairing.updated_rating
+      redirect_to pairing_path(@pairing)
+    else
+    render :new
+    end
   end
 
   def show

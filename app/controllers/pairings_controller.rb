@@ -11,10 +11,15 @@ class PairingsController < ApplicationController
   def create
     @pairing = Pairing.new(pairing_params)
     @pairing.user = current_user
-    @pairing.comment_count = 0
-    @pairing.user_rating = 1
-    @pairing.save
-    redirect_to @pairing
+    if @pairing.valid?
+      @pairing.comment_count = 0
+      @pairing.user_rating = 1
+      @pairing.save
+      redirect_to @pairing
+    else
+      render :new
+    end
+
   end
 
   def show
