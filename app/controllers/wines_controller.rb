@@ -24,13 +24,17 @@ class WinesController < ApplicationController
     @wine = Wine.find(params[:id])
     @wines = Wine.all
     @pairing = Pairing.new(wine_id: params[:id])
+    @user = current_user
   end
 
 
   def update
   end
 
-  def delete
+  def destroy
+    Pairing.delete_associated_pairings_for_wine(params[:id])
+    Wine.find(params[:id]).destroy
+    redirect_to wines_url
   end
 
   private

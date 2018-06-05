@@ -33,6 +33,7 @@ CSV.foreach("db/csv/cookies.csv") do |row|
 @user.user_name = "admin"
 @user.email = "admin@gmail.com"
 @user.zipcode = 94607
+@user.admin = true
 @user.save
 
 #PAIRINGS

@@ -1,5 +1,8 @@
 class Comment < ApplicationRecord
 
+	#RELATIONSHIPS
+	belongs_to :user
+	belongs_to :pairing
 
 	#VALIDATIONS
 
@@ -7,8 +10,6 @@ class Comment < ApplicationRecord
 	validates :body, length: {maximum: 25, too_long: "%{count} characters is the maximum allowed" }
 	validates :body, length: {minimum: 2, too_short: "%{count} characters is the minimum allowed" }
 
-	#RELATIONSHIPS
-	belongs_to :user
-	belongs_to :pairing
+
 
 end

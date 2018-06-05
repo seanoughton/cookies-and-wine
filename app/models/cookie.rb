@@ -1,5 +1,10 @@
 class Cookie < ApplicationRecord
 
+	#RELATIONSHIPS
+	has_many :pairings
+	#a cookie has many wines that it can pair with
+	has_many :wines, through: :pairings
+
 	#VALIDATIONS
 	validates :cookie_name, presence: true
 	validates :cookie_name, uniqueness: true
@@ -12,10 +17,7 @@ validates :description, length: {minimum: 2, too_short: "%{count} characters is 
 
 	#validation that the link is in a url format
 
-	#RELATIONSHIPS
-	has_many :pairings
-	#a cookie has many wines that it can pair with
-	has_many :wines, through: :pairings
+
 
 	#PAIRINGS FOR A SPECIFIC COOKIE - returns all wines paired with a specific cookie
 	def paired_wines #instance method

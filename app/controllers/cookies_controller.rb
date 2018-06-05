@@ -1,5 +1,5 @@
 class CookiesController < ApplicationController
-
+  before_action :require_logged_in
   def index
     @cookies = Cookie.all
   end
@@ -25,13 +25,17 @@ class CookiesController < ApplicationController
     @cookie = Cookie.find(params[:id])
     @cookies = Cookie.all
     @pairing = Pairing.new(cookie_id: params[:id])
+    @user = current_user
   end
 
 
   def update
   end
 
-  def delete
+  def destroy
+    Pairing.delete_associated_pairings_for_cookie(params[:id])
+    Cookie.find(params[:id]).destroy
+    redirect_to cookies_url
   end
 
   private

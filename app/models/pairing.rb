@@ -1,5 +1,12 @@
 class Pairing < ApplicationRecord
 
+	#RELATIONSHIPS
+	belongs_to :wine
+	belongs_to :cookie
+	belongs_to :user
+	has_many :comments
+	has_many :ratings
+
 	#VALIDATIONS
 	validates :wine_id, presence: {message: "Must Have a Wine"}
 	validates :cookie_id, presence: {message: "Must Have a Cookie"}
@@ -11,14 +18,8 @@ class Pairing < ApplicationRecord
 			errors.add(:pairing, "This Pairing Already Exists. Try Creating a Different Pairing")
 		end
 	end
-	#prevent the same pairing from being created
 
-	#RELATIONSHIPS
-	belongs_to :wine
-	belongs_to :cookie
-	belongs_to :user
-	has_many :comments
-	has_many :ratings
+
 
 	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
 	def self.highest_rated
@@ -42,6 +43,19 @@ class Pairing < ApplicationRecord
 		order(created_at: :asc).first
 	end
 
+	def self.delete_associated_pairings_for_cookie(cookie_id)
+		Pairing.where(cookie_id: cookie_id).find_each do |pairing|
+		  pairing.destroy
+		end
+	end
+
+
+		def self.delete_associated_pairings_for_wine(wine_id)
+			Pairing.where(wine_id: wine_id).find_each do |pairing|
+			  pairing.destroy
+			end
+		end
+
 #INSTANCE METHODS
 	def updated_rating #averages the rating and updates the database
 		#test for edge cases where the pairing does not have a rating
@@ -64,7 +78,7 @@ class Pairing < ApplicationRecord
 
 
 
-	#PAIRINGS FOR A SPECIFIC WINE
+
 
 
 end

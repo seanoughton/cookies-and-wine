@@ -1,5 +1,10 @@
 class User < ApplicationRecord
 
+	#RELATIONSHIPS
+	has_many :pairings
+	has_many :comments
+	has_many :ratings
+
 	#VALIDATIONS
 	has_secure_password
 	validates :user_name, presence: true
@@ -21,8 +26,19 @@ class User < ApplicationRecord
 		end
 	end
 
-	#RELATIONSHIPS
-	has_many :pairings
-	has_many :comments
-	has_many :ratings
+	#AUTHORIZATIONS (STUFF ONLY THE ADMIN CAN DO)
+	#EDIT/DELETE A User, Pairing, Wine, Cookie, Comment
+
+	#A USER CAN EDIT THEIR OWN USER PROFILE
+	#A USER CAN EDIT/DELETE THEIR OWN PAIRINGS?
+
+	def is_admin?
+		self.admin
+	end
+
+
+
+
+
+
 end

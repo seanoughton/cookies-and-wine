@@ -1,8 +1,11 @@
 
 <h3> <%= @cookie.cookie_name.titlecase %> </h3>
 <h3>Description: <%= @cookie.description.titlecase %> </h3>
-<h3> Here is the recipe: <%=link_to @cookie.link, @cookie.link %>
+<h3> Here is the recipe: <%=link_to @cookie.link, @cookie.link %><br>
 
+  <% if user_admin? %>
+  <%= link_to "Delete", @cookie, method: :delete, data: {confirm: "Really?!"} %>
+  <% end %>
   <h3> Here are all of the wines it pairs with:</h3>
 <ul>
   <%@cookie.wines.each do |wine|%>
