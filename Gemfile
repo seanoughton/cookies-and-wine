@@ -39,7 +39,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bcrypt'
 
 gem "validate_url"
-gem 'valid_email'
+gem "valid_email2"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
