@@ -16,10 +16,10 @@ class RatingsController < ApplicationController
     if @rating.valid?
       @rating.save
       @pairing = Pairing.find(params[:rating][:pairing_id])
-      @pairing.updated_rating
+      @pairing.update_rating
       redirect_to pairing_path(@pairing)
     else
-    render :new
+      render :new
     end
   end
 

@@ -1,0 +1,12 @@
+
+<h2> Here are all of the Comments </h2>
+
+<ol>
+<%@comments.each do |comment| %>
+  <li><%=link_to comment.body, pairing_url(comment.pairing)%> </li>
+<%end%>
+</ol>
+
+
+
+<%= link_to 'Home', home_url%>

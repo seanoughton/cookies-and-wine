@@ -3,7 +3,17 @@
   <%@pairings.each do |pairing| %>
     <li>
   <%= link_to pairing.wine.wine_name, pairing_path(pairing) %>
-      is paired with <%=link_to pairing.cookie.cookie_name.titlecase, cooky_path(pairing.cookie)%>.  Rating:
+      is paired with <%=link_to pairing.cookie.cookie_name.titlecase, pairing_path(pairing)%>.  Rating:
+      <%=pairing.user_rating%>
+  </li>
+  <%end%>
+</ul>
+
+<ul>
+  <%@pairings.each do |pairing| %>
+    <li>
+  <%= link_to pairing.wine.wine_name, pairing_path(pairing) %>
+      is paired with <%=link_to pairing.cookie.cookie_name.titlecase, pairing_path(pairing)%>.  Rating:
       <%=pairing.user_rating%>
   </li>
   <%end%>

@@ -1,4 +1,4 @@
-<h1>Add a Comment  </h1>
+<h1>Edit Comment  </h1>
 
 <%= form_for(@comment) do |f| %>
 
@@ -14,12 +14,13 @@
   </div>
 <% end %>
 
-  <%= comment_pairing_id_field(@comment) %>
-  <br>
-  <%= f.label :Add_Comment %>
+<%= hidden_field_tag "comment[pairing_id]", @comment.pairing_id %>
+<%= hidden_field_tag "comment[user_id]", @comment.user_id %>
+
+  <%= f.label :Edit_Comment %>
   <%= f.text_field :body %>
 
   <%= f.submit %>
-<% end %>
+<% end %><br>
 
-<%= link_to 'Home', home_url%>
+<br><%= link_to 'Home', home_url%>

@@ -10,7 +10,7 @@ class Pairing < ApplicationRecord
 	#VALIDATIONS
 	validates :wine_id, presence: {message: "Must Have a Wine"}
 	validates :cookie_id, presence: {message: "Must Have a Cookie"}
-	validate :pairing_already_exists
+	#validate :pairing_already_exists
 
 	def pairing_already_exists
 		pairing = Pairing.find_by(wine_id: self.wine_id, cookie_id: self.cookie_id)
@@ -22,6 +22,11 @@ class Pairing < ApplicationRecord
 
 
 	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
+
+	def self.sort_by_ratings
+		order(user_rating: :desc).to_a
+	end
+
 	def self.highest_rated
 		#where("rating > 3")
 		order(user_rating: :desc).limit(1).first
@@ -57,10 +62,9 @@ class Pairing < ApplicationRecord
 		end
 
 #INSTANCE METHODS
-	def updated_rating #averages the rating and updates the database
-		#test for edge cases where the pairing does not have a rating
+	def update_rating #averages the rating and updates the database
 		if self.ratings.empty?
-			rating = 0
+			self.user_rating = 1
 		else
 			rating_values = self.ratings.collect do |rating|
 				rating.rating_value
@@ -68,7 +72,7 @@ class Pairing < ApplicationRecord
 			rating = rating_values.sum/rating_values.count
 			self.user_rating = rating #assigns the new rating
 		end
-		self.save
+		self.save(validate: false) #might need to change this
 	end
 
 	def updated_comment_count

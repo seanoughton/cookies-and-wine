@@ -26,6 +26,7 @@ class PairingsController < ApplicationController
      @pairing = Pairing.find(params[:id])
      @pairings = Pairing.all
      @comments = Comment.all
+     @user = current_user
   end
 
   def update
@@ -37,6 +38,8 @@ class PairingsController < ApplicationController
   end
 
   def destroy
+    Pairing.find(params[:id]).destroy
+    redirect_to pairings_url
   end
 
   private
