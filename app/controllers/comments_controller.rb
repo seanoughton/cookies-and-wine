@@ -13,10 +13,15 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.user = current_user
-    @comment.save
-    @pairing = Pairing.find(params[:comment][:pairing_id])
-    @pairing.updated_comment_count
-    redirect_to pairing_path(@pairing)
+    if @comment.valid?
+      @comment.save
+      @pairing = Pairing.find(params[:comment][:pairing_id])
+      @pairing.updated_comment_count
+      redirect_to pairing_path(@pairing)
+    else
+      render :new
+    end
+
   end
 
   def show
