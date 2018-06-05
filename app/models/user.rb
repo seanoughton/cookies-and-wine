@@ -6,6 +6,7 @@ class User < ApplicationRecord
 	validates :password, presence: true
 	validates :zipcode, presence: true
 	validates :zipcode, numericality: { only_integer: true }
+	#validates :email, :presence => true, :email => true
 	validates :password, presence: true
 
 	#RELATIONSHIPS

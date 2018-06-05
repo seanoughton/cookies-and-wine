@@ -5,6 +5,11 @@ class Wine < ApplicationRecord
 	validates :grape_varietal, presence: true
 	validates :origin, presence: true
 	validates :description, presence: true
+	validates :description, length: {maximum: 25, too_long: "%{count} characters is the maximum allowed" }
+validates :description, length: {minimum: 2, too_short: "%{count} characters is the minimum allowed" }
+
+
+	#some kind of validation that prevents the description from just being numbers
 
 	#RELATIONSHIPS
 	has_many :pairings
