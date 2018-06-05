@@ -1,5 +1,10 @@
 class Cookie < ApplicationRecord
 
+	#VALIDATIONS
+	validates :cookie_name, presence: true
+	validates :description, presence: true
+	validates :link, presence: true
+
 	#RELATIONSHIPS
 	has_many :pairings
 	#a cookie has many wines that it can pair with

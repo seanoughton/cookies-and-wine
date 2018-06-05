@@ -10,8 +10,14 @@ class WinesController < ApplicationController
   end
 
   def create
-    @wine = Wine.create(wine_params)
-    redirect_to @wine
+    @wine = Wine.new(wine_params)
+    if @wine.valid?
+      @wine.save
+      redirect_to @wine
+    else
+      render :new
+    end
+
   end
 
   def show

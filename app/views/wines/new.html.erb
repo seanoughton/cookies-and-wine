@@ -1,7 +1,17 @@
 <h2> Add a new wine<h2>
 
   <%= form_for @wine  do |f| %>
-    <%= f.label :name %>
+
+  <% if @wine.errors.any? %>
+    <div id="error_explanation" class="field_with_errors">
+      <ul>
+      <% @wine.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <%= f.label :wine_name %>
     <%= f.text_field :wine_name %>
   <br>
 

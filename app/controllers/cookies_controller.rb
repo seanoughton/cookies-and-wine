@@ -10,8 +10,15 @@ class CookiesController < ApplicationController
   end
 
   def create
-    @cookie = Cookie.create(cookie_params)
-    redirect_to @cookie
+    @cookie = Cookie.new(cookie_params)
+    if @cookie.valid?
+      @cookie.save
+      redirect_to @cookie
+    else
+      render :new
+    end
+
+
   end
 
   def show
