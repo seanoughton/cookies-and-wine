@@ -3,7 +3,7 @@
   <input type=submit value='logout'>
 <% end %>
 
-
+<br>
 <%= link_to 'Highest Rated Pairing', pairing_url(@highest_rated_pairing)%><br>
 
 <%= link_to 'Most Commented Pairing', pairing_url(@most_commented_pairing)%><br>
@@ -17,4 +17,7 @@
 
 <%= link_to 'Find a pairing for a specific wine', wines_url%> <br>
 
-<%= link_to 'Create a Pairing', new_pairing_url%>
+<%= link_to 'Create a Pairing', new_pairing_url%><br>
+
+<%= link_to 'Add a Wine', new_wine_url%><br>
+<%= link_to 'Add a Cookie', new_cooky_url%>

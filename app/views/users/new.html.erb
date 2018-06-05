@@ -1,6 +1,18 @@
 <h2> Sign Up </h2>
 
 <%= form_for @user, controller: 'users', action: 'create' do |f| %>
+
+
+<% if @user.errors.any? %>
+  <div id="error_explanation" class="field_with_errors">
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
   <%= f.label :name %>
   <%= f.text_field :user_name %>
 

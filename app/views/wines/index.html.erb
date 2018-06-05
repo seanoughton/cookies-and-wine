@@ -4,6 +4,10 @@
 
 <ul>
   <%@wines.each do |wine| %>
-    <li><%=wine.wine_name%> <%=wine.id%></li>
+    <li>
+      <%=link_to wine.wine_name, wine_path(wine)%>
+    </li>
   <%end%>
 </ul>
+
+<%= link_to 'Home', home_url%>
