@@ -1,4 +1,5 @@
 <h3> Here are all of the pairings </h3>
+
 <ul>
   <%@pairings.each do |pairing| %>
     <li>
@@ -10,7 +11,17 @@
 </ul>
 
 <ul>
-  <%@pairings.each do |pairing| %>
+  <%@highest_to_lowest.each do |pairing| %>
+    <li>
+  <%= link_to pairing.wine.wine_name, pairing_path(pairing) %>
+      is paired with <%=link_to pairing.cookie.cookie_name.titlecase, pairing_path(pairing)%>.  Rating:
+      <%=pairing.user_rating%>
+  </li>
+  <%end%>
+</ul>
+
+<ul>
+  <%@lowest_to_highest.each do |pairing| %>
     <li>
   <%= link_to pairing.wine.wine_name, pairing_path(pairing) %>
       is paired with <%=link_to pairing.cookie.cookie_name.titlecase, pairing_path(pairing)%>.  Rating:

@@ -23,8 +23,12 @@ class Pairing < ApplicationRecord
 
 	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
 
-	def self.sort_by_ratings
+	def self.highest_to_lowest
 		order(user_rating: :desc).to_a
+	end
+
+	def self.lowest_to_highest
+		order(user_rating: :asc).to_a
 	end
 
 	def self.highest_rated
