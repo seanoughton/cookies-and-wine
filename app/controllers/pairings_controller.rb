@@ -2,8 +2,12 @@ class PairingsController < ApplicationController
 
   def index
     @pairings = Pairing.all
-    @highest_to_lowest = Pairing.highest_to_lowest
-    @lowest_to_highest = Pairing.lowest_to_highest
+    #@highest_to_lowest = Pairing.highest_to_lowest
+    #@lowest_to_highest = Pairing.lowest_to_highest
+    @highest_rated_pairing = Pairing.highest_rated
+    @most_commented_pairing = Pairing.most_commented
+    @newest_pairing = Pairing.newest
+    @oldest_pairing = Pairing.oldest
   end
 
   def new

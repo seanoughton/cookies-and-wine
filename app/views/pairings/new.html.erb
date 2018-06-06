@@ -26,3 +26,7 @@
 <%= link_to 'Wines', wines_path%><br>
 <%= link_to 'Cookies', cookies_path%><br>
 <%= link_to 'Home', home_url%>
+
+<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+  <input type=submit value='logout'>
+<% end %>

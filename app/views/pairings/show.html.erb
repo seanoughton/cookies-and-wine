@@ -8,7 +8,13 @@
 <h3> Comments: <%=@pairing.comment_count%></h3>
 <ul>
 <%@pairing.comments.each do |comment|%>
-  <li><%=comment.body%></li>
+  <li>
+    <%=comment.body%>
+    <% if user_admin? %>
+      <%= link_to "Delete Comment", edit_comment_url(comment) %>
+    <% end %><br>
+  </li>
+
 <%end%>
 </ul><br>
 
@@ -26,3 +32,7 @@
 <%= link_to 'All Pairings', pairings_path(@pairings)%><br>
 
 <%= link_to 'Home', home_url%>
+
+<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+  <input type=submit value='logout'>
+<% end %>

@@ -33,6 +33,7 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
+    @user = current_user
   end
 
   def update
@@ -49,6 +50,7 @@ class CommentsController < ApplicationController
   def destroy
     comment = Comment.find(params[:id])
     comment.destroy
+    redirect_to pairings_path
   end
 
 private

@@ -10,7 +10,7 @@ class Pairing < ApplicationRecord
 	#VALIDATIONS
 	validates :wine_id, presence: {message: "Must Have a Wine"}
 	validates :cookie_id, presence: {message: "Must Have a Cookie"}
-	#validate :pairing_already_exists
+	validate :pairing_already_exists
 
 	def pairing_already_exists
 		pairing = Pairing.find_by(wine_id: self.wine_id, cookie_id: self.cookie_id)
@@ -81,7 +81,7 @@ class Pairing < ApplicationRecord
 
 	def updated_comment_count
 		self.comment_count += 1
-		self.save
+		self.save(validate: false)
 	end
 
 
