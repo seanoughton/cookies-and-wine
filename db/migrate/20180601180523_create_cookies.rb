@@ -4,6 +4,7 @@ class CreateCookies < ActiveRecord::Migration[5.2]
     	t.string :cookie_name
     	t.string :description
     	t.string :link
+      t.integer :user_id
       t.timestamps
     end
   end

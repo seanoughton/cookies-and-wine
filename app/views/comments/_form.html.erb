@@ -12,10 +12,10 @@
   </div>
 <% end %>
 
-  <%= comment_pairing_id_field(@comment) %>
   <br>
   <%= f.label :Add_Comment %>
   <%= f.text_field :body %>
-
+  <%=comment_pairing_id_field(@comment)%>
+  <%=id_field(@comment,@user)%>
   <%= f.submit %>
 <% end %>

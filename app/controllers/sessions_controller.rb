@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
         u.user_name = auth['info']['name']
         u.email = auth['info']['email']
         u.image = auth['info']['image']
+        u.password = "password"
       end
     else #if logging in directly
         @user = User.find_by(user_name: params[:user][:user_name])

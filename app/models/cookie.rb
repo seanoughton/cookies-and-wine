@@ -5,6 +5,8 @@ class Cookie < ApplicationRecord
 	#a cookie has many wines that it can pair with
 	has_many :wines, through: :pairings
 
+	belongs_to :user
+
 	#VALIDATIONS
 	validates :cookie_name, presence: true
 	validates :cookie_name, uniqueness: true

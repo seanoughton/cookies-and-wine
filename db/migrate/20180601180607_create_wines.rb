@@ -5,6 +5,7 @@ class CreateWines < ActiveRecord::Migration[5.2]
     	t.string :grape_varietal
     	t.string :origin
     	t.string :description
+      t.integer :user_id
       t.timestamps
     end
   end

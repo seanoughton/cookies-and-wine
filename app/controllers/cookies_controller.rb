@@ -17,8 +17,6 @@ class CookiesController < ApplicationController
     else
       render :new
     end
-
-
   end
 
   def show
@@ -46,7 +44,7 @@ class CookiesController < ApplicationController
 
   private
   def cookie_params
-    params.require(:cookie).permit(:cookie_name, :description, :link)
+    params.require(:cookie).permit(:cookie_name, :description, :link, :user_id)
   end
 
 end

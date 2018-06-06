@@ -8,13 +8,5 @@ module CommentsHelper
   end
 
 
-#COME BACK TO THIS
-  def all_comments(comments)
-    comments.collect do |comment|
-      "<li>#{link_to comment.body, pairing_url(comment.pairing)}</li><"
-    end.join
-
-  end
-
 
 end

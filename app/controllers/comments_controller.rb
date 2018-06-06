@@ -3,18 +3,21 @@ class CommentsController < ApplicationController
   def index
     @comments = Comment.all
   end
+
   def new
+
     if params[:pairing_id] && !Pairing.exists?(params[:pairing_id])
       redirect_to pairings_path, alert: "Pairing not found."
     else
       @comment = Comment.new(pairing_id: params[:pairing_id])
+      @pairing = Pairing.find(params[:pairing_id])
+      @user = current_user
     end
 
   end
 
   def create
     @comment = Comment.new(comment_params)
-    @comment.user = current_user
     if @comment.valid?
       @comment.save
       @pairing = Pairing.find(params[:comment][:pairing_id])

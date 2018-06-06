@@ -4,13 +4,15 @@ class User < ApplicationRecord
 	has_many :pairings
 	has_many :comments
 	has_many :ratings
+	has_many :cookies
+	has_many :wines
 
 	#VALIDATIONS
 	has_secure_password #conflicts with omniauth
 
 	validates :user_name, presence: true
 	validates :user_name, uniqueness: true
-	validates :password, presence: true
+	#validates :password, presence: true
 	#validates :zipcode, presence: true
 	#validates :zipcode, numericality: { only_integer: true }
 	validates :email, presence: true, 'valid_email_2/email': true

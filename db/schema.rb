@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_161250) do
     t.string "cookie_name"
     t.string "description"
     t.string "link"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -63,6 +64,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_161250) do
     t.string "grape_varietal"
     t.string "origin"
     t.string "description"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
