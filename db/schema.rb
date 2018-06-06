@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(version: 2018_06_04_161250) do
     t.integer "zipcode"
     t.string "password_digest"
     t.boolean "admin", default: false
+    t.string "uid"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
