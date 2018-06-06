@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   end
 
   def create #signup
-    #@user = User.create(user_params)
     @user = User.new(user_params)
     if @user.valid?
       @user.save
@@ -17,17 +16,30 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    if is_current_user?(params[:id])
+      @user = User.find(params[:id])
+    else
+      redirect_to controller: 'sessions', action: 'new'
+    end
   end
 
   def edit
-    @user = User.find(params[:id])
+    if is_current_user?(params[:id])
+      @user = User.find(params[:id])
+    else
+      redirect_to controller: 'sessions', action: 'new'
+    end
   end
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    render :show
+    if is_current_user?(params[:id])
+      @user.update(user_params)
+      render :show
+    else
+      redirect_to controller: 'sessions', action: 'new'
+    end
+
   end
 
   private

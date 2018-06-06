@@ -1,5 +1,5 @@
 class PairingsController < ApplicationController
-
+  before_action :require_logged_in
   def index
     @pairings = Pairing.all
     #@highest_to_lowest = Pairing.highest_to_lowest

@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
   def require_logged_in
     return redirect_to(controller: 'sessions', action: 'new') unless logged_in?
   end
+
+  def is_current_user?(params_id)
+    session[:user_id] == params_id.to_i
+  end
 end
