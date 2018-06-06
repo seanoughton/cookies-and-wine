@@ -1,28 +1,5 @@
 <h2> Add a new cookie <h2>
 
-  <%= form_for @cookie  do |f| %>
-
-  <% if @cookie.errors.any? %>
-    <div id="error_explanation" class="field_with_errors">
-      <ul>
-      <% @cookie.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-    <%= f.label :name %>
-    <%= f.text_field :cookie_name %>
-  <br>
-
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  <br>
-    <%= f.label :link %>
-    <%= f.text_field :link %>
-  <br>
-    <%= f.submit %>
-  <% end %>
+  <%= render 'form', cookie: @cookie %>
 
   <%= link_to 'Home', home_url%>

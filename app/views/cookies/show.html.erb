@@ -4,7 +4,8 @@
 <h3> Here is the recipe: <%=link_to @cookie.link, @cookie.link %><br>
 
   <% if user_admin? %>
-  <%= link_to "Delete", @cookie, method: :delete, data: {confirm: "Really?!"} %>
+  <%= link_to 'Edit Cookie', edit_cooky_path(@cookie)%><br>
+  <%= link_to "Delete", @cookie, method: :delete, data: {confirm: "Really?!"} %><br>
   <% end %>
   <h3> Here are all of the wines it pairs with:</h3>
 <ul>
@@ -14,8 +15,6 @@
   </li>
   <%end%>
 </ul>
-
-  <%= link_to 'Add a new Cookie', new_cooky_path%>
 
   <h3> Create a Pairing with this Cookie</h3>
   <%= form_for @pairing  do |f| %>
@@ -28,6 +27,7 @@
     <%= f.submit %>
   <% end %> <br><br>
 
+  <%= link_to 'Add a new Cookie', new_cooky_path%><br>
   <%= link_to 'All Cookies', cookies_path%><br>
     <%= link_to 'All Wines', wines_path%><br>
     <%= link_to 'All Pairings', pairings_path%><br>

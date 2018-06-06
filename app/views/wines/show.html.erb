@@ -3,7 +3,8 @@
 <h3>Origin: <%= @wine.origin %> </h3>
 <h3>Grape Varietal: <%= @wine.grape_varietal %> </h3><br>
 <% if user_admin? %>
-<%= link_to "Delete", @wine, method: :delete, data: {confirm: "Really?!"} %>
+  <%= link_to 'Edit Wine', edit_wine_path(@wine)%><br>
+  <%= link_to "Delete", @wine, method: :delete, data: {confirm: "Really?!"} %>
 <% end %>
 
 <h3> Here are all of the cookies it pairs with:</h3>

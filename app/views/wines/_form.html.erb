@@ -1,0 +1,26 @@
+<%= form_for @wine  do |f| %>
+
+  <% if @wine.errors.any? %>
+    <div id="error_explanation" class="field_with_errors">
+      <ul>
+      <% @wine.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <%= f.label :wine_name %>
+    <%= f.text_field :wine_name %>
+  <br>
+
+    <%= f.label :grape_varietal %>
+    <%= f.text_field :grape_varietal %>
+  <br>
+    <%= f.label :origin %>
+    <%= f.text_field :origin %>
+  <br>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <br>
+    <%= f.submit %>
+<% end %>

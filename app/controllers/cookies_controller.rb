@@ -28,8 +28,14 @@ class CookiesController < ApplicationController
     @user = current_user
   end
 
+  def edit
+    @cookie = Cookie.find(params[:id])
+  end
 
   def update
+    @cookie = Cookie.find(params[:id])
+    @cookie.update(cookie_params)
+    redirect_to @cookie
   end
 
   def destroy
