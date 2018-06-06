@@ -1,35 +1,21 @@
-<h1>Hi, <%= @user.user_name %></h1>
 
-<% if session[:user_id] %>
-  <h1><%= @user.user_name %>  | email: <%= @user.email %></h1>
-
-  <!--<h2>Facebook UID: <%= @user.uid %></h2>-->
-  <img src="<%= @user.image %>">
-<% else %>
-  <%= link_to('Log in with Facebook!', '/auth/facebook') %>
-<% end %><br>
-
-
-<%= link_to 'Update Your Profile', edit_user_path(@user) %><br>
+<h1><%= @user.user_name %></h1>
+<img src="<%= @user.image %>">
 <br><br>
 
+
+<!-- links -->
+<%= link_to 'Update Your Profile', edit_user_path(@user) %><br>
+<br><br>
 <%= link_to 'Highest Rated Pairing', pairing_url(@highest_rated_pairing)%><br>
-
 <%= link_to 'Most Commented Pairing', pairing_url(@most_commented_pairing)%><br>
-
 <%= link_to 'Newest Pairing', pairing_url(@newest_pairing)%><br>
 <%= link_to 'Oldest Pairing', pairing_url(@oldest_pairing)%><br>
-
 <%= link_to 'all pairings', pairings_path%><br>
 <%= link_to 'all comments', comments_path%><br>
-
-
 <%= link_to 'Find a pairing for a specific cookie', cookies_url%> <br>
-
 <%= link_to 'Find a pairing for a specific wine', wines_url%> <br>
-
 <%= link_to 'Create a Pairing', new_pairing_url%><br>
-
 <%= link_to 'Add a Wine', new_wine_url%><br>
 <%= link_to 'Add a Cookie', new_cooky_url%>
 <br><br>

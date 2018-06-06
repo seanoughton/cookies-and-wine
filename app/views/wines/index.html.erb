@@ -2,13 +2,9 @@
 
   <h3> Sort/Search Pairings <h3>
 
-<ul>
-  <%@wines.each do |wine| %>
-    <li>
-      <%=link_to wine.wine_name, wine_path(wine)%>
-    </li>
-  <%end%>
-</ul>
+<%= render 'all_wines', comment: @wines %>
+
+
 
 <%= link_to 'Home', home_url%>
 

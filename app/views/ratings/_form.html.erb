@@ -1,0 +1,18 @@
+<%= form_for(@rating) do |f| %>
+  <% if @rating.errors.any? %>
+    <div id="error_explanation" class="field_with_errors">
+      <ul>
+      <% @rating.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= rating_pairing_id_field(@rating) %>
+  <br>
+  <%= f.label :rating_value %>
+  <%= f.select :rating_value, ['1', '2', '3','4','5']%>
+
+  <%= f.submit %>
+<% end %>

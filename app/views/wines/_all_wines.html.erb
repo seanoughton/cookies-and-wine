@@ -1,0 +1,7 @@
+<ul>
+  <%@wines.each do |wine| %>
+    <li>
+      <%=link_to wine.wine_name, wine_path(wine)%>
+    </li>
+  <%end%>
+</ul>

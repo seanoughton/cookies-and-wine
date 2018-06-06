@@ -1,36 +1,19 @@
-<h3>Name: <%= @wine.wine_name %> </h3>
-<h3>Description: <%= @wine.description %> </h3>
-<h3>Origin: <%= @wine.origin %> </h3>
-<h3>Grape Varietal: <%= @wine.grape_varietal %> </h3><br>
+
+
+<%= render 'wineinfo', wine: @wine %>
+
 <% if user_admin? %>
   <%= link_to 'Edit Wine', edit_wine_path(@wine)%><br>
   <%= link_to "Delete", @wine, method: :delete, data: {confirm: "Really?!"} %>
 <% end %>
 
-<h3> Here are all of the cookies it pairs with:</h3>
-<ul>
-<%@wine.cookies.each do |cookie|%>
-<li>
-  <%= link_to cookie.cookie_name, cooky_path(cookie) %>
-</li>
-<%end%>
-</ul>
+<%= render 'cookie_pairings', wine: @wine %>
 
-<h3> Create a Pairing with this Wine </h3>
-<%= form_for @pairing  do |f| %>
-
-  <%= f.label :Cookie %>
-  <%= f.collection_select :cookie_id, Cookie.all,:id,:cookie_name%>
-  <%= f.hidden_field :wine_id, value: @wine.id %>
-  <br />
-
-  <%= f.submit %>
-<% end %> <br><br>
+<%= render 'create_pairing', wine: @wine %>
 
 
 <%= link_to 'Add a New Wine', new_wine_path%><br>
-
 <%= link_to 'All Cookies', cookies_path%><br>
-  <%= link_to 'All Wines', wines_path%><br>
-  <%= link_to 'All Pairings', pairings_path%><br>
-  <%= link_to 'Home', home_url%>
+<%= link_to 'All Wines', wines_path%><br>
+<%= link_to 'All Pairings', pairings_path%><br>
+<%= link_to 'Home', home_url%>

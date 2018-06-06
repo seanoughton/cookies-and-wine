@@ -1,35 +1,6 @@
 <h2> Sign Up </h2>
 
-<%= form_for @user, controller: 'users', action: 'create' do |f| %>
-
-
-<% if @user.errors.any? %>
-  <div id="error_explanation" class="field_with_errors">
-    <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
-
-  <%= f.label :name %>
-  <%= f.text_field :user_name %><br>
-
-  <%= f.label :email %>
-  <%= f.text_field :email %><br>
-
-  <%= f.label :zipcode %>
-  <%= f.text_field :zipcode %><br>
-
-  <%= f.label :password %>
-  <%= f.password_field :password %><br>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %><br>
-
-  <%= f.submit "create" %>
-<% end %>
+<%= render 'form', user: @user %>
 <br>
 <br>
 <h2> Or Log In</h2>

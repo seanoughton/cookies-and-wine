@@ -1,0 +1,8 @@
+<h3> Create a Pairing with this Wine </h3>
+<%= form_for @pairing  do |f| %>
+  <%= f.label :Cookie %>
+  <%= f.collection_select :cookie_id, Cookie.all,:id,:cookie_name%>
+  <%= f.hidden_field :wine_id, value: @wine.id %>
+  <br />
+  <%= f.submit %>
+<% end %> <br><br>

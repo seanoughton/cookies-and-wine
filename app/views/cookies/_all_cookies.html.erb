@@ -1,0 +1,7 @@
+<ul>
+  <%@cookies.each do |cookie| %>
+    <li>
+      <%= link_to cookie.cookie_name, cooky_url(cookie)%>
+    </li>
+  <%end%>
+</ul>

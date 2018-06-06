@@ -1,14 +1,7 @@
 <h3> Here are all of the pairings </h3>
 
-<ul>
-  <%@pairings.each do |pairing| %>
-    <li>
-  <%= link_to pairing.wine.wine_name, pairing_path(pairing) %>
-      is paired with <%=link_to pairing.cookie.cookie_name.titlecase, pairing_path(pairing)%>. (Rating:
-      <%=pairing.user_rating%> , Comments: <%=pairing.comment_count%>)
-  </li>
-  <%end%>
-</ul>
+<%= render 'all_pairings', pairing: @pairing %>
+
 
 
 <%= link_to 'Home', home_url%><br>

@@ -1,12 +1,6 @@
 <h3> Here are all of the cookies </h3>
 Click the cookie to see what wines it pairs with
-<ul>
-  <%@cookies.each do |cookie| %>
-    <li>
-      <%= link_to cookie.cookie_name, cooky_url(cookie)%>
-    </li>
 
-  <%end%>
-</ul>
+<%= render 'all_cookies', cookie: @cookie %>
 
 <%= link_to 'Home', home_url%>

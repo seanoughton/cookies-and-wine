@@ -1,17 +1,19 @@
 
 <h3>
-<%= @pairing.wine.wine_name%> is paired with <%= @pairing.cookie.cookie_name %>.
+  <%=show_pairing(@pairing)%>
 </h3>
 
-<h3> Rating: <%=@pairing.user_rating%></h3>
+<h3> <%=show_rating(@pairing)%></h3>
 
-<h3> Comments: <%=@pairing.comment_count%></h3>
+<h3> <%=show_comment_count(@pairing)%></h3>
 <ul>
+
 <%@pairing.comments.each do |comment|%>
   <li>
     <%=comment.body%>
     <% if user_admin? %>
-      <%= link_to "Delete Comment", edit_comment_url(comment) %>
+      <%=edit(comment)%>
+      <%=delete(comment)%><br>
     <% end %><br>
   </li>
 
@@ -19,20 +21,15 @@
 </ul><br>
 
 <% if user_admin? %>
-<%= link_to "Delete Pairing", @wine, method: :delete, data: {confirm: "Really?!"} %>
+  <%= link_to "Delete Pairing", @wine, method: :delete, data: {confirm: "Really?!"} %>
 <% end %><br>
 
 
 <%= link_to "Add Rating", new_pairing_rating_path(@pairing) %><br>
 <%= link_to "Add a Comment", new_pairing_comment_path(@pairing) %><br>
-
 <%= link_to "Create another pairing", new_pairing_path %><br>
-
-
 <%= link_to 'All Pairings', pairings_path(@pairings)%><br>
-
 <%= link_to 'Home', home_url%>
-
 <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
   <input type=submit value='logout'>
 <% end %>

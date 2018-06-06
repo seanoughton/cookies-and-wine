@@ -1,26 +1,6 @@
 <h1> Create a Pairing </h1>
 
-<%= form_for @pairing  do |f| %>
-<% if @pairing.errors.any? %>
-  <div id="error_explanation" class="field_with_errors">
-    <ul>
-    <% @pairing.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
-
-  <%= f.label :Wine %>
-  <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%>
-  <br>
-  <%= f.label :Cookie %>
-  <%= f.collection_select :cookie_id, Cookie.all,:id,:cookie_name%>
-
-  <br />
-
-  <%= f.submit %>
-<% end %>
+<%= render 'form', pairing: @pairing %>
 <br>
 <%= link_to 'Pairings', pairings_path%><br>
 <%= link_to 'Wines', wines_path%><br>
