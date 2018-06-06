@@ -19,11 +19,14 @@
   <%= f.label :zipcode %>
   <%= f.text_field :zipcode %><br>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %><br>
+<!-- if user logged in with facebook then they don't need to be able to change the password -->
+  <% if !@user.uid %>
+    <%= f.label :password %>
+    <%= f.password_field :password %><br>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %><br>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %><br>
+  <%end%>
 
   <%= f.submit  %>
 <% end %>
