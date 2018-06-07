@@ -1,5 +1,8 @@
 class WelcomeController < ApplicationController
   before_action :require_logged_in
+
+  def index
+  end
   def home
     @user = User.find(session[:user_id])
     @highest_rated_pairing = Pairing.highest_rated

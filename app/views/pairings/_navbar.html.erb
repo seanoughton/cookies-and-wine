@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Cookies and Wine</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><img src="<%= @user.image %>"><span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#"><%= @user.user_name %><span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Here's all the stuff you can do
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+          <%= link_to 'Highest Rated Pairing', pairing_url(highest_rated_pairing), :class => "dropdown-item"%>
+          <%= link_to 'Get a Random Pairing', pairing_url(random_pairing),:class => "dropdown-item" %><br>
+          <%= link_to 'Most Commented Pairing', pairing_url(most_commented_pairing), :class => "dropdown-item"%>
+          <%= link_to 'Newest Pairing', pairing_url(newest_pairing), :class => "dropdown-item"%>
+          <%= link_to 'Oldest Pairing', pairing_url(oldest_pairing), :class => "dropdown-item"%>
+          <%= link_to 'all pairings', pairings_path, :class => "dropdown-item"%>
+          <%= link_to 'all comments', comments_path, :class => "dropdown-item"%>
+          <%= link_to 'Find a pairing for a specific cookie', cookies_url, :class => "dropdown-item"%>
+          <%= link_to 'Find a pairing for a specific wine', wines_url, :class => "dropdown-item"%>
+          <%= link_to 'Create a Pairing', new_pairing_url, :class => "dropdown-item"%>
+          <%= link_to 'Add a Wine', new_wine_url, :class => "dropdown-item"%>
+          <%= link_to 'Add a Cookie', new_cooky_url, :class => "dropdown-item"%>
+          <%= link_to 'All Users', users_url, :class => "dropdown-item"%>
+          <div class="dropdown-divider"></div>
+            <%= link_to 'Update Your Profile', edit_user_path(@user),  :class => "dropdown-item" %>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+          <input type=submit value='logout'>
+        <% end %>
+      </li>
+
+
+    </ul>
+
+  </div>
+</nav>

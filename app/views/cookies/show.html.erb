@@ -1,7 +1,7 @@
-
+<%= render :partial => 'layouts/navbar' %>
 <h3> <%= @cookie.cookie_name.titlecase %> </h3>
 <h3>Description: <%= @cookie.description.titlecase %> </h3>
-<h3> Here is the recipe: <%=link_to @cookie.link, @cookie.link %><br>
+<h3> Here is the recipe: <%=link_to @cookie.link, @cookie.link, :target => "_blank"%> <br>
 
   <% if user_admin? %>
   <%= link_to 'Edit Cookie', edit_cooky_path(@cookie)%><br>

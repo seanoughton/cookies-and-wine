@@ -28,6 +28,10 @@ module PairingsHelper
     @user = User.user_with_most_pairings
   end
 
+  def random_pairing
+    @random_pairing = Pairing.find(rand(1...Pairing.last.id))
+  end
+
 
 
 end

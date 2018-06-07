@@ -1,8 +1,18 @@
-<h2> Sign Up </h2>
 
-<%= render 'form', user: @user %>
-<br>
-<br>
-<h2> Or Log In</h2>
+<%= render 'navbar' %>
 
-<%= link_to "Log In", '/login' %><br>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 ">
+    </div><!--end column -->
+
+   <div class="col-sm-3 ">
+     <h2> Sign Up </h2>
+     <%= render 'form', user: @user %>
+   </div><!--end column -->
+
+   <div class="col-sm-3 ">
+   </div><!--end column -->
+
+ </div> <!--end row -->
+</div><!--end container -->

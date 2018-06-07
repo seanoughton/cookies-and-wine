@@ -15,7 +15,7 @@ class Pairing < ApplicationRecord
 	def pairing_already_exists
 		pairing = Pairing.find_by(wine_id: self.wine_id, cookie_id: self.cookie_id)
 		if pairing
-			errors.add(:pairing, "This Pairing Already Exists. Try Creating a Different Pairing")
+			errors.add(:pairing, "Already Exists. Try Creating a Different Pairing")
 		end
 	end
 

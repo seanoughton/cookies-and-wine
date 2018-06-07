@@ -1,5 +1,31 @@
-<h1> Log in form </h1>
+<%= render 'navbar' %>
 
-<%= render 'form', user: @user %>
 
-<%= link_to('Log in with Facebook!', '/auth/facebook') %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 ">
+    </div><!--end column -->
+
+   <div class="col-sm-3 ">
+     <h2> Log in </h2>
+     <%= render 'form', user: @user %>
+   </div><!--end column -->
+
+   <div class="col-sm-3 ">
+   </div><!--end column -->
+
+ </div> <!--end row --><br></br>
+
+ <div class="row">
+   <div class="col-sm-3 ">
+   </div><!--end column -->
+
+  <div class="col-sm-3 ">
+    <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+  </div><!--end column -->
+
+  <div class="col-sm-3 ">
+  </div><!--end column -->
+
+</div> <!--end row -->
+</div><!--end container -->

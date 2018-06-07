@@ -1,4 +1,6 @@
 
+<%= render :partial => 'layouts/navbar' %>
+
 <h3>
   <%=link_to @pairing.wine.wine_name, wine_url(@pairing.wine) %> is paired with <%= link_to @pairing.cookie.cookie_name, cooky_url(@pairing.cookie)%>.
 </h3>
