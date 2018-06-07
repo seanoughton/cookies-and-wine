@@ -40,14 +40,7 @@ class User < ApplicationRecord
 
 	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
 	def self.user_with_most_pairings
-		#get all of the users
-		self.all.collect do |user|
-			user.pairings.size
-			user.id
-		end
-
-		#compare how many pairings they Have
-		#return the one with the most pairings
+		order( "pairings_count desc" ).first
 	end
 
 

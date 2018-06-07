@@ -8,6 +8,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     	t.boolean :admin, default: false
       t.string :uid
       t.string :image
+      t.integer :pairings_count
       t.timestamps
     end
   end

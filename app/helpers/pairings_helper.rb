@@ -29,7 +29,7 @@ module PairingsHelper
   end
 
   def user_with_most_pairings
-    @user = 
+    @user = User.user_with_most_pairings
   end
 
 

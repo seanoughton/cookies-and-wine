@@ -3,7 +3,7 @@ class Pairing < ApplicationRecord
 	#RELATIONSHIPS
 	belongs_to :wine
 	belongs_to :cookie
-	belongs_to :user
+	belongs_to :user, :counter_cache => true
 	has_many :comments
 	has_many :ratings
 
@@ -64,6 +64,8 @@ class Pairing < ApplicationRecord
 		order(created_at: :asc).to_a
 	end
 
+
+
 	def self.delete_associated_pairings_for_cookie(cookie_id)
 		Pairing.where(cookie_id: cookie_id).find_each do |pairing|
 		  pairing.destroy
@@ -71,11 +73,11 @@ class Pairing < ApplicationRecord
 	end
 
 
-		def self.delete_associated_pairings_for_wine(wine_id)
-			Pairing.where(wine_id: wine_id).find_each do |pairing|
-			  pairing.destroy
-			end
+	def self.delete_associated_pairings_for_wine(wine_id)
+		Pairing.where(wine_id: wine_id).find_each do |pairing|
+		  pairing.destroy
 		end
+	end
 
 #INSTANCE METHODS
 	def update_rating #averages the rating and updates the database
