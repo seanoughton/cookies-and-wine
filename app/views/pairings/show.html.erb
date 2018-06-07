@@ -1,7 +1,9 @@
 
 <h3>
-  <%=show_pairing(@pairing)%>
+  <%=link_to @pairing.wine.wine_name, wine_url(@pairing.wine) %> is paired with <%= link_to @pairing.cookie.cookie_name, cooky_url(@pairing.cookie)%>.
 </h3>
+
+
 
 <h3> <%=show_rating(@pairing)%></h3>
 

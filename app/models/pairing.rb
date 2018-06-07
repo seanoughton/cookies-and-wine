@@ -41,11 +41,11 @@ class Pairing < ApplicationRecord
 	end
 
 	def self.most_commented_list
-		order(comment_count: :desc).to_a
+		order(comments_count: :desc).to_a
 	end
 
 	def self.most_commented
-		order(comment_count: :desc).first
+		order(comments_count: :desc).first
 	end
 
 	def self.newest
@@ -91,11 +91,6 @@ class Pairing < ApplicationRecord
 			self.user_rating = rating #assigns the new rating
 		end
 		self.save(validate: false) #might need to change this
-	end
-
-	def updated_comment_count
-		self.comment_count += 1
-		self.save(validate: false)
 	end
 
 

@@ -6,7 +6,7 @@
       <%=link_to pairing.cookie.cookie_name.titlecase, pairing_path(pairing)%>.
       (Pairing Creator: <%=link_to pairing.user.user_name, user_url(pairing.user)%>
       Rating: <%=pairing.user_rating%> ,
-      Comments: <%=pairing.comment_count%>)
+      Comments: <%=pairing.comments_count%>)
   </li>
   <%end%>
 </ul>

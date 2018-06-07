@@ -11,6 +11,7 @@
 
 <%= render 'create_pairing', wine: @wine %>
 
+<%= link_to 'Where to Buy this Wine', "http://www.google.de/search?q=Buy #{@wine.wine_name} #{@user.zipcode}", :target => "_blank" %><br>
 
 <%= link_to 'Add a New Wine', new_wine_path%><br>
 <%= link_to 'All Cookies', cookies_path%><br>

@@ -21,7 +21,6 @@ class CommentsController < ApplicationController
     if @comment.valid?
       @comment.save
       @pairing = Pairing.find(params[:comment][:pairing_id])
-      @pairing.updated_comment_count
       redirect_to pairing_path(@pairing)
     else
       render :new

@@ -7,6 +7,9 @@
 <!-- links -->
 <%= link_to 'Update Your Profile', edit_user_path(@user) %><br>
 <br><br>
+
+<%= link_to 'Get a Random Pairing', pairing_url(@random_pairing)%><br>
+
 <%= link_to 'Highest Rated Pairing', pairing_url(@highest_rated_pairing)%><br>
 <%= link_to 'Most Commented Pairing', pairing_url(@most_commented_pairing)%><br>
 <%= link_to 'Newest Pairing', pairing_url(@newest_pairing)%><br>

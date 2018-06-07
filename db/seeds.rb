@@ -44,11 +44,10 @@ CSV.foreach("db/csv/cookies.csv") do |row|
 
 CSV.foreach("db/csv/pairings.csv") do |row|
   			new_pairing = Pairing.create(
-          comment_count: row[0],
-          user_rating: row[1],
-          wine_id: row[2],
-  				cookie_id: row[3],
-          user_id: row[4]
+          user_rating: row[0],
+          wine_id: row[1],
+  				cookie_id: row[2],
+          user_id: row[3]
   				)
 		end
 

@@ -2,7 +2,7 @@ class Comment < ApplicationRecord
 
 	#RELATIONSHIPS
 	belongs_to :user
-	belongs_to :pairing
+	belongs_to :pairing, :counter_cache => true
 
 	#VALIDATIONS
 
