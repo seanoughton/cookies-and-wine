@@ -40,6 +40,10 @@ class Pairing < ApplicationRecord
 		where("rating < '2'")
 	end
 
+	def self.most_commented_list
+		order(comment_count: :desc).to_a
+	end
+
 	def self.most_commented
 		order(comment_count: :desc).first
 	end
@@ -50,6 +54,14 @@ class Pairing < ApplicationRecord
 
 	def self.oldest
 		order(created_at: :asc).first
+	end
+
+	def self.newest_list
+		order(created_at: :desc).to_a
+	end
+
+	def self.oldest_list
+		order(created_at: :asc).to_a
 	end
 
 	def self.delete_associated_pairings_for_cookie(cookie_id)

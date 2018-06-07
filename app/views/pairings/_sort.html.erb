@@ -1,0 +1,6 @@
+<%= form_tag(controller: "pairings", action: "sort", method: "post") do %>
+
+ <%= select_tag 'sort', options_for_select(["highest rated", "lowest rated", "most commented","newest","oldest"])
+  %>
+  <%= submit_tag("Sort") %>
+<% end %>

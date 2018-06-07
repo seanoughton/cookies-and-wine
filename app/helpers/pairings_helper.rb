@@ -12,5 +12,26 @@ module PairingsHelper
     "Comments: #{pairing.comment_count}"
   end
 
+  def highest_rated_pairing
+    @highest_rated_pairing = Pairing.highest_rated
+  end
+
+  def most_commented_pairing
+    @most_commented_pairing = Pairing.most_commented
+  end
+
+  def newest_pairing
+    @newest_pairing = Pairing.newest
+  end
+
+  def oldest_pairing
+    @oldest_pairing = Pairing.oldest
+  end
+
+  def user_with_most_pairings
+    @user = 
+  end
+
+
 
 end

@@ -2,12 +2,26 @@ class PairingsController < ApplicationController
   before_action :require_logged_in
   def index
     @pairings = Pairing.all
-    #@highest_to_lowest = Pairing.highest_to_lowest
-    #@lowest_to_highest = Pairing.lowest_to_highest
-    @highest_rated_pairing = Pairing.highest_rated
-    @most_commented_pairing = Pairing.most_commented
-    @newest_pairing = Pairing.newest
-    @oldest_pairing = Pairing.oldest
+  end
+
+  def sort
+    case params[:sort]
+    when "highest rated"
+      @pairings = Pairing.highest_to_lowest
+    when "lowest rated"
+      @pairings = Pairing.lowest_to_highest
+    when "most commented"
+      @pairings = Pairing.most_commented_list
+    when "newest"
+      @pairings = Pairing.newest_list
+    when "oldest"
+      @pairings = Pairing.oldest_list
+    else
+      @pairings = Pairing.all
+    end
+
+    render :index
+
   end
 
   def new
@@ -47,6 +61,10 @@ class PairingsController < ApplicationController
     Pairing.find(params[:id]).destroy
     redirect_to pairings_url
   end
+
+  #helper methods
+
+
 
   private
 

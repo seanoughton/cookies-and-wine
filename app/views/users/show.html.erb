@@ -4,5 +4,15 @@
 <h2>Email: <%=@user.email%>
 <h2>Zipcode: <%=@user.zipcode%><br>
 
-<%= link_to 'Edit Profile', edit_user_path(@user)%><br>
+<h3> Here are all of <%=@user.user_name%>'s Pairings </h3>
+<ul>
+  <%@user.pairings.each do |pairing| %>
+    <li><%=link_to pairing.wine.wine_name, pairing_url(pairing)%></li>
+  <%end%>
+</ul>
+
+<% if @user == @current_user %>
+  <%= link_to 'Edit Profile', edit_user_path(@user)%><br>
+<% end %>
+
 <%= link_to 'Home', home_url%>

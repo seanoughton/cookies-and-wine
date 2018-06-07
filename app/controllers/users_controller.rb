@@ -16,11 +16,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    if is_current_user?(params[:id])
-      @user = User.find(params[:id])
-    else
-      redirect_to controller: 'sessions', action: 'new'
-    end
+    @current_user = current_user
+    @user = User.find(params[:id])
+
+
   end
 
   def edit
