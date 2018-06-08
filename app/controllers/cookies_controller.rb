@@ -1,5 +1,6 @@
 class CookiesController < ApplicationController
   before_action :require_logged_in
+  before_action :current_user
   def index
     @cookies = Cookie.all
   end

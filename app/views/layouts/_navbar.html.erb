@@ -8,11 +8,11 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <a class="nav-link" href="#"><img src="<%= @user.image %>"><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#"><img src="<%= @current_user.image %>"><span class="sr-only">(current)</span></a>
       </li>
 
       <li class="nav-item">
-        <%= link_to @user.user_name, user_url(@user),:class => "nav-link" %>
+        <%= link_to @current_user.user_name, user_url(@current_user),:class => "nav-link" %>
       </li>
 
       <li class="nav-item dropdown">
@@ -46,7 +46,7 @@
           <%= link_to 'All comments', comments_path, :class => "dropdown-item"%>
           <%= link_to 'All Users', users_url, :class => "dropdown-item"%>
           <div class="dropdown-divider"></div>
-            <%= link_to 'Update Your Profile', edit_user_path(@user),  :class => "dropdown-item" %>
+            <%= link_to 'Update Your Profile', edit_user_path(@current_user),  :class => "dropdown-item" %>
         </div>
       </li>
 

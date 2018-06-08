@@ -1,17 +1,16 @@
 class CommentsController < ApplicationController
-  before_action :require_logged_in
+  before_action :current_user
   def index
     @comments = Comment.all
   end
 
   def new
-
     if params[:pairing_id] && !Pairing.exists?(params[:pairing_id])
       redirect_to pairings_path, alert: "Pairing not found."
     else
       @comment = Comment.new(pairing_id: params[:pairing_id])
       @pairing = Pairing.find(params[:pairing_id])
-      @user = current_user
+      #@user = current_user
     end
 
   end
@@ -29,13 +28,13 @@ class CommentsController < ApplicationController
   end
 
   def show
-    @user = current_user
+    #@user = current_user
     @comment = Comment.find(params[:id])
   end
 
   def edit
     @comment = Comment.find(params[:id])
-    @user = current_user
+    #@user = current_user
   end
 
   def update

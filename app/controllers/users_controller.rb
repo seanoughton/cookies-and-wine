@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
 
+  before_action :require_logged_in
+
   def index
     @users = User.all
-    @user = current_user
   end
 
   def new
@@ -21,10 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @current_user = current_user
     @user = User.find(params[:id])
-
-
   end
 
   def edit

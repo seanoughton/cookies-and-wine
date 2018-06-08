@@ -1,7 +1,8 @@
 class RatingsController < ApplicationController
 
   before_action :require_logged_in
-  
+  before_action :current_user
+
   def new
     if params[:pairing_id] && !Pairing.exists?(params[:pairing_id])
       redirect_to pairings_path, alert: "Pairing not found."

@@ -1,5 +1,6 @@
 class PairingsController < ApplicationController
   before_action :require_logged_in
+  before_action :current_user
 
   def index
     @pairings = Pairing.all
@@ -44,7 +45,7 @@ class PairingsController < ApplicationController
      @pairing = Pairing.find(params[:id])
      @pairings = Pairing.all
      @comments = Comment.all
-     @user = current_user
+     @user = User.find(@pairing.user.id)
   end
 
   def update

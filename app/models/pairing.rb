@@ -64,6 +64,14 @@ class Pairing < ApplicationRecord
 		order(created_at: :asc).to_a
 	end
 
+	def self.random_pairing
+		random_number = 0
+		while !Pairing.ids.include?(random_number)
+			random_number = rand(1...self.last.id)
+		end
+		Pairing.find(random_number)
+	end
+
 
 
 	def self.delete_associated_pairings_for_cookie(cookie_id)

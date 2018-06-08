@@ -1,15 +1,18 @@
 module UsersHelper
   def user_admin?
-    @user.admin?
+    @current_user.admin?
   end
 
   def current_user?
     User.find_by(id: session[:user_id])
   end
 
-  def user_current_user?(item)
-    #is the current user the one who created the thing (comment,etc)
-    item.user_id == @user.id
+  def user_current_user?
+    @user == @current_user
+  end
+
+  def current_user_created_this_item?(item)
+    item.user_id == @current_user.id
   end
 
   def delete(item)
@@ -19,7 +22,7 @@ module UsersHelper
   end
 
   def edit(item)
-    if user_current_user?(item) || user_admin?
+    if current_user_created_this_item?(item) || user_admin?
         link_to "Edit", :controller => "#{item.class.to_s.downcase}s", :action => "edit", :id => item
     end
   end
