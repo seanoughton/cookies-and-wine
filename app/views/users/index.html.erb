@@ -1,11 +1,23 @@
 <%= render :partial => 'layouts/navbar' %>
 
-<h1> Here are all of the users <h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 ">
+    </div><!--end column -->
 
-<ul>
-  <%@users.each do |user| %>
-    <li><%=link_to user.user_name, user_url(user)%></li>
-  <%end%>
-</ul>
+   <div class="col-sm-3 ">
+    <h1> Here are all of the users <h1><br>
+    <h3>
+       <ul>
+         <%@users.each do |user| %>
+           <li><%=link_to user.user_name, user_url(user)%></li>
+         <%end%>
+       </ul>
+   </h3>
+   </div><!--end column -->
 
-<%= link_to 'Home', home_url%><br>
+   <div class="col-sm-3 ">
+   </div><!--end column -->
+
+ </div> <!--end row -->
+</div><!--end container -->

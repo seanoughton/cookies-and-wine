@@ -6,10 +6,11 @@
     </div><!--end column -->
 
    <div class="col-sm-10 ">
+     <h2> Here is some information about this Cookie: </h2><br>
      <h3>
-      <%= @cookie.cookie_name.titlecase %>
-     Description: <%= @cookie.description.titlecase %><br>
-     Here is the recipe: <%=link_to @cookie.link, @cookie.link, :target => "_blank"%> <br>
+      Cookie Name: <%= @cookie.cookie_name.titlecase %><br>
+      Description: <%= @cookie.description.titlecase %><br>
+      Cookie Recipe: <%=link_to @cookie.link, @cookie.link, :target => "_blank"%> <br>
    </div><!--end column -->
    <div class="col-sm-1 ">
    </div><!--end column -->

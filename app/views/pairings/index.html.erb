@@ -1,36 +1,18 @@
 <%= render :partial => 'layouts/navbar' %>
 
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-1 ">
+    </div><!--end column -->
 
-<h3> Here are all of the pairings </h3>
-<%= render 'sort'%>
-<%= render 'all_pairings', pairing: @pairing %>
+   <div class="col-sm-10 ">
+     <h3> Here are all of the pairings </h3>
+     <%= render 'sort'%>
+     <%= render 'all_pairings', pairing: @pairing %>
+   </div><!--end column -->
 
+   <div class="col-sm-1 ">
+   </div><!--end column -->
 
-
-
-<%= link_to 'Home', home_url%><br>
-<%= link_to 'Highest Rated Pairing', pairing_url(highest_rated_pairing)%><br>
-
-<%= link_to 'Most Commented Pairing', pairing_url(most_commented_pairing)%><br>
-
-<%= link_to 'Newest Pairing', pairing_url(newest_pairing)%><br>
-<%= link_to 'Oldest Pairing', pairing_url(oldest_pairing)%><br>
-
-<%= link_to 'User with Most Pairings', user_url(user_with_most_pairings)%><br>
-
-
-<%= link_to 'all comments', comments_path%><br>
-
-
-<%= link_to 'Find a pairing for a specific cookie', cookies_url%> <br>
-
-<%= link_to 'Find a pairing for a specific wine', wines_url%> <br>
-
-<%= link_to 'Create a Pairing', new_pairing_url%><br>
-
-<%= link_to 'Add a Wine', new_wine_url%><br>
-<%= link_to 'Add a Cookie', new_cooky_url%>
-<br><br>
-<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-  <input type=submit value='logout'>
-<% end %>
+ </div> <!--end row -->
+</div><!--end container -->

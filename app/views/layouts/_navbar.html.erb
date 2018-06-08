@@ -8,11 +8,11 @@
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
-        <a class="nav-link" href="/home"><img src="<%= @user.image %>"><span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#"><img src="<%= @user.image %>"><span class="sr-only">(current)</span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" href="#"><%= @user.user_name %><span class="sr-only">(current)</span></a>
+        <%= link_to @user.user_name, user_url(@user),:class => "nav-link" %>
       </li>
 
       <li class="nav-item dropdown">
@@ -21,18 +21,29 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
+          <%= link_to 'Get a Random Pairing', pairing_url(random_pairing),:class => "dropdown-item" %>
+
+          <div class="dropdown-divider"></div>
+          <%= link_to 'All pairings', pairings_path, :class => "dropdown-item"%>
+
+          <div class="dropdown-divider"></div>
           <%= link_to 'Highest Rated Pairing', pairing_url(highest_rated_pairing), :class => "dropdown-item"%>
-          <%= link_to 'Get a Random Pairing', pairing_url(random_pairing),:class => "dropdown-item" %><br>
           <%= link_to 'Most Commented Pairing', pairing_url(most_commented_pairing), :class => "dropdown-item"%>
           <%= link_to 'Newest Pairing', pairing_url(newest_pairing), :class => "dropdown-item"%>
           <%= link_to 'Oldest Pairing', pairing_url(oldest_pairing), :class => "dropdown-item"%>
-          <%= link_to 'all pairings', pairings_path, :class => "dropdown-item"%>
-          <%= link_to 'all comments', comments_path, :class => "dropdown-item"%>
+
+
+          <div class="dropdown-divider"></div>
           <%= link_to 'Find a pairing for a specific cookie', cookies_url, :class => "dropdown-item"%>
           <%= link_to 'Find a pairing for a specific wine', wines_url, :class => "dropdown-item"%>
+
+          <div class="dropdown-divider"></div>
           <%= link_to 'Create a Pairing', new_pairing_url, :class => "dropdown-item"%>
           <%= link_to 'Add a Wine', new_wine_url, :class => "dropdown-item"%>
           <%= link_to 'Add a Cookie', new_cooky_url, :class => "dropdown-item"%>
+
+          <div class="dropdown-divider"></div>
+          <%= link_to 'All comments', comments_path, :class => "dropdown-item"%>
           <%= link_to 'All Users', users_url, :class => "dropdown-item"%>
           <div class="dropdown-divider"></div>
             <%= link_to 'Update Your Profile', edit_user_path(@user),  :class => "dropdown-item" %>

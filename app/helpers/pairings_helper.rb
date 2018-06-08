@@ -32,6 +32,4 @@ module PairingsHelper
     @random_pairing = Pairing.find(rand(1...Pairing.last.id))
   end
 
-
-
 end

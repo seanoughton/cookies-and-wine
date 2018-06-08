@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :ratings
+
   root 'users#new'
+  
+  resources :ratings
   resources :comments
   resources :pairings do
     resources :ratings
@@ -21,5 +23,6 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#create'
 
   post '/sort' => 'pairings#sort'
+  get '/sort' => 'pairings#sort'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

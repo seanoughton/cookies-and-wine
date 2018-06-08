@@ -1,8 +1,19 @@
 <%= render :partial => 'layouts/navbar' %>
 
-<h3> Here are all of the cookies </h3>
-Click the cookie to see what wines it pairs with
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2 ">
+    </div><!--end column -->
 
-<%= render 'all_cookies', cookie: @cookie %>
+   <div class="col-sm-8 ">
+     <h3> Here are all of the cookies </h3>
+     Click the cookie to see what wines it pairs with
 
-<%= link_to 'Home', home_url%>
+     <%= render 'all_cookies', cookie: @cookie %>
+   </div><!--end column -->
+
+   <div class="col-sm-2 ">
+   </div><!--end column -->
+
+ </div> <!--end row -->
+</div><!--end container -->

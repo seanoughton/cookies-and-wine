@@ -1,58 +1,58 @@
 
-<%= render :partial => 'layouts/navbar' %>
+<%= render :partial => 'layouts/navbar' %><br></br>
 
 <div class="container-fluid">
 
   <div class="row">
-    <div class="col-sm-1 ">
+    <div class="col-sm-2 ">
     </div><!--end column -->
 
-   <div class="col-sm-10 ">
+   <div class="col-sm-8 ">
      <%= render 'wineinfo', wine: @wine %>
    </div><!--end column -->
 
-   <div class="col-sm-1 ">
+   <div class="col-sm-2 ">
    </div><!--end column -->
  </div> <!--end row --><br>
 
 
  <div class="row">
-   <div class="col-sm-1 ">
+   <div class="col-sm-2 ">
    </div><!--end column -->
 
-  <div class="col-sm-10 ">
+  <div class="col-sm-8 ">
     <%= render 'cookie_pairings', wine: @wine %>
   </div><!--end column -->
 
-  <div class="col-sm-1 ">
+  <div class="col-sm-2 ">
   </div><!--end column -->
 </div> <!--end row --><br>
 
 
  <div class="row">
-   <div class="col-sm-1 ">
+   <div class="col-sm-2 ">
    </div><!--end column -->
 
-  <div class="col-sm-10 ">
+  <div class="col-sm-8 ">
     <%= render 'create_pairing', wine: @wine %>
   </div><!--end column -->
 
-  <div class="col-sm-1 ">
+  <div class="col-sm-2 ">
   </div><!--end column -->
 </div> <!--end row -->
 
 <div class="row">
-  <div class="col-sm-1 ">
+  <div class="col-sm-2 ">
   </div><!--end column -->
 
- <div class="col-sm-10 ">
+ <div class="col-sm-8 ">
    <% if user_admin? %>
      <h4><%= link_to 'Edit Wine', edit_wine_path(@wine)%><br>
      <%= link_to "Delete Wine", @wine, method: :delete, data: {confirm: "Really?!"} %></h4>
    <% end %>
  </div><!--end column -->
 
- <div class="col-sm-1 ">
+ <div class="col-sm-2 ">
  </div><!--end column -->
 </div> <!--end row -->
 

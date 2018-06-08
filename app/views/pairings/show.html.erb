@@ -8,7 +8,8 @@
 
    <div class="col-sm-10 ">
      <h3>
-       <%=link_to @pairing.wine.wine_name, wine_url(@pairing.wine) %> is paired with <%= link_to @pairing.cookie.cookie_name, cooky_url(@pairing.cookie)%>.
+       <%=link_to @pairing.wine.wine_name.titlecase, wine_url(@pairing.wine) %> is paired with <%= link_to @pairing.cookie.cookie_name.titlecase, cooky_url(@pairing.cookie)%>.<br>
+       Creator: <%= link_to "#{@pairing.user.user_name}", user_url(@pairing.user)%>
      </h3>
    </div><!--end column -->
 
@@ -23,7 +24,7 @@
   <div class="col-sm-10 ">
     <h3>
        <%=show_rating(@pairing)%>
-       <%= link_to "Add Rating", new_pairing_rating_path(@pairing)%>
+       <%= link_to "(Add a Rating)", new_pairing_rating_path(@pairing)%>
     </h3>
   </div><!--end column -->
 
@@ -39,7 +40,7 @@
  <div class="col-sm-10 ">
    <h3>
       <%=show_comment_count(@pairing)%>
-      <%= link_to "Add a Comment", new_pairing_comment_path(@pairing)%>
+      <%= link_to "(Add a Comment)", new_pairing_comment_path(@pairing)%>
    </h3>
  </div><!--end column -->
 

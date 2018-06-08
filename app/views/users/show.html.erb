@@ -1,17 +1,38 @@
 <%= render :partial => 'layouts/navbar' %>
 
-<h2>User Name: <%=@user.user_name%>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2 ">
+    </div><!--end column -->
 
-<h3> Here are all of <%=@user.user_name%>'s Pairings </h3>
-<ul>
-  <%@user.pairings.each do |pairing| %>
-    <li><%=link_to pairing.wine.wine_name, pairing_url(pairing)%></li>
-  <%end%>
-</ul>
+   <div class="col-sm-8 ">
+     <h2>
+       User Name: <%=@user.user_name%>
+       <% if @user == @current_user %>
+         <%= link_to '(Edit Profile)', edit_user_path(@user)%><br>
+       <% end %>
+       <h2>
 
-<% if @user == @current_user %>
-  <%= link_to 'Edit Profile', edit_user_path(@user)%><br>
-<% end %>
+        <% if @user.pairings.empty? && @user == @current_user %>
+           <h3>
+             You Don't have any Pairings
+             <%= link_to "Create a Pairing", new_pairing_url%>
+           </h3>
+        <% else %>
+          <h3> Here are all of <%=@user.user_name%>'s Pairings </h3>
+          <ul>
+            <%@user.pairings.each do |pairing| %>
+              <li><%=link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name}", pairing_url(pairing)%></li>
+            <%end%>
+          </ul>
+        <%end%>
 
-<%= link_to 'Home', home_url%><br>
-<%= link_to 'All Users', users_url%>
+
+
+   </div><!--end column -->
+
+   <div class="col-sm-2 ">
+   </div><!--end column -->
+
+ </div> <!--end row -->
+</div><!--end container -->

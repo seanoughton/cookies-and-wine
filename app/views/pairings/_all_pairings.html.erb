@@ -1,12 +1,13 @@
 <ul>
   <%@pairings.each do |pairing| %>
     <li>
-  <%= link_to pairing.wine.wine_name, pairing_path(pairing) %>
-      is paired with
-      <%=link_to pairing.cookie.cookie_name.titlecase, pairing_path(pairing)%>.
-      (Pairing Creator: <%=link_to pairing.user.user_name, user_url(pairing.user)%>
-      Rating: <%=pairing.user_rating%> ,
-      Comments: <%=pairing.comments_count%>)
+
+      <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", pairing_path(pairing) %><br>
+
+        Rating: <%=pairing.user_rating%> ,
+        Comments: <%=pairing.comments_count%>
+        Pairing Creator: <%=link_to pairing.user.user_name, user_url(pairing.user)%>
+
   </li>
   <%end%>
 </ul>

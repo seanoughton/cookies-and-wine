@@ -1,5 +1,6 @@
 class PairingsController < ApplicationController
   before_action :require_logged_in
+
   def index
     @pairings = Pairing.all
   end
@@ -19,9 +20,7 @@ class PairingsController < ApplicationController
     else
       @pairings = Pairing.all
     end
-
     render :index
-
   end
 
   def new

@@ -1,15 +1,19 @@
 <%= render :partial => 'layouts/navbar' %>
 
-<h3> Here are all of the wines </h3>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2 ">
+    </div><!--end column -->
 
-  <h3> Sort/Search Pairings </h3>
+   <div class="col-sm-8 ">
+     <h3> Here are all of the wines </h3>
+     Click the wine to see what cookies it pairs with
 
-<%= render 'all_wines', comment: @wines %>
+     <%= render 'all_wines', comment: @wines %>
+   </div><!--end column -->
 
+   <div class="col-sm-2 ">
+   </div><!--end column -->
 
-
-<%= link_to 'Home', home_url%>
-
-<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-  <input type=submit value='logout'>
-<% end %>
+ </div> <!--end row -->
+</div><!--end container -->

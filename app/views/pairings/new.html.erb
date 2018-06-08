@@ -1,13 +1,19 @@
 <%= render :partial => 'layouts/navbar' %>
-<h1> Create a Pairing </h1>
 
-<%= render 'form', pairing: @pairing %>
-<br>
-<%= link_to 'Pairings', pairings_path%><br>
-<%= link_to 'Wines', wines_path%><br>
-<%= link_to 'Cookies', cookies_path%><br>
-<%= link_to 'Home', home_url%>
 
-<%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-  <input type=submit value='logout'>
-<% end %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-2 ">
+    </div><!--end column -->
+
+   <div class="col-sm-8 ">
+     <h1> Create a Pairing </h1>
+
+     <%= render 'form', pairing: @pairing %>
+   </div><!--end column -->
+
+   <div class="col-sm-2 ">
+   </div><!--end column -->
+
+ </div> <!--end row -->
+</div><!--end container -->
