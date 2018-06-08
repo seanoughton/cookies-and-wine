@@ -1,5 +1,25 @@
-<h2> Edit cookie <h2>
+<%= render :partial => 'layouts/navbar' %>
 
-  <%= render 'form', cookie: @cookie %>
+<div class="container-fluid">
 
-  <%= link_to 'Home', home_url%>
+  <div class="row">
+    <div class="col-sm-1 ">
+    </div><!--end column -->
+   <div class="col-sm-10 ">
+    <h2> Edit cookie <h2>
+   </div><!--end column -->
+   <div class="col-sm-1 ">
+   </div><!--end column -->
+ </div> <!--end row -->
+
+ <div class="row">
+   <div class="col-sm-1 ">
+   </div><!--end column -->
+  <div class="col-sm-10 ">
+   <%= render 'form', cookie: @cookie %>
+  </div><!--end column -->
+  <div class="col-sm-1 ">
+  </div><!--end column -->
+</div> <!--end row -->
+
+</div><!--end container -->

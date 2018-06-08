@@ -1,4 +1,4 @@
-<h3> Create a Pairing with this Wine </h3>
+<h3> Create a New Pairing with this Wine </h3>
 <%= form_for @pairing  do |f| %>
   <%= f.label :Cookie %>
   <%= f.collection_select :cookie_id, Cookie.all,:id,:cookie_name%>

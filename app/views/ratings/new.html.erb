@@ -1,5 +1,17 @@
-<h1>Add a Rating  </h1>
-<%= render 'form', rating: @rating %>
-<h3> Rate this pairing </h3>
+<%= render :partial => 'layouts/navbar' %>
 
-<%= link_to 'Home', home_url%>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 ">
+    </div><!--end column -->
+
+   <div class="col-sm-3 ">
+     <h1>Add a Rating </h1>
+     <%= render 'form', rating: @rating %>
+   </div><!--end column -->
+
+   <div class="col-sm-3 ">
+   </div><!--end column -->
+
+ </div> <!--end row -->
+</div><!--end container -->

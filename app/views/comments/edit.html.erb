@@ -1,6 +1,18 @@
-<h1>Edit Comment  </h1>
+<%= render :partial => 'layouts/navbar' %>
 
-<%= render 'form', comment: @comment %>
-<%=delete(@comment)%>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 ">
+    </div><!--end column -->
 
-<br><%= link_to 'Home', home_url%>
+   <div class="col-sm-3 ">
+     <h1>Edit Comment  </h1>
+     <%= render 'form', comment: @comment %>
+     <h2><%=delete(@comment)%></h2>
+   </div><!--end column -->
+
+   <div class="col-sm-3 ">
+   </div><!--end column -->
+
+ </div> <!--end row -->
+</div><!--end container -->

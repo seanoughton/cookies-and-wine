@@ -1,20 +1,61 @@
 
 <%= render :partial => 'layouts/navbar' %>
-<%= render 'wineinfo', wine: @wine %>
 
-<% if user_admin? %>
-  <%= link_to 'Edit Wine', edit_wine_path(@wine)%><br>
-  <%= link_to "Delete", @wine, method: :delete, data: {confirm: "Really?!"} %>
-<% end %>
+<div class="container-fluid">
 
-<%= render 'cookie_pairings', wine: @wine %>
+  <div class="row">
+    <div class="col-sm-1 ">
+    </div><!--end column -->
 
-<%= render 'create_pairing', wine: @wine %>
+   <div class="col-sm-10 ">
+     <%= render 'wineinfo', wine: @wine %>
+   </div><!--end column -->
 
-<%= link_to 'Where to Buy this Wine', "http://www.google.de/search?q=Buy #{@wine.wine_name} #{@user.zipcode}", :target => "_blank" %><br>
+   <div class="col-sm-1 ">
+   </div><!--end column -->
+ </div> <!--end row --><br>
 
-<%= link_to 'Add a New Wine', new_wine_path%><br>
-<%= link_to 'All Cookies', cookies_path%><br>
-<%= link_to 'All Wines', wines_path%><br>
-<%= link_to 'All Pairings', pairings_path%><br>
-<%= link_to 'Home', home_url%>
+
+ <div class="row">
+   <div class="col-sm-1 ">
+   </div><!--end column -->
+
+  <div class="col-sm-10 ">
+    <%= render 'cookie_pairings', wine: @wine %>
+  </div><!--end column -->
+
+  <div class="col-sm-1 ">
+  </div><!--end column -->
+</div> <!--end row --><br>
+
+
+ <div class="row">
+   <div class="col-sm-1 ">
+   </div><!--end column -->
+
+  <div class="col-sm-10 ">
+    <%= render 'create_pairing', wine: @wine %>
+  </div><!--end column -->
+
+  <div class="col-sm-1 ">
+  </div><!--end column -->
+</div> <!--end row -->
+
+<div class="row">
+  <div class="col-sm-1 ">
+  </div><!--end column -->
+
+ <div class="col-sm-10 ">
+   <% if user_admin? %>
+     <h4><%= link_to 'Edit Wine', edit_wine_path(@wine)%><br>
+     <%= link_to "Delete Wine", @wine, method: :delete, data: {confirm: "Really?!"} %></h4>
+   <% end %>
+ </div><!--end column -->
+
+ <div class="col-sm-1 ">
+ </div><!--end column -->
+</div> <!--end row -->
+
+
+
+</div><!--end container -->

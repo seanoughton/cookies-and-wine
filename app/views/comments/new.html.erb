@@ -1,5 +1,17 @@
-<h1>Add a Comment  </h1>
+<%= render :partial => 'layouts/navbar' %>
 
-<%= render 'form', comment: @comment %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 ">
+    </div><!--end column -->
 
-<%= link_to 'Home', home_url%>
+   <div class="col-sm-3 ">
+     <h1>Add a Comment </h1>
+     <%= render 'form', comment: @comment %>
+   </div><!--end column -->
+
+   <div class="col-sm-3 ">
+   </div><!--end column -->
+
+ </div> <!--end row -->
+</div><!--end container -->

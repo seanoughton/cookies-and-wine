@@ -2,3 +2,4 @@
 <h3>Description: <%= @wine.description %> </h3>
 <h3>Origin: <%= @wine.origin %> </h3>
 <h3>Grape Varietal: <%= @wine.grape_varietal %> </h3><br>
+<h3><%= link_to 'Where to Buy this Wine', "http://www.google.de/search?q=Buy #{@wine.wine_name} #{@user.zipcode}", :target => "_blank" %><h3>
