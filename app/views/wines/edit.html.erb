@@ -1,4 +1,16 @@
-<h2> Edit wine<h2>
+<%= render :partial => 'layouts/navbar' %>
+<div class="container-fluid main_body_style">
+  <div class="row">
+    <div class="col-sm-3 ">
+    </div><!--end column -->
 
-<%= render 'form', wine: @wine %>
-<%= link_to 'Home', home_url%>
+   <div class="col-sm-3 ">
+     <h2> Edit wine<h2><br>
+     <h3><%= render 'form', wine: @wine %></h3>
+   </div><!--end column -->
+
+   <div class="col-sm-3 ">
+   </div><!--end column -->
+
+ </div> <!--end row -->
+</div><!--end container -->

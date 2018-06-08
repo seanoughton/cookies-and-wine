@@ -1,30 +1,26 @@
 module UsersHelper
+
+  #RETURNS TRUE IF THE CURRENT USER IS AN ADMIN
   def user_admin?
     @current_user.admin?
   end
 
-  def current_user?
-    User.find_by(id: session[:user_id])
-  end
+  #RETURNS TRUE IF THE USER IS LOGGED IN
+  #def current_user?
+    #current_user
+  #end
 
+  #THIS IS HERE SO THAT WHEN A LOGGED IN USER NAVIGATES TO ANOTHER USERS PROFILE PAGE, THEY CANNOT EDIT THEIR PROFILE
+  #IS THE LOGGED IN USER THE SAME USER FOR ANY GIVEN PROFILE PAGE
   def user_current_user?
     @user == @current_user
   end
 
+  #THIS IS HERE SO THAT COMMENTS,COOKIES,PAIRINGS,WINES CAN ONLY BE EDITED BY THE USER THAT CREATED THEM
   def current_user_created_this_item?(item)
     item.user_id == @current_user.id
   end
 
-  def delete(item)
-    if user_admin?
-      link_to "Delete", item, method: :delete, data: {confirm: "Really?!"}
-    end
-  end
 
-  def edit(item)
-    if current_user_created_this_item?(item) || user_admin?
-        link_to "Edit", :controller => "#{item.class.to_s.downcase}s", :action => "edit", :id => item
-    end
-  end
 
 end

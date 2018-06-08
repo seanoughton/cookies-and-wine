@@ -1,7 +1,6 @@
 
 
 <%= render :partial => 'layouts/navbar' %>
-<br><br>
 <div class="container-fluid">
 
   <div class="row align-items-center" style="background:transparent url('assets/crispy-chewy-chocolate-chip-cookies1.jpg') no-repeat center center /cover; height:500px;">
@@ -51,26 +50,26 @@
 
 <div class="row justify-content-center">
   <div class="col-md-3 ml-md-auto">
-    <h3>
-      <%=link_to(image_tag("/assets/hazelnut-chocolate-thumbprint-cookies1.jpg", :alt => "logo", :title => "", :class => "img-thumbnail"), pairing_path(newest_pairing) ) %>
+    <h4>
+      <%=link_to(image_tag("/assets/iced-oatmeal-cookies.jpg", :alt => "logo", :title => "", :class => "img-thumbnail"), pairing_path(newest_pairing) ) %>
       <%= link_to newest_pairing.cookie.cookie_name.titlecase, pairing_path(newest_pairing) %><br>
       Rating: <%=newest_pairing.user_rating %>
-    </h3>
+    </h4>
   </div><!--end column -->
  <div class="col-md-3 ml-md-auto">
-   <h2>
+   <h4>
      <%= link_to(image_tag("/assets/almond-biscotti.jpg", :alt => "logo", :title => "", :class => "img-thumbnail"), pairing_path(most_commented_pairing) ) %>
 
      <%= link_to most_commented_pairing.cookie.cookie_name.titlecase, pairing_path(most_commented_pairing) %><br>
      Rating: <%=most_commented_pairing.user_rating %>
-   </h2>
+   </h4>
  </div><!--end column -->
  <div class="col-md-3 ml-md-auto">
-   <h2>
+   <h4>
      <%= link_to(image_tag("/assets/peanut-butter-cookies.jpg", :alt => "logo", :title => "", :class => "img-thumbnail"), pairing_path(highest_rated_pairing) ) %>
      <%= link_to highest_rated_pairing.cookie.cookie_name.titlecase, pairing_path(highest_rated_pairing) %><br>
      Rating: <%=highest_rated_pairing.user_rating %>
-   </h2>
+   </h4>
  </div><!--end column -->
 </div> <!--end row -->
 

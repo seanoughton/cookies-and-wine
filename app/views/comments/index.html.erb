@@ -1,14 +1,12 @@
 <%= render :partial => 'layouts/navbar' %>
 
-
-<div class="container-fluid">
+<div class="container-fluid main_body_style">
   <div class="row">
     <div class="col-sm-2 ">
     </div><!--end column -->
 
    <div class="col-sm-8 ">
      <h2> Here are all of the Comments </h2>
-
      <%= render 'all_comments', comment: @comment %>
    </div><!--end column -->
 

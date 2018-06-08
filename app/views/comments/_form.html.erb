@@ -1,21 +1,12 @@
 <%= form_for(@comment) do |f| %>
 
-<% if @comment.errors.any? %>
-  <div id="error_explanation" class="field_with_errors">
-    <ul>
-    <% @comment.errors.messages.values.each do |msg| %>
-    <%msg.each do  |m| %>
-       <li><%= m %></li>
-     <%end %>
-   <% end %>
-    </ul>
-  </div>
-<% end %>
+  <%=shows_error_messages(@comment)%><br>
 
-  <br>
   <%= f.label :Add_Comment %>
-  <%= f.text_field :body %>
-  <%=comment_pairing_id_field(@comment)%>
-  <%=id_field(@comment,@user)%>
-  <%= f.submit %>
+  <%= f.text_field :body %><br>
+
+  <%=id_field(@comment,@pairing)%>
+  <%=id_field(@comment,@current_user)%>
+
+  <%= f.submit :class => 'btn btn-primary'%>
 <% end %>

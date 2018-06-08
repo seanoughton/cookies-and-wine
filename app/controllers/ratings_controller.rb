@@ -8,6 +8,7 @@ class RatingsController < ApplicationController
       redirect_to pairings_path, alert: "Pairing not found."
     else
       @rating = Rating.new(pairing_id: params[:pairing_id])
+      @pairing = Pairing.find(params[:pairing_id])
     end
 
   end

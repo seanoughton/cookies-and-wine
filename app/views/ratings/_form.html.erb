@@ -9,7 +9,8 @@
     </div>
   <% end %>
 
-  <%= rating_pairing_id_field(@rating) %>
+  
+  <%= id_field(@rating,@pairing) %>
   <br>
   <%= f.label :rating_value %>
   <%= f.select :rating_value, ['1', '2', '3','4','5']%>

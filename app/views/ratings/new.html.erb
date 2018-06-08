@@ -1,13 +1,13 @@
 <%= render :partial => 'layouts/navbar' %>
 
-<div class="container-fluid">
+<div class="container-fluid main_body_style">
   <div class="row">
     <div class="col-sm-3 ">
     </div><!--end column -->
 
    <div class="col-sm-3 ">
      <h1>Add a Rating </h1>
-     <%= render 'form', rating: @rating %>
+     <%= render 'form', rating: @rating, pairing: @pairing %>
    </div><!--end column -->
 
    <div class="col-sm-3 ">

@@ -17,9 +17,9 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+    @pairing = Pairing.find(params[:comment][:pairing_id])
     if @comment.valid?
       @comment.save
-      @pairing = Pairing.find(params[:comment][:pairing_id])
       redirect_to pairing_path(@pairing)
     else
       render :new
@@ -34,11 +34,13 @@ class CommentsController < ApplicationController
 
   def edit
     @comment = Comment.find(params[:id])
+    @pairing = @comment.pairing
     #@user = current_user
   end
 
   def update
     @comment = Comment.find(params[:id])
+    @pairing = @comment.pairing
     @comment.update(comment_params)
     if @comment.valid?
       redirect_to comment_path(@comment)

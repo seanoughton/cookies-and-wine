@@ -1,11 +1,19 @@
 <%= render :partial => 'layouts/navbar' %>
 
-<h2> Here is the comment </h2>
+<div class="container-fluid main_body_style">
+  <div class="row">
+    <div class="col-sm-3 ">
+    </div><!--end column -->
 
-<%=@comment.body%><br>
+   <div class="col-sm-3 ">
+     <h2> Here is the comment </h2>
+     <%=@comment.body%><br>
+     <%= delete(@comment)%> <br>
+     <%= edit(@comment)%> <br>
+   </div><!--end column -->
 
-<%= delete(@comment)%> <br>
-<%= edit(@comment)%> <br>
+   <div class="col-sm-3 ">
+   </div><!--end column -->
 
-
-<br><%= link_to 'Home', home_url%>
+ </div> <!--end row -->
+</div><!--end container -->
