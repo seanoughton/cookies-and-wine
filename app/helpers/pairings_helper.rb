@@ -29,7 +29,7 @@ module PairingsHelper
   end
 
   def random_pairing
-    @random_pairing = Pairing.find(rand(1...Pairing.last.id))
+    Pairing.random_pairing
   end
 
 end

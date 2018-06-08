@@ -4,26 +4,23 @@
 <br><br>
 <div class="container-fluid">
 
-  <div class="row justify-content-center">
+  <div class="row align-items-center" style="background:transparent url('assets/crispy-chewy-chocolate-chip-cookies1.jpg') no-repeat center center /cover; height:500px;">
     <div class="col col-lg-2">
     </div><!--end column -->
    <div class="col-md-auto">
-    <h1> Discover great Cookie and Wine Pairings </h1>
+     <blockquote class="blockquote text-center">
+      <br><br><br><br><br>
+       <h1 class="text-white "> Discover great Cookie and Wine Pairings </h1><br>
+       <h4 class="text-white"> Eat Cookies |  Drink Wine | Share. </h4>
+     </blockquote>
    </div><!--end column -->
    <div class="col col-lg-2">
    </div><!--end column -->
  </div> <!--end row -->
 
- <div class="row justify-content-center">
-   <div class="col col-lg-2">
-   </div><!--end column -->
-  <div class="col-lg-auto">
-   <h4> Eat Cookies, Drink Wine, Comment. </h4>
-  </div><!--end column -->
-  <div class="col col-lg-2">
-  </div><!--end column -->
-</div> <!--end row -->
 
+
+<br><br>
 
 <div class="row justify-content-center">
   <div class="col col-lg-2">
@@ -34,5 +31,63 @@
  <div class="col col-lg-2">
  </div><!--end column -->
 </div> <!--end row -->
+
+</div><!--end container -->
+
+<br><br>
+
+
+<div class="row justify-content-center">
+  <div class="col col-lg-2">
+  </div><!--end column -->
+ <div class="col-lg-auto">
+  <h4>Featured Pairings </h4>
+ </div><!--end column -->
+ <div class="col col-lg-2">
+ </div><!--end column -->
+</div> <!--end row -->
+
+<br><br>
+
+<div class="row justify-content-center">
+  <div class="col-md-3 ml-md-auto">
+    <h3>
+      <%=link_to(image_tag("/assets/hazelnut-chocolate-thumbprint-cookies1.jpg", :alt => "logo", :title => "", :class => "img-thumbnail"), pairing_path(newest_pairing) ) %>
+      <%= link_to newest_pairing.cookie.cookie_name.titlecase, pairing_path(newest_pairing) %><br>
+      Rating: <%=newest_pairing.user_rating %>
+    </h3>
+  </div><!--end column -->
+ <div class="col-md-3 ml-md-auto">
+   <h2>
+     <%= link_to(image_tag("/assets/almond-biscotti.jpg", :alt => "logo", :title => "", :class => "img-thumbnail"), pairing_path(most_commented_pairing) ) %>
+
+     <%= link_to most_commented_pairing.cookie.cookie_name.titlecase, pairing_path(most_commented_pairing) %><br>
+     Rating: <%=most_commented_pairing.user_rating %>
+   </h2>
+ </div><!--end column -->
+ <div class="col-md-3 ml-md-auto">
+   <h2>
+     <%= link_to(image_tag("/assets/peanut-butter-cookies.jpg", :alt => "logo", :title => "", :class => "img-thumbnail"), pairing_path(highest_rated_pairing) ) %>
+     <%= link_to highest_rated_pairing.cookie.cookie_name.titlecase, pairing_path(highest_rated_pairing) %><br>
+     Rating: <%=highest_rated_pairing.user_rating %>
+   </h2>
+ </div><!--end column -->
+</div> <!--end row -->
+
+<br><br>
+
+<div class="row justify-content-center">
+  <div class="col col-lg-2">
+  </div><!--end column -->
+ <div class="col-lg-auto">
+  <h4>Create Your Own Pairing</h4>
+  <%= link_to 'Create a Pairing', new_pairing_url, :class => "btn btn-primary btn-lg btn-block"%>
+
+
+ </div><!--end column -->
+ <div class="col col-lg-2">
+ </div><!--end column -->
+</div> <!--end row -->
+<br><br>
 
 </div><!--end container -->
