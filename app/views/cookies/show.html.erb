@@ -6,11 +6,7 @@
     </div><!--end column -->
 
    <div class="col-sm-10 ">
-     <h2> Here is some information about this Cookie: </h2><br>
-     <h3>
-      Cookie Name: <%= @cookie.cookie_name.titlecase %><br>
-      Description: <%= @cookie.description.titlecase %><br>
-      Cookie Recipe: <%=link_to @cookie.link, @cookie.link, :target => "_blank"%> <br>
+     <%= render 'cookieinfo', cookie: @cookie %>
    </div><!--end column -->
    <div class="col-sm-1 ">
    </div><!--end column -->
@@ -21,14 +17,7 @@
    </div><!--end column -->
 
   <div class="col-sm-10 ">
-      <h3> Here are all of the wines it pairs with:</h3>
-    <ul>
-      <%@cookie.wines.each do |wine|%>
-      <li>
-        <%= link_to wine.wine_name, wine_path(wine) %>
-      </li>
-      <%end%>
-    </ul>
+    <%= render 'wine_pairings', cookie: @cookie %>
   </div><!--end column -->
   <div class="col-sm-1 ">
   </div><!--end column -->
@@ -39,16 +28,7 @@
   </div><!--end column -->
 
  <div class="col-sm-10 ">
-   <h3> Create a New Pairing with this Cookie</h3>
-   <%= form_for @pairing  do |f| %>
-
-     <%= f.label :Wine %>
-     <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%>
-     <%= f.hidden_field :cookie_id, value: @cookie.id %>
-     <br />
-
-     <%= f.submit %>
-   <% end %> <br><br>
+   <%= render 'create_pairing', pairing: @pairing, cookie: @cookie %>
  </div><!--end column -->
  <div class="col-sm-1 ">
  </div><!--end column -->
@@ -59,11 +39,10 @@
   </div><!--end column -->
 
  <div class="col-sm-10 ">
-   <% if user_admin? %>
-   <%= link_to 'Edit Cookie', edit_cooky_path(@cookie)%><br>
-   <%= link_to "Delete", @cookie, method: :delete, data: {confirm: "Really?!"} %><br>
-   <% end %>
+   <%=delete(@cookie)%><br>
+   <%=edit(@cookie)%>
  </div><!--end column -->
+ 
  <div class="col-sm-1 ">
  </div><!--end column -->
 </div> <!--end row -->

@@ -53,21 +53,7 @@
   </div><!--end column -->
 
  <div class="col-sm-10 ">
-   <h5>
-     <ul>
-
-     <%@pairing.comments.each do |comment|%>
-       <li>
-         <%=comment.body%>
-         <% if user_admin? %>
-           <%=edit(comment)%>
-           <%=delete(comment)%>
-         <% end %>
-       </li>
-
-     <%end%>
-     </ul>
-   </h5>
+   <%= render 'pairing_comments', pairing: @pairing %>
  </div><!--end column -->
 
  <div class="col-sm-1 ">
@@ -79,11 +65,7 @@
   </div><!--end column -->
 
  <div class="col-sm-10 ">
-   <h3>
-   <% if user_admin? || current_user_created_this_item?(@pairing) %>
-     <%= link_to "Delete Pairing", @wine, method: :delete, data: {confirm: "Really?!"} %>
-   <% end %><br>
- </h3>
+     <%=delete(@pairing)%>
  </div><!--end column -->
 
  <div class="col-sm-1 ">
@@ -91,10 +73,3 @@
 </div> <!--end row -->
 
 </div><!--end container -->
-
-
-
-
-
-
-<br>

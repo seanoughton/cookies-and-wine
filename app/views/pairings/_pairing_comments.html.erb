@@ -1,0 +1,14 @@
+<h5>
+  <ul>
+  <%@pairing.comments.each do |comment|%>
+    <li>
+      <%=comment.body%>
+      <% if user_admin? %>
+        <%=edit(comment)%>
+        <%=delete(comment)%>
+      <% end %>
+    </li>
+
+  <%end%>
+  </ul>
+</h5>

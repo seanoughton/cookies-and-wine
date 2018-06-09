@@ -8,14 +8,14 @@ module ApplicationHelper
   #CREATES A LINK TO DELETE AN ITEM, WORKS FOR ANY ITEM CREATED BY A USER
   def delete(item)
     if user_admin?
-      link_to "Delete", item, method: :delete, data: {confirm: "Really?!"}
+      link_to "Delete", item, method: :delete, data: {confirm: "Really?!"} ,:class => 'btn btn-danger'
     end
   end
 
   #CREATES A LINK TO EDIT AN ITEM, WORKS FOR ANY ITEM CREATED BY A USER
   def edit(item)
     if current_user_created_this_item?(item) || user_admin?
-        link_to "Edit", :controller => "#{item.class.to_s.downcase}s", :action => "edit", :id => item
+        link_to "Edit", :controller => "#{item.class.to_s.downcase}s", :action => "edit", :class => 'btn btn-danger', :id => item
     end
   end
 
