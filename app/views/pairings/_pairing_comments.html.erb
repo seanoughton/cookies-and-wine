@@ -3,10 +3,8 @@
   <%@pairing.comments.each do |comment|%>
     <li>
       <%=comment.body%>
-      <%=link_to edit_pairing_comment_path(@pairing)%>
-      <!-- /pairings/:pairing_id/comments/:id/edit -->
-        <%=edit(comment)%>
-        <%=delete(comment)%>
+      <%=edit_with_parent(@pairing,comment)%>
+      <%=delete(comment)%>
     </li>
 
   <%end%>

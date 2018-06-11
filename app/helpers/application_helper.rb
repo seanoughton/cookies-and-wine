@@ -20,6 +20,10 @@ module ApplicationHelper
     end
   end
 
+  def edit_with_parent(parent,child)
+    link_to "Edit #{child.class.to_s}", "/#{parent.class.to_s.downcase}s/#{parent.id}/#{child.class.to_s.downcase}s/#{child.id}/edit",  :class=> "btn btn-warning"
+  end
+
 
   def shows_error_messages(item)
     if item.errors.any?

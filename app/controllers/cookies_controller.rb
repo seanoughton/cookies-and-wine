@@ -1,8 +1,9 @@
 class CookiesController < ApplicationController
   before_action :require_logged_in
   before_action :current_user
+
   def index
-    @cookies = Cookie.all
+    get_all_cookies
   end
 
 
@@ -21,26 +22,34 @@ class CookiesController < ApplicationController
   end
 
   def show
-    @cookie = Cookie.find(params[:id])
-    @cookies = Cookie.all
+    find_cookie(params[:id])
+    get_all_cookies
     @pairing = Pairing.new(cookie_id: params[:id])
-    @user = current_user
   end
 
   def edit
-    @cookie = Cookie.find(params[:id])
+    find_cookie(params[:id])
   end
 
   def update
-    @cookie = Cookie.find(params[:id])
+    find_cookie(params[:id])
     @cookie.update(cookie_params)
     redirect_to @cookie
   end
 
   def destroy
     Pairing.delete_associated_pairings_for_cookie(params[:id])
-    Cookie.find(params[:id]).destroy
+    find_cookie(params[:id]).destroy
     redirect_to cookies_url
+  end
+
+  #HELPERS
+  def find_cookie(id)
+    @cookie = Cookie.find(id)
+  end
+
+  def get_all_cookies
+    @cookies = Cookie.all
   end
 
   private

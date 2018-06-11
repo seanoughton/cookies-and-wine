@@ -7,20 +7,7 @@ class PairingsController < ApplicationController
   end
 
   def sort
-    case params[:sort]
-    when "highest rated"
-      @pairings = Pairing.highest_to_lowest
-    when "lowest rated"
-      @pairings = Pairing.lowest_to_highest
-    when "most commented"
-      @pairings = Pairing.most_commented_list
-    when "newest"
-      @pairings = Pairing.newest_list
-    when "oldest"
-      @pairings = Pairing.oldest_list
-    else
-      @pairings = Pairing.all
-    end
+    sort_order(params[:sort])
     render :index
   end
 
@@ -61,7 +48,23 @@ class PairingsController < ApplicationController
     redirect_to pairings_url
   end
 
-  #helper methods
+  #HELPERS
+  def sort_order(sort_input)
+    case sort_input
+    when "highest rated"
+      @pairings = Pairing.highest_to_lowest
+    when "lowest rated"
+      @pairings = Pairing.lowest_to_highest
+    when "most commented"
+      @pairings = Pairing.most_commented_list
+    when "newest"
+      @pairings = Pairing.newest_list
+    when "oldest"
+      @pairings = Pairing.oldest_list
+    else
+      @pairings = Pairing.all
+    end
+  end
 
 
 

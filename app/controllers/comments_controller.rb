@@ -10,14 +10,14 @@ class CommentsController < ApplicationController
       redirect_to pairings_path, alert: "Pairing not found."
     else
       create_empty_comment(params[:pairing_id])
-      find_pairing(params[:pairing_id])
+      find_pairing(params[:pairing_id],@comment)
     end
 
   end
 
   def create #CREATES A COMMENT FOR A SPECIFIC PAIRING
     @comment = Comment.new(comment_params)
-    find_pairing(params[:comment][:pairing_id])
+    find_pairing((params[:comment][:pairing_id]),@comment)
     if @comment.valid?
       @comment.save
       redirect_to pairing_path(@pairing)
@@ -27,38 +27,43 @@ class CommentsController < ApplicationController
 
   end
 
-  def show
+  def show #SHOWS A COMMENT FOR A SPECIFIC PAIRING
     find_comment(params[:id])
+    find_pairing(params[:pairing_id],@comment)
+    #@pairing = Pairing.find(params[:pairing_id])
   end
 
-  def edit
+  def edit #EDITS A COMMENT FOR A SPECIFIC PAIRING
     find_comment(params[:id])
-    @pairing = @comment.pairing
+    find_pairing(params[:pairing_id],@comment)
   end
 
-  def update
+  def update #UPDATES A COMMENT FOR A SPECIFIC PAIRING
     find_comment(params[:id])
-    @pairing = @comment.pairing
+    find_pairing(params[:comment][:pairing_id],@comment)
     @comment.update(comment_params)
-    if @comment.valid?
-      redirect_to comment_path(@comment)
-    else
-      render :edit
-    end
-
+    redirect_to pairing_comment_path(@comment) if @comment.valid?
+    render :edit if !@comment.valid?
   end
 
   def destroy
     find_comment(params[:id])
-    @pairing = @comment.pairing
+    find_pairing(@comment.pairing.id,@comment)
     @comment.destroy
     redirect_to @pairing
   end
 
   #helpers
 
-  def find_pairing(pairing_id)
-    @pairing = Pairing.find(pairing_id)
+  #FINDS A PAIRING WITH A PAIRING ID
+  #IF PAIRING ID DOES NOT EXIST IN THE PARAMS
+  #ASSINGS PAIRING BASED ON THE COMMENT'S PARENT PAIRING
+  def find_pairing(pairing_id,comment)
+    if Pairing.exists?(pairing_id)
+      @pairing = Pairing.find(pairing_id)
+    else
+      @pairing = comment.pairing
+    end
   end
 
 
