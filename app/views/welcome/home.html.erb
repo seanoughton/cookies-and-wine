@@ -50,26 +50,26 @@
 
 <div class="row justify-content-center">
   <div class="col-md-3 ml-md-auto">
-    <h4>
+    <h6 class = "text-success">
       <%=link_to(image_tag("/assets/iced-oatmeal-cookies.jpg", :alt => "logo", :title => "", :class => "img-thumbnail"), pairing_path(newest_pairing) ) %>
-      <%= link_to newest_pairing.cookie.cookie_name.titlecase, pairing_path(newest_pairing) %><br>
-      Rating: <%=newest_pairing.user_rating %>
-    </h4>
+      <%= link_to "#{newest_pairing.cookie.cookie_name.titlecase} paired with #{newest_pairing.wine.wine_name.titlecase}" , pairing_path(newest_pairing) %><br>
+      Rating: <%=newest_pairing.user_rating%>
+    </h6>
   </div><!--end column -->
  <div class="col-md-3 ml-md-auto">
-   <h4>
+   <h6 class = "text-success">
      <%= link_to(image_tag("/assets/almond-biscotti.jpg", :alt => "logo", :title => "", :class => "img-thumbnail"), pairing_path(most_commented_pairing) ) %>
 
-     <%= link_to most_commented_pairing.cookie.cookie_name.titlecase, pairing_path(most_commented_pairing) %><br>
+     <%= link_to "#{most_commented_pairing.cookie.cookie_name.titlecase} paired with #{most_commented_pairing.wine.wine_name.titlecase}", pairing_path(most_commented_pairing) %><br>
      Rating: <%=most_commented_pairing.user_rating %>
-   </h4>
+   </h6>
  </div><!--end column -->
  <div class="col-md-3 ml-md-auto">
-   <h4>
+   <h6 class = "text-success">
      <%= link_to(image_tag("/assets/peanut-butter-cookies.jpg", :alt => "logo", :title => "", :class => "img-thumbnail"), pairing_path(highest_rated_pairing) ) %>
-     <%= link_to highest_rated_pairing.cookie.cookie_name.titlecase, pairing_path(highest_rated_pairing) %><br>
+     <%= link_to "#{highest_rated_pairing.cookie.cookie_name.titlecase} paired with #{highest_rated_pairing.wine.wine_name.titlecase}", pairing_path(highest_rated_pairing) %><br>
      Rating: <%=highest_rated_pairing.user_rating %>
-   </h4>
+   </h6>
  </div><!--end column -->
 </div> <!--end row -->
 

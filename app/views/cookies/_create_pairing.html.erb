@@ -4,7 +4,7 @@
     <%= f.label :Wine %>
     <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%>
     <%= f.hidden_field :cookie_id, value: @cookie.id %>
-    <br />
+    <br><br>
 
-    <%= f.submit %>
+    <%= f.submit :class => "btn btn-success"%>
   <% end %> <br><br>

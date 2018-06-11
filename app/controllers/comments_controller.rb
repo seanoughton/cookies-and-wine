@@ -52,8 +52,9 @@ class CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find(params[:id])
+    @pairing = comment.pairing
     comment.destroy
-    redirect_to pairings_path
+    redirect_to @pairing
   end
 
 private

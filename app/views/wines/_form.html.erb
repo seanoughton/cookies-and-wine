@@ -2,6 +2,9 @@
 
   <%=shows_error_messages(@wine)%><br>
 
+  <%= f.label :wine_name %>
+  <%= f.text_field :wine_name %><br>
+
   <%= f.label :grape_varietal %>
   <%= f.text_field :grape_varietal %><br>
 
@@ -10,7 +13,7 @@
 
   <%= f.label :description %>
   <%= f.text_field :description %><br>
-  
+
   <%=id_field(@wine,@current_user)%><br>
 
   <%= f.submit :class => 'btn btn-primary' %>
