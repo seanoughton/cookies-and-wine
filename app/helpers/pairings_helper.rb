@@ -40,6 +40,5 @@ module PairingsHelper
     Pairing.random_pairing
   end
 
-  
 
 end

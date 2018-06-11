@@ -8,7 +8,7 @@ class User < ApplicationRecord
 	has_many :wines
 
 	#VALIDATIONS
-	has_secure_password #Had to create a random user password for users signing in with Omniauth
+	has_secure_password 
 
 	validates :user_name, presence: true
 	validates :user_name, uniqueness: true

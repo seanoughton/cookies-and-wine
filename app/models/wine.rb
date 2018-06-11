@@ -4,8 +4,8 @@ class Wine < ApplicationRecord
 	has_many :pairings
 	#a wine has many cookies that it can pair with
 	has_many :cookies, through: :pairings, :source => :cookie #this solves a problem with the plurality of cookie
-
 	belongs_to :user
+
 	#VALIDATIONS
 	validates :wine_name, presence: true
 	validates :wine_name, uniqueness: true
@@ -15,7 +15,7 @@ class Wine < ApplicationRecord
 	validates :description, length: {maximum: 50, too_long: "%{count} characters is the maximum allowed" }
 	validates :description, length: {minimum: 2, too_short: "%{count} characters is the minimum allowed" }
 
-
+	#INSTANCE METHODS
 	def paired_cookies
 		self.cookies
 	end

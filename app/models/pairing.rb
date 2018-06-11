@@ -24,8 +24,6 @@ class Pairing < ApplicationRecord
 	end
 
 
-
-
 	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
 
 	def self.highest_to_lowest
@@ -37,7 +35,6 @@ class Pairing < ApplicationRecord
 	end
 
 	def self.highest_rated
-		#where("rating > 3")
 		order(user_rating: :desc).limit(1).first
 	end
 
@@ -71,23 +68,22 @@ class Pairing < ApplicationRecord
 
 	def self.random_pairing
 		random_number = 0
-		while !Pairing.ids.include?(random_number)
+		#keeps looking for a random number until it finds one that is included in the Pairing Id's
+		while !self.ids.include?(random_number)
 			random_number = rand(1...self.last.id)
 		end
-		Pairing.find(random_number)
+		self.find(random_number)
 	end
 
-
-
 	def self.delete_associated_pairings_for_cookie(cookie_id)
-		Pairing.where(cookie_id: cookie_id).find_each do |pairing|
+		self.where(cookie_id: cookie_id).find_each do |pairing|
 		  pairing.destroy
 		end
 	end
 
 
 	def self.delete_associated_pairings_for_wine(wine_id)
-		Pairing.where(wine_id: wine_id).find_each do |pairing|
+		self.where(wine_id: wine_id).find_each do |pairing|
 		  pairing.destroy
 		end
 	end
@@ -120,14 +116,7 @@ class Pairing < ApplicationRecord
 			rating = rating_values.sum/rating_values.count
 			self.user_rating = rating #assigns the new rating
 		end
-		self.save(validate: false) #might need to change this
+		self.save(validate: false)
 	end
-
-
-
-
-
-
-
 
 end
