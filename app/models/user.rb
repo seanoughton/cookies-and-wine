@@ -8,18 +8,17 @@ class User < ApplicationRecord
 	has_many :wines
 
 	#VALIDATIONS
-	has_secure_password #conflicts with omniauth
+	has_secure_password #Had to create a random user password for users signing in with Omniauth
 
 	validates :user_name, presence: true
 	validates :user_name, uniqueness: true
-	#validates :password, presence: true
-	#validates :zipcode, presence: true
-	#validates :zipcode, numericality: { only_integer: true }
+	#INTENTIONALLY LEFT OUT VALIDATING PRESENCE OF ZIPCODE SO THAT FACEBOOK USER COULD LOG IN WITHOUT HAVING TO INPUT THAT INFORMATION
+	validates :zipcode, numericality: { only_integer: true }
 	validates :email, presence: true, 'valid_email_2/email': true
 	validates :email, uniqueness: true
 
 
-	#validate :user_already_exists
+	#VALIDATION TO SEE IF THE USER ALREADY EXISTS IN THE DATABASE
 
 	def user_already_exists
 		user = User.find_by(user_name: self.user_name, email: self.email)
@@ -28,11 +27,8 @@ class User < ApplicationRecord
 		end
 	end
 
-	#AUTHORIZATIONS (STUFF ONLY THE ADMIN CAN DO)
+	#AUTHORIZATIONS (STUFF THE ADMIN CAN DO)
 	#EDIT/DELETE A User, Pairing, Wine, Cookie, Comment
-
-	#A USER CAN EDIT THEIR OWN USER PROFILE
-	#A USER CAN EDIT/DELETE THEIR OWN PAIRINGS?
 
 	def is_admin?
 		self.admin
@@ -42,8 +38,6 @@ class User < ApplicationRecord
 	def self.user_with_most_pairings
 		order( "pairings_count desc" ).first
 	end
-
-
 
 
 

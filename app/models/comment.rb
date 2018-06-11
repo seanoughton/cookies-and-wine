@@ -2,7 +2,7 @@ class Comment < ApplicationRecord
 
 	#RELATIONSHIPS
 	belongs_to :user
-	belongs_to :pairing, :counter_cache => true
+	belongs_to :pairing, :counter_cache => true #keeps track of the number of comments created for a pairing
 
 	#VALIDATIONS
 

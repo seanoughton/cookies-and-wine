@@ -3,10 +3,10 @@
   <%@pairing.comments.each do |comment|%>
     <li>
       <%=comment.body%>
-      <% if user_admin? %>
+      <%=link_to edit_pairing_comment_path(@pairing)%>
+      <!-- /pairings/:pairing_id/comments/:id/edit -->
         <%=edit(comment)%>
         <%=delete(comment)%>
-      <% end %>
     </li>
 
   <%end%>

@@ -3,7 +3,7 @@ class Pairing < ApplicationRecord
 	#RELATIONSHIPS
 	belongs_to :wine
 	belongs_to :cookie
-	belongs_to :user, :counter_cache => true
+	belongs_to :user, :counter_cache => true #counts the number of pairings for a specific user
 	has_many :comments
 	has_many :ratings
 
@@ -18,6 +18,11 @@ class Pairing < ApplicationRecord
 			errors.add(:pairing, "Already Exists. Try Creating a Different Pairing")
 		end
 	end
+
+	def self.pairing_exists?(pairing_id)
+		self.exists?(pairing_id)
+	end
+
 
 
 
@@ -100,6 +105,8 @@ class Pairing < ApplicationRecord
 		end
 		self.save(validate: false) #might need to change this
 	end
+
+
 
 
 

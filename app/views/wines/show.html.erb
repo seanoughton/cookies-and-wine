@@ -46,15 +46,13 @@
   </div><!--end column -->
 
  <div class="col-sm-8 ">
-   <% if user_admin? %>
-     <h4><%= link_to 'Edit Wine', edit_wine_path(@wine)%><br>
-     <%= link_to "Delete Wine", @wine, method: :delete, data: {confirm: "Really?!"} %></h4>
-   <% end %>
+   <%=edit(@wine)%>
+   <%=delete(@wine)%>
  </div><!--end column -->
 
  <div class="col-sm-2 ">
  </div><!--end column -->
-</div> <!--end row -->
+</div> <!--end row --><br><br>
 
 
 
