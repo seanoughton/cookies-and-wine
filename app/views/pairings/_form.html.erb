@@ -8,5 +8,8 @@
   <%= f.label :Cookie %>
   <%= f.collection_select :cookie_id, Cookie.all,:id,:cookie_name%><br>
 
+  <%=id_field(@pairing,@current_user)%>
+  <%=hidden_field_tag "pairing[user_rating]", 1%>
+
   <%= f.submit :class => 'btn btn-primary'%>
 <% end %>

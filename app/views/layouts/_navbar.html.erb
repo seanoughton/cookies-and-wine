@@ -38,7 +38,7 @@
           <%= link_to 'Find a pairing for a specific wine', wines_url, :class => "dropdown-item"%>
 
           <div class="dropdown-divider"></div>
-          <%= link_to 'Create a Pairing', new_pairing_url, :class => "dropdown-item"%>
+          <%= link_to 'Create a Pairing', new_user_pairing_url(@current_user), :class => "dropdown-item"%>
           <%= link_to 'Add a Wine', new_wine_url, :class => "dropdown-item"%>
           <%= link_to 'Add a Cookie', new_cooky_url, :class => "dropdown-item"%>
 

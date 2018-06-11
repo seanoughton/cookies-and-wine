@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
 
   root 'users#new'
-  
+
   resources :ratings
   resources :comments
   resources :pairings do
@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   end
   resources :wines
   resources :cookies
-  resources :users
+  resources :users do
+    resources :pairings 
+  end
   resources :welcome
 
   get 'home' => 'welcome#home'
