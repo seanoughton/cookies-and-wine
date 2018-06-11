@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :current_user #loads in the current_user
+  before_action :require_logged_in
+  before_action :current_user 
 
   def index
     @comments = Comment.all

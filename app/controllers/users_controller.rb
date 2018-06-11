@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :current_user #loads in the current_user
+  before_action :current_user
 
   def index
     @users = User.all
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.valid?
       @user.save
-      session[:user_id] = @user.id
+      log_in(@user)
       redirect_to controller: 'welcome', action: 'home'
     else
       render :new

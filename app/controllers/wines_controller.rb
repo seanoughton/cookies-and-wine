@@ -1,8 +1,9 @@
 class WinesController < ApplicationController
   before_action :require_logged_in
   before_action :current_user
+
   def index
-    @wines = Wine.all
+    get_all_wines
   end
 
 
@@ -22,19 +23,17 @@ class WinesController < ApplicationController
   end
 
   def show
-    @wine = Wine.find(params[:id])
-    @wines = Wine.all
+    find_wine(params[:id])
     @pairing = Pairing.new(wine_id: params[:id])
-    @user = current_user
   end
 
   def edit
-    @wine = Wine.find(params[:id])
+    find_wine(params[:id])
   end
 
 
   def update
-    @wine = Wine.find(params[:id])
+    find_wine(params[:id])
     @wine.update(wine_params)
     redirect_to @wine
   end
@@ -43,6 +42,15 @@ class WinesController < ApplicationController
     Pairing.delete_associated_pairings_for_wine(params[:id])
     Wine.find(params[:id]).destroy
     redirect_to wines_url
+  end
+
+  #HELPERS
+  def find_wine(id)
+    @wine = Wine.find(id)
+  end
+
+  def get_all_wines
+    @wines = Wine.all
   end
 
   private

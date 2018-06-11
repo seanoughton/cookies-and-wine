@@ -4,8 +4,8 @@ class WelcomeController < ApplicationController
 
   def index
   end
+
   def home
-    @user = User.find(session[:user_id])
     @highest_rated_pairing = Pairing.highest_rated
     @most_commented_pairing = Pairing.most_commented
     @newest_pairing = Pairing.newest

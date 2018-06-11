@@ -92,6 +92,23 @@ class Pairing < ApplicationRecord
 		end
 	end
 
+	def self.sort_order(sort_input)
+		case sort_input
+    when "highest rated"
+      highest_to_lowest
+    when "lowest rated"
+      lowest_to_highest
+    when "most commented"
+      most_commented_list
+    when "newest"
+      newest_list
+    when "oldest"
+      oldest_list
+    else
+      all
+    end
+	end
+
 #INSTANCE METHODS
 	def update_rating #averages the rating and updates the database
 		if self.ratings.empty?

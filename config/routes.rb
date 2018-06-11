@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :wines
   resources :cookies
   resources :users do
-    resources :pairings 
+    resources :pairings
   end
   resources :welcome
 
