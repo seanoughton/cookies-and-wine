@@ -1,5 +1,7 @@
 <%= form_for :user, url: '/login' do |f| %>
-  Username: <%= f.text_field :user_name %>
-  Password: <%= f.password_field :password %>
-  <%= f.submit "Submit" %>
+  <%= f.label "User Name: "%>
+  <%= f.text_field :user_name %><br>
+  <%= f.label "Password: "%>
+  <%= f.password_field :password %><br>
+  <%= f.submit "Log In", :class => 'btn btn-primary' %>
 <% end %>

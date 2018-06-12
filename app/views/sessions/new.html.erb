@@ -1,30 +1,31 @@
 <%= render 'navbar' %>
 
 
-<div class="container-fluid main_body_style">
+<div class="container-fluid main_body_style" style="background:transparent url('assets/potato-chip-cookies.jpg') no-repeat center center /cover; height:960px;">
   <div class="row">
-    <div class="col-sm-3 ">
+    <div class="col-sm-1 ">
     </div><!--end column -->
 
-   <div class="col-sm-3 ">
-     <h2> Log in </h2>
-     <%= render 'form', user: @user %>
+   <div class="col-sm-5 text-white">
+     <h2 > Log in </h2>
+     <%= render 'form', user: @user %><br>
    </div><!--end column -->
 
-   <div class="col-sm-3 ">
+   <div class="col-sm-4 ">
+     <%= link_to('Log in with Facebook!', '/auth/facebook') %>
    </div><!--end column -->
 
  </div> <!--end row --><br></br>
 
  <div class="row">
-   <div class="col-sm-3 ">
+   <div class="col-sm-1 ">
    </div><!--end column -->
 
-  <div class="col-sm-3 ">
-    <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+  <div class="col-sm-6 ">
+
   </div><!--end column -->
 
-  <div class="col-sm-3 ">
+  <div class="col-sm-5 ">
   </div><!--end column -->
 
 </div> <!--end row -->

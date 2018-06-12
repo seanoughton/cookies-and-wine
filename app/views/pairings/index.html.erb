@@ -1,16 +1,16 @@
 <%= render :partial => 'layouts/navbar' %>
-<div class="container-fluid main_body_style">
+<div class="container-fluid main_body_style" id="bg-img-01">
 
   <% flash.each do |key, value| %>
         <div class="alert alert-danger"> <%= key.upcase %>: <%= value %></div>
   <% end %>
 
 
-  <div class="row">
+  <div class="row" >
     <div class="col-sm-1 ">
     </div><!--end column -->
 
-   <div class="col-sm-10 ">
+   <div class="col-sm-10 text-white">
      <h3> Here are all of the pairings </h3>
      <%= render 'sort'%>
      <%= render 'all_pairings', pairing: @pairing %>

@@ -10,7 +10,7 @@
   </div>
 <% end %>
 
-  <%= f.label :name %>
+  <%= f.label :name%>
   <%= f.text_field :user_name %><br>
 
   <%= f.label :email %>
@@ -21,10 +21,10 @@
 
 <!-- if user logged in with facebook then they don't need to be able to change the password -->
   <% if !@user.uid %>
-    <%= f.label :password %>
+    <%= f.label :password, :class => 'text-white' %>
     <%= f.password_field :password %><br>
 
-    <%= f.label :password_confirmation %>
+    <%= f.label :password_confirmation, :class => 'text-white' %>
     <%= f.password_field :password_confirmation %><br>
   <%end%>
 
