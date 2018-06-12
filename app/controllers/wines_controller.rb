@@ -51,7 +51,7 @@ class WinesController < ApplicationController
   end
 
   def get_all_wines
-    @wines = Wine.all
+    @wines = Wine.find_each
   end
 
   private

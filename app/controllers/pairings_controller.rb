@@ -3,7 +3,7 @@ class PairingsController < ApplicationController
   before_action :current_user
 
   def index
-    @pairings = Pairing.all
+    @pairings = Pairing.find_each
   end
 
   def sort
@@ -28,7 +28,7 @@ class PairingsController < ApplicationController
 
   def show
     find_pairing(params[:id])
-    @comments = Comment.all
+    @comments = Comment.find_each
   end
 
   def edit
@@ -49,7 +49,6 @@ class PairingsController < ApplicationController
 
   def destroy
     find_pairing(params[:id])
-    @pairing.delete_pairings_comments_ratings
     find_pairing(params[:id]).destroy
     redirect_to pairings_url
   end

@@ -5,17 +5,22 @@ Rails.application.routes.draw do
 
   resources :ratings
   resources :comments
+
   resources :pairings do
     resources :ratings
     resources :comments
     resources :cookies
   end
+
   resources :wines
   resources :cookies
+
   resources :users do
     resources :pairings
     resources :comments
+    get 'most_recipes' => 'users#show'
   end
+
   resources :welcome
 
   get 'home' => 'welcome#home'

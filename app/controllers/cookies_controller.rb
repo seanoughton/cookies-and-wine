@@ -50,7 +50,7 @@ class CookiesController < ApplicationController
   end
 
   def get_all_cookies
-    @cookies = Cookie.all
+    @cookies = Cookie.find_each
   end
 
   private

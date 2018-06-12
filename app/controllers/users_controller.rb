@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :current_user
 
   def index
-    @users = User.all
+    @users = User.find_each
   end
 
   def new

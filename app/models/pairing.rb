@@ -4,13 +4,12 @@ class Pairing < ApplicationRecord
 	belongs_to :wine
 	belongs_to :cookie
 	belongs_to :user, :counter_cache => true #counts the number of pairings for a specific user
-	has_many :comments
-	has_many :ratings
+	has_many :comments, dependent: :destroy
 
 	#VALIDATIONS
 	validates :wine_id, presence: {message: "Must Have a Wine"}
 	validates :cookie_id, presence: {message: "Must Have a Cookie"}
-	validate :pairing_already_exists 
+	validate :pairing_already_exists
 
 	#CUSTOM VALIDATIONS
 	def pairing_already_exists
@@ -40,7 +39,8 @@ class Pairing < ApplicationRecord
 	end
 
 	def self.lowest_rated
-		where("rating < '2'")
+		order(user_rating: :asc).limit(1).first
+		#where('rating < ?', '2')
 	end
 
 	def self.most_commented_list
@@ -74,19 +74,6 @@ class Pairing < ApplicationRecord
 			random_number = rand(1...self.last.id)
 		end
 		self.find(random_number)
-	end
-
-	def self.delete_associated_pairings_for_cookie(cookie_id)
-		self.where(cookie_id: cookie_id).find_each do |pairing|
-		  pairing.destroy
-		end
-	end
-
-
-	def self.delete_associated_pairings_for_wine(wine_id)
-		self.where(wine_id: wine_id).find_each do |pairing|
-		  pairing.destroy
-		end
 	end
 
 	def self.sort_order(sort_input)

@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :current_user
 
   def index
-    @comments = Comment.all
+    @comments = Comment.find_each
   end
 
   def new #CREATES A COMMENT FOR A SPECIFIC PAIRING
