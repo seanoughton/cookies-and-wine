@@ -35,7 +35,8 @@ class WinesController < ApplicationController
   def update
     find_wine(params[:id])
     @wine.update(wine_params)
-    redirect_to @wine
+    redirect_to @wine if @wine.valid?
+    render :edit if !@wine.valid?
   end
 
   def destroy

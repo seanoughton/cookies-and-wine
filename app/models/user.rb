@@ -8,12 +8,12 @@ class User < ApplicationRecord
 	has_many :wines
 
 	#VALIDATIONS
-	has_secure_password 
+	has_secure_password
 
 	validates :user_name, presence: true
 	validates :user_name, uniqueness: true
 	#INTENTIONALLY LEFT OUT VALIDATING PRESENCE OF ZIPCODE SO THAT FACEBOOK USER COULD LOG IN WITHOUT HAVING TO INPUT THAT INFORMATION
-	validates :zipcode, numericality: { only_integer: true }
+	#validates :zipcode, numericality: { only_integer: true }
 	validates :email, presence: true, 'valid_email_2/email': true
 	validates :email, uniqueness: true
 

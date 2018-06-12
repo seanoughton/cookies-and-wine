@@ -10,8 +10,9 @@ class Pairing < ApplicationRecord
 	#VALIDATIONS
 	validates :wine_id, presence: {message: "Must Have a Wine"}
 	validates :cookie_id, presence: {message: "Must Have a Cookie"}
-	validate :pairing_already_exists
+	validate :pairing_already_exists 
 
+	#CUSTOM VALIDATIONS
 	def pairing_already_exists
 		pairing = Pairing.find_by(wine_id: self.wine_id, cookie_id: self.cookie_id)
 		if pairing

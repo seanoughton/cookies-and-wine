@@ -34,7 +34,8 @@ class CookiesController < ApplicationController
   def update
     find_cookie(params[:id])
     @cookie.update(cookie_params)
-    redirect_to @cookie
+    redirect_to @cookie if @cookie.valid?
+    render :edit if !@cookie.valid?
   end
 
   def destroy

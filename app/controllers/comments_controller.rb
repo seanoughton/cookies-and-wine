@@ -39,11 +39,13 @@ class CommentsController < ApplicationController
   end
 
   def update #UPDATES A COMMENT FOR A SPECIFIC PAIRING
+
     find_comment(params[:id])
     find_pairing(params[:comment][:pairing_id],@comment)
     @comment.update(comment_params)
-    redirect_to pairing_comment_path(@comment) if @comment.valid?
+    redirect_to @pairing if @comment.valid?
     render :edit if !@comment.valid?
+
   end
 
   def destroy

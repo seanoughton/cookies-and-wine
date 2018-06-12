@@ -21,7 +21,10 @@ module ApplicationHelper
 
   #CREATES A LINK TO EDIT AN ITEM ASSOCIATED WITH A PARENT
   def edit_with_parent(parent,child)
-    link_to "Edit #{child.class.to_s}", "/#{parent.class.to_s.downcase}s/#{parent.id}/#{child.class.to_s.downcase}s/#{child.id}/edit",  :class=> "btn btn-warning"
+    if current_user_created_this_item?(child) || user_admin?
+      link_to "Edit #{child.class.to_s}", "/#{parent.class.to_s.downcase}s/#{parent.id}/#{child.class.to_s.downcase}s/#{child.id}/edit",  :class=> "btn btn-warning"
+    end
+
   end
 
   #CREATES HTML TO SHOW ERROR MESSAGES FOR ANY ERRORS/MODELS

@@ -37,7 +37,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if is_current_user?(params[:id])
       @user.update(user_params)
-      render :show
+      redirect_to @user if @user.valid?
+      render :edit if !@user.valid?
     else
       redirect_to controller: 'sessions', action: 'new'
     end

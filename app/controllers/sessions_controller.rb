@@ -5,9 +5,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    facebook_login(params) if params[:code]
-    regular_login(params) if !params[:code]
-    redirect_the_user(@user)
+    if params[:code]
+      facebook_login(params)
+      redirect_the_user(@user)
+    else
+      regular_login(params)
+      redirect_the_user(@user)
+    end
+
   end
 
   def destroy
