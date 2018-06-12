@@ -1,7 +1,7 @@
 <ol>
   <%@comments.each do |comment| %>
     <li>
-      <%=link_to comment.body, pairing_url(comment.pairing)%>(Created by:
+      <%=link_to comment.body, "/pairings/#{comment.pairing_id}/comments/#{comment.id}"%>(Created by:
       <%=link_to comment.user.user_name, user_url(comment.user), :class => 'text-success'%>)
     </li>
   <%end%>

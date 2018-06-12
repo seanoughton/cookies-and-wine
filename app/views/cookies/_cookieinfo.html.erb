@@ -1,5 +1,7 @@
 <h2> Here is some information about this Cookie: </h2><br>
-<h3>
- Cookie Name: <%= @cookie.cookie_name.titlecase %><br>
- Description: <%= @cookie.description.titlecase %><br>
- Cookie Recipe: <%=link_to @cookie.link, @cookie.link, :target => "_blank"%> <br>
+
+<h3 class="text-secondary">
+ Cookie Name: <span class ="text-primary"> <%= @cookie.cookie_name.titlecase %></span><br>
+ Description: <span class ="text-primary"> <%= @cookie.description.titlecase %></span><br>
+ Cookie Recipe: <%=link_to @cookie.link, @cookie.link, :target => "_blank"%>
+</h3> <br>

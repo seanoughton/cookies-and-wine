@@ -15,7 +15,7 @@ module ApplicationHelper
   #CREATES A LINK TO EDIT AN ITEM, WORKS FOR ANY ITEM CREATED BY A USER
   def edit(item)
     if current_user_created_this_item?(item) || user_admin?
-      link_to "Edit #{item.class.to_s}", "/#{item.class.to_s.downcase}s/#{item.id}/edit", :class=> "btn btn-warning"
+      link_to "Edit #{item.class.to_s}", "/#{item.class.to_s.downcase}s/#{item.id}/edit", :class=> "btn btn-warning "
     end
   end
 

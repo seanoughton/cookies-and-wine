@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :cookies
   resources :users do
     resources :pairings
+    resources :comments
   end
   resources :welcome
 

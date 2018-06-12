@@ -8,7 +8,9 @@
 
    <div class="col-sm-10 ">
      <h3>
-       <%=link_to @pairing.wine.wine_name.titlecase, wine_url(@pairing.wine) %> is paired with <%= link_to @pairing.cookie.cookie_name.titlecase, cooky_url(@pairing.cookie)%>.<br>
+       <%=link_to @pairing.wine.wine_name.titlecase, wine_url(@pairing.wine) %> is paired with <%= link_to @pairing.cookie.cookie_name.titlecase, cooky_url(@pairing.cookie)%>.<br></h3>
+       <h2>------------------------------------------</h2>
+     <h3>
        Creator: <%= link_to "#{@pairing.user.user_name}", user_url(@pairing.user)%>
      </h3>
    </div><!--end column -->
@@ -16,6 +18,7 @@
    <div class="col-sm-1 ">
    </div><!--end column -->
  </div> <!--end row -->
+
 
  <div class="row">
    <div class="col-sm-1 ">

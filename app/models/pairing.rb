@@ -119,4 +119,13 @@ class Pairing < ApplicationRecord
 		self.save(validate: false)
 	end
 
+	def delete_pairings_comments_ratings
+		self.comments.each do |comment|
+      comment.destroy
+    end
+    self.ratings.each do |rating|
+      rating.destroy
+    end
+	end
+
 end

@@ -4,7 +4,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <div class="collapse navbar-collapse " id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
@@ -15,11 +15,11 @@
         <%= link_to @current_user.user_name, user_url(@current_user),:class => "nav-link" %>
       </li>
 
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown ">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Here's all the stuff you can do
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu " aria-labelledby="navbarDropdown">
 
           <%= link_to 'Get a Random Pairing', pairing_url(random_pairing),:class => "dropdown-item" %>
 
@@ -42,7 +42,7 @@
           <%= link_to 'Add a Wine', new_wine_url, :class => "dropdown-item"%>
           <%= link_to 'Add a Cookie', new_cooky_url, :class => "dropdown-item"%>
 
-          <div class="dropdown-divider"></div>
+          <div class="dropdown-divider "></div>
           <%= link_to 'All comments', comments_path, :class => "dropdown-item"%>
           <%= link_to 'All Users', users_url, :class => "dropdown-item"%>
           <div class="dropdown-divider"></div>
@@ -52,7 +52,7 @@
 
       <li class="nav-item">
         <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-          <input type=submit value='logout'>
+          <input type=submit value='logout' class="btn btn-primary m-10">
         <% end %>
       </li>
 

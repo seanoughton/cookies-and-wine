@@ -7,7 +7,7 @@
 
    <div class="col-sm-3 ">
      <h1>Edit Comment  </h1>
-     <%= render 'form', comment: @comment %>
+     <%= render 'form', comment: @comment, current_user: @current_user %>
      <h2><%=delete(@comment)%></h2>
    </div><!--end column -->
 

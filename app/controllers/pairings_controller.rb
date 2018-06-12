@@ -42,6 +42,8 @@ class PairingsController < ApplicationController
   end
 
   def destroy
+    find_pairing(params[:id])
+    @pairing.delete_pairings_comments_ratings
     find_pairing(params[:id]).destroy
     redirect_to pairings_url
   end
@@ -52,6 +54,7 @@ class PairingsController < ApplicationController
   def find_pairing(id)
     @pairing = Pairing.find(id)
   end
+
 
   private
 

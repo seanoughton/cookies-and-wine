@@ -1,7 +1,7 @@
 <h5>
   <ul>
   <%@pairing.comments.each do |comment|%>
-    <li>
+    <li class="w-1 p-1">
       <%=comment.body%>
       <%=edit_with_parent(@pairing,comment)%>
       <%=delete(comment)%>

@@ -3,7 +3,8 @@
 
     <%= f.label :Wine %>
     <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%>
-    <%= f.hidden_field :cookie_id, value: @cookie.id %>
+    <%= id_field(@pairing,@cookie) %>
+    <%= id_field(@pairing,@current_user) %>
     <br><br>
 
     <%= f.submit :class => "btn btn-success"%>

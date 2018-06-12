@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :require_logged_in
-  before_action :current_user 
+  before_action :current_user
 
   def index
     @comments = Comment.all
@@ -31,7 +31,6 @@ class CommentsController < ApplicationController
   def show #SHOWS A COMMENT FOR A SPECIFIC PAIRING
     find_comment(params[:id])
     find_pairing(params[:pairing_id],@comment)
-    #@pairing = Pairing.find(params[:pairing_id])
   end
 
   def edit #EDITS A COMMENT FOR A SPECIFIC PAIRING
