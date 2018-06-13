@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :wines do
     resources :pairings
   end
-  
+
   resources :cookies do
     resources :pairings
   end
@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   resources :users do
     resources :pairings
     resources :comments
+    resources :cookies
+    resources :wines
   end
 
   resources :welcome

@@ -3,7 +3,8 @@ class WinesController < ApplicationController
   before_action :current_user
 
   def index
-    get_all_wines
+    @wines = Wine.find_each
+    check_for_user(params)
   end
 
 
@@ -48,10 +49,6 @@ class WinesController < ApplicationController
   #HELPERS
   def find_wine(id)
     @wine = Wine.find(id)
-  end
-
-  def get_all_wines
-    @wines = Wine.find_each
   end
 
   private

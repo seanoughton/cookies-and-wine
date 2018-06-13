@@ -3,7 +3,8 @@ class CookiesController < ApplicationController
   before_action :current_user
 
   def index
-    get_all_cookies
+    @cookies = Cookie.find_each
+    check_for_user(params)
   end
 
 
@@ -23,7 +24,7 @@ class CookiesController < ApplicationController
 
   def show
     find_cookie(params[:id])
-    get_all_cookies
+    @cookies = Cookie.find_each
     @pairing = Pairing.new(cookie_id: params[:id])
   end
 
@@ -39,7 +40,7 @@ class CookiesController < ApplicationController
   end
 
   def destroy
-    Pairing.delete_associated_pairings_for_cookie(params[:id])
+    #Pairing.delete_associated_pairings_for_cookie(params[:id])
     find_cookie(params[:id]).destroy
     redirect_to cookies_url
   end
@@ -49,9 +50,7 @@ class CookiesController < ApplicationController
     @cookie = Cookie.find(id)
   end
 
-  def get_all_cookies
-    @cookies = Cookie.find_each
-  end
+
 
   private
   def cookie_params

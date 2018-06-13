@@ -1,14 +1,19 @@
 <%= render :partial => 'layouts/navbar' %>
 
-<div class="container-fluid main_body_style" id="bg-img-01">
+<div class="container-fluid main_body_style">
   <div class="row">
     <div class="col-sm-2 ">
     </div><!--end column -->
 
    <div class="col-sm-8 ">
-     <h3> Here are all of the cookies </h3>
+     <% if @user %>
+       <h3> Here are all of <%=@user.user_name.titlecase%> Cookies</h3>
+     <% else %>
+       <h3> Here are all of the cookies</h3>
+     <% end %>
+
      Click the cookie to see what wines it pairs with
-     <%= render 'all_cookies', cookie: @cookie %>
+     <%= render 'all_cookies', cookies: @cookies %>
    </div><!--end column -->
 
    <div class="col-sm-2 ">

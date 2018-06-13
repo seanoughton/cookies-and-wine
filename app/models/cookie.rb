@@ -1,7 +1,7 @@
 class Cookie < ApplicationRecord
 
 	#RELATIONSHIPS
-	has_many :pairings
+	has_many :pairings, dependent: :destroy
 	#a cookie has many wines that it can pair with
 	has_many :wines, through: :pairings
 	belongs_to :user

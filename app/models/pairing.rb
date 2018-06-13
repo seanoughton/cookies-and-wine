@@ -105,7 +105,7 @@ class Pairing < ApplicationRecord
 			@pairing = Pairing.newest
 		elsif params == "random"
 			@pairing = Pairing.random_pairing
-		else
+		elsif Pairing.exists?(params)
 			@pairing = Pairing.find(params)
 		end
 	end
@@ -125,16 +125,14 @@ class Pairing < ApplicationRecord
 
 
 
-	def update_rating #averages the rating and updates the database
-		if self.ratings.empty?
-			self.user_rating = 1
-		else
-			rating_values = self.ratings.collect do |rating|
-				rating.rating_value
-			end
-			rating = rating_values.sum/rating_values.count
-			self.user_rating = rating #assigns the new rating
+	def update_rating #updates the user_rating
+		ratings_array = Rating.all.select do |rating|
+			rating.pairing = self
 		end
+		ratings_values = ratings_array.collect do |rating|
+			rating.rating_value
+		end
+		self.user_rating = ratings_values.sum/ratings_values.count
 		self.save(validate: false)
 	end
 

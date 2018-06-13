@@ -54,19 +54,19 @@ class PairingsController < ApplicationController
   end
 
   def show
-    @pairing = Pairing.return_pairing(params[:id])
+    check_for_pairing(params)
     @comments = Comment.find_each
   end
 
   def edit
-    find_pairing(params[:id])
+    @pairing = Pairing.find(params[:id])
   end
 
   def update
     @pairing = Pairing.new(pairing_params)
     #THE VALIDATION IS DONE THIS WAY, BECAUSE WHEN YOU UPDATE THE PAIRING WITH THE NEW INPUTS AND IT IS SAVED TO THE DATABASE,AND THEN YOU CHECK TO SEE IF IT IS VALID, IT WILL COME BACK AS INVALID, BECAUSE THE PAIRING EXISTS, WHICH CAUSES A VALIDATION ERROR
     if @pairing.valid?
-      find_pairing(params[:id])
+      @pairing = Pairing.find(params[:id])
       @pairing.update(pairing_params)
       redirect_to @pairing
     else
@@ -75,8 +75,8 @@ class PairingsController < ApplicationController
   end
 
   def destroy
-    find_pairing(params[:id])
-    find_pairing(params[:id]).destroy
+    @pairing = Pairing.find(params[:id])
+    @pairing.destroy
     redirect_to pairings_url
   end
 
