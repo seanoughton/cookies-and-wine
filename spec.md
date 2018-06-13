@@ -12,8 +12,8 @@ Specs:
 - [x] Include login (Custom)
 - [x] Include logout (Custom, delete the user_id from the session)
 - [x] Include third party signup/login (OmniAuth through Facebook)
-- [x] Include nested resource show or index (URL pairings/1/comments/new)
-- [x] Include nested resource "new" form (URL pairings/1/comments/new)
+- [ ] Include nested resource show or index (URL pairings/1/comments/show)
+- [ ] Include nested resource "new" form (URL pairings/1/comments/new)
 - [x] Include form display of validation errors (all forms have validation errors)
 
 Confirm:

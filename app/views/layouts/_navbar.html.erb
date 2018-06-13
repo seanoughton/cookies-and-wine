@@ -21,16 +21,16 @@
         </a>
         <div class="dropdown-menu " aria-labelledby="navbarDropdown">
 
-          <%= link_to 'Get a Random Pairing', pairing_url(random_pairing),:class => "dropdown-item" %>
+          <%= link_to 'Get a Random Pairing', pairing_url("random"),:class => "dropdown-item" %>
 
           <div class="dropdown-divider"></div>
           <%= link_to 'All pairings', pairings_path, :class => "dropdown-item"%>
 
           <div class="dropdown-divider"></div>
-          <%= link_to 'Highest Rated Pairing', pairing_url(highest_rated_pairing), :class => "dropdown-item"%>
-          <%= link_to 'Most Commented Pairing', pairing_url(most_commented_pairing), :class => "dropdown-item"%>
-          <%= link_to 'Newest Pairing', pairing_url(newest_pairing), :class => "dropdown-item"%>
-          <%= link_to 'Oldest Pairing', pairing_url(oldest_pairing), :class => "dropdown-item"%>
+          <%= link_to 'Highest Rated Pairing', pairing_url("highest_rated"), :class => "dropdown-item"%>
+          <%= link_to 'Most Commented Pairing', pairing_url("most_commented"), :class => "dropdown-item"%>
+          <%= link_to 'Newest Pairing', pairing_url("newest"), :class => "dropdown-item"%>
+          <%= link_to 'Oldest Pairing', pairing_url("oldest"), :class => "dropdown-item"%>
 
 
           <div class="dropdown-divider"></div>

@@ -3,10 +3,17 @@ class PairingsController < ApplicationController
   before_action :current_user
 
   def index
-    @pairings = Pairing.find_each
+    if params[:cooky_id]
+      @cookie = Cookie.find(params[:cooky_id])
+      @pairings = @cookie.pairings
+    else
+      @pairings = Pairing.find_each
+    end
+
   end
 
   def sort
+    byebug
     @pairings = Pairing.sort_order(params[:sort])
     render :index
   end
@@ -27,7 +34,7 @@ class PairingsController < ApplicationController
   end
 
   def show
-    find_pairing(params[:id])
+    @pairing = Pairing.return_pairing(params[:id])
     @comments = Comment.find_each
   end
 
@@ -51,13 +58,6 @@ class PairingsController < ApplicationController
     find_pairing(params[:id])
     find_pairing(params[:id]).destroy
     redirect_to pairings_url
-  end
-
-
-
-  #HELPERS
-  def find_pairing(id)
-    @pairing = Pairing.find(id)
   end
 
 

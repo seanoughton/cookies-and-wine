@@ -17,6 +17,7 @@
    </div><!--end column -->
 
   <div class="col-sm-10 ">
+    <%= link_to 'Pairings for this cookie', cooky_pairings_url(@cookie) %>
     <%= render 'wine_pairings', cookie: @cookie %>
   </div><!--end column -->
   <div class="col-sm-1 ">

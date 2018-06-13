@@ -94,6 +94,25 @@ class Pairing < ApplicationRecord
 	end
 
 #INSTANCE METHODS
+
+
+	def self.return_pairing(params)
+		if params == "highest_rated"
+			@pairing = Pairing.highest_rated
+		elsif params == "most_commented"
+			@pairing = Pairing.most_commented
+		elsif params == "oldest"
+			@pairing = Pairing.oldest
+		elsif params == "newest"
+			@pairing = Pairing.newest
+		elsif params == "random"
+			@pairing = Pairing.random_pairing
+		else
+			@pairing = Pairing.find(params)
+		end
+	end
+
+
 	def update_rating #averages the rating and updates the database
 		if self.ratings.empty?
 			self.user_rating = 1
