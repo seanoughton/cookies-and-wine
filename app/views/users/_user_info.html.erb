@@ -11,10 +11,5 @@
         <%= link_to "Create a Pairing", new_pairing_url%>
       </h3>
    <% else %>
-     <h3> Here are all of <%=@user.user_name%>'s Pairings </h3>
-     <ul>
-       <%@user.pairings.each do |pairing| %>
-         <li><%=link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name}", pairing_url(pairing)%></li>
-       <%end%>
-     </ul>
+     <%= link_to "Wine Pairings for #{@user.user_name}", user_pairings_url(@user) %>
    <%end%>

@@ -9,6 +9,9 @@ class PairingsController < ApplicationController
     elsif params[:wine_id]
       @wine = Wine.find(params[:wine_id])
       @pairings = @wine.pairings
+    elsif params[:user_id]
+      @user = User.find(params[:user_id])
+      @pairings = @user.pairings
     else
       @pairings = Pairing.find_each
     end
@@ -26,6 +29,11 @@ class PairingsController < ApplicationController
       @wine = Wine.find(params[:wine])
       @pairings = @sorted_pairings.select do |pairing|
         pairing.wine == @wine
+      end
+    elsif params[:user]
+      @user = User.find(params[:user])
+      @pairings = @sorted_pairings.select do |pairing|
+        pairing.user == @user
       end
     else
       @pairings = @sorted_pairings

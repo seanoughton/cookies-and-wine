@@ -10,5 +10,11 @@
   <%if wine %>
   <%=  hidden_field_tag "wine", wine.id%>
   <% end %>
+
+  <%if user %>
+  <%=  hidden_field_tag "user", user.id%>
+  <% end %>
+
+  
   <%= submit_tag("Sort") %>
 <% end %>
