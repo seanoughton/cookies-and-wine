@@ -22,12 +22,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.return_user(params[:id])
-    #@user = User.find(params[:id])
+    check_for_user(params)
   end
 
   def edit
-    if is_current_user?(params[:id])
+    if is_current_user?(params[:id]) || current_user.admin?
       @user = User.find(params[:id])
     else
       redirect_to controller: 'sessions', action: 'new'
@@ -36,7 +35,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if is_current_user?(params[:id])
+    if is_current_user?(params[:id]) || current_user.admin?
       @user.update(user_params)
       redirect_to @user if @user.valid?
       render :edit if !@user.valid?

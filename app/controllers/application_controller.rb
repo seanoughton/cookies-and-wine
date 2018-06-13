@@ -24,6 +24,9 @@ class ApplicationController < ActionController::Base
   end
 
   def check_for_user(params)
+    if params[:id]
+      params[:user_id] = params[:id]
+    end
     if params[:user_id] && User.exists?(params[:user_id])
         @user = User.find(params[:user_id])
         @pairings = @user.pairings
@@ -48,7 +51,6 @@ class ApplicationController < ActionController::Base
     def check_for_wine(params)
       if params[:wine_id] && Wine.exists?(params[:wine_id])
         @wine = Wine.find(params[:wine_id])
-        byebug
         @pairings = @wine.pairings
       elsif params[:wine_id] && !Wine.exists?(params[:wine_id])
         redirect_to pairings_path, alert: "Wine not found."
@@ -56,10 +58,13 @@ class ApplicationController < ActionController::Base
     end
 
     def check_for_pairing(params)
-      if params[:id] && Pairing.return_pairing(params[:id])
-        @pairing = Pairing.return_pairing(params[:id])
+      if params[:id]
+        params[:pairing_id] = params[:id]
+      end
+      if params[:pairing_id] && Pairing.return_pairing(params[:pairing_id])
+        @pairing = Pairing.return_pairing(params[:pairing_id])
         @comments = @pairing.comments
-      elsif params[:id] && !Pairing.exists?(params[:id])
+      elsif params[:pairing_id] && !Pairing.exists?(params[:pairing_id])
         redirect_to pairings_path, alert: "Pairing not found."
       end
     end

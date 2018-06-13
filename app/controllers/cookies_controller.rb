@@ -40,7 +40,6 @@ class CookiesController < ApplicationController
   end
 
   def destroy
-    #Pairing.delete_associated_pairings_for_cookie(params[:id])
     find_cookie(params[:id]).destroy
     redirect_to cookies_url
   end

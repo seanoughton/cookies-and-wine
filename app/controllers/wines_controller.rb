@@ -41,7 +41,6 @@ class WinesController < ApplicationController
   end
 
   def destroy
-    Pairing.delete_associated_pairings_for_wine(params[:id])
     Wine.find(params[:id]).destroy
     redirect_to wines_url
   end
