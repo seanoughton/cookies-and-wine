@@ -11,5 +11,13 @@
         <%= link_to "Create a Pairing", new_pairing_url%>
       </h3>
    <% else %>
-     <%= link_to "Wine Pairings for #{@user.user_name}", user_pairings_url(@user) %>
+     <%= link_to "Pairings for #{@user.user_name}", user_pairings_url(@user) %><br>
+   <%end%>
+
+   <% if !@user.comments.empty? %>
+        <%= link_to "Comments for #{@user.user_name}", user_comments_url(@user) %>
+   <%end%>
+<%byebug%>
+   <% if !@user.cookies.empty? %>
+        <%= link_to "Cookies added by #{@user.user_name}", user_cookies_url(@user) %>
    <%end%>

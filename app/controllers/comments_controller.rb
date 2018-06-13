@@ -4,6 +4,8 @@ class CommentsController < ApplicationController
 
   def index
     @comments = Comment.find_each
+    check_for_user(params)
+    check_for_pairing(params)
   end
 
   def new #CREATES A COMMENT FOR A SPECIFIC PAIRING

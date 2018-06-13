@@ -4,7 +4,7 @@ class User < ApplicationRecord
 	has_many :pairings
 	has_many :comments
 	has_many :ratings
-	has_many :cookies
+	has_many :cookies, foreign_key: "user_id", class_name: "Cookie"
 	has_many :wines
 
 	#VALIDATIONS
@@ -35,8 +35,16 @@ class User < ApplicationRecord
 	end
 
 	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
-	def self.user_with_most_pairings
+	def self.most_pairings
 		order( "pairings_count desc" ).first
+	end
+
+	def self.return_user(params)
+		if params == "most_pairings"
+			@user = User.most_pairings
+		else
+			@user = User.find(params)
+		end
 	end
 
 

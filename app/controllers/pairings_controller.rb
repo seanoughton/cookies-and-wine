@@ -3,19 +3,10 @@ class PairingsController < ApplicationController
   before_action :current_user
 
   def index
-    if params[:cooky_id]
-      @cookie = Cookie.find(params[:cooky_id])
-      @pairings = @cookie.pairings
-    elsif params[:wine_id]
-      @wine = Wine.find(params[:wine_id])
-      @pairings = @wine.pairings
-    elsif params[:user_id]
-      @user = User.find(params[:user_id])
-      @pairings = @user.pairings
-    else
-      @pairings = Pairing.find_each
-    end
-
+    @pairings = Pairing.find_each
+    check_for_user(params)
+    check_for_cookie(params)
+    check_for_wine(params)
   end
 
   def sort
@@ -88,6 +79,9 @@ class PairingsController < ApplicationController
     find_pairing(params[:id]).destroy
     redirect_to pairings_url
   end
+
+  #HELPERS
+
 
 
   private
