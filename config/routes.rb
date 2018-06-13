@@ -11,7 +11,10 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  resources :wines
+  resources :wines do
+    resources :pairings
+  end
+  
   resources :cookies do
     resources :pairings
   end

@@ -6,6 +6,9 @@ class PairingsController < ApplicationController
     if params[:cooky_id]
       @cookie = Cookie.find(params[:cooky_id])
       @pairings = @cookie.pairings
+    elsif params[:wine_id]
+      @wine = Wine.find(params[:wine_id])
+      @pairings = @wine.pairings
     else
       @pairings = Pairing.find_each
     end
@@ -13,12 +16,30 @@ class PairingsController < ApplicationController
   end
 
   def sort
-    byebug
-    @pairings = Pairing.sort_order(params[:sort])
+    @sorted_pairings = Pairing.sort_order(params[:sort])
+    if params[:cookie]
+      @cookie = Cookie.find(params[:cookie])
+      @pairings = @sorted_pairings.select do |pairing|
+        pairing.cookie == @cookie
+      end
+    elsif params[:wine]
+      @wine = Wine.find(params[:wine])
+      @pairings = @sorted_pairings.select do |pairing|
+        pairing.wine == @wine
+      end
+    else
+      @pairings = @sorted_pairings
+    end
     render :index
   end
 
   def new
+    if params[:cooky_id]
+      @cookie = Cookie.find(params[:cooky_id])
+    elsif params[:wine_id]
+      @wine = Wine.find(params[:wine_id])
+    else
+    end
     @pairing = Pairing.new
   end
 

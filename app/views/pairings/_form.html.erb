@@ -1,12 +1,29 @@
+<h1> Create a Pairing </h1>
+
+
 <%= form_for @pairing  do |f| %>
 
   <%=shows_error_messages(@pairing)%><br>
 
-  <%= f.label :Wine %>
-  <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%><br>
 
-  <%= f.label :Cookie %>
-  <%= f.collection_select :cookie_id, Cookie.all,:id,:cookie_name%><br>
+
+  <% if @cookie %>
+    <%= f.label :Wine %>
+    <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%><br>
+    <%= f.label :Cookie %>: <%=@cookie.cookie_name.titlecase%><br>
+    <%= id_field(@pairing,@cookie) %>
+  <% elsif @wine %>
+    <%= f.label :Cookie %>
+    <%= f.collection_select :cookie_id, Cookie.all,:id,:cookie_name%><br>
+    <%= f.label :Wine %>: <%=@wine.wine_name.titlecase%><br>
+    <%= id_field(@pairing,@wine) %>
+  <% else %>
+    <%= f.label :Wine %>
+    <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%><br>
+    <%= f.label :Cookie %>
+    <%= f.collection_select :cookie_id, Cookie.all,:id,:cookie_name%><br>
+  <% end %>
+
 
   <%=id_field(@pairing,@current_user)%>
   <%=hidden_field_tag "pairing[user_rating]", 1%>

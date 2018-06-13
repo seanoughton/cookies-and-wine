@@ -77,6 +77,7 @@ class Pairing < ApplicationRecord
 	end
 
 	def self.sort_order(sort_input)
+		#take the sort input and a cookie id or a wine id and call the appropriate function
 		case sort_input
     when "highest rated"
       highest_to_lowest
@@ -93,9 +94,6 @@ class Pairing < ApplicationRecord
     end
 	end
 
-#INSTANCE METHODS
-
-
 	def self.return_pairing(params)
 		if params == "highest_rated"
 			@pairing = Pairing.highest_rated
@@ -111,6 +109,20 @@ class Pairing < ApplicationRecord
 			@pairing = Pairing.find(params)
 		end
 	end
+
+
+
+
+#INSTANCE METHODS
+
+	def pairings_for_specific_cookie(cookie_id)
+		byebug
+		cookie = Cookie.find(cookie_id)
+		self.collect do |pairing|
+			pairing.cookie
+		end
+	end
+
 
 
 	def update_rating #averages the rating and updates the database

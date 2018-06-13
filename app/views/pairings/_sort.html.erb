@@ -3,5 +3,12 @@
  <%= select_tag 'sort', options_for_select(["Choose a Sort Type", "highest rated", "lowest rated", "most commented","newest","oldest"])
   %>
 
+  <%if cookie %>
+  <%=  hidden_field_tag "cookie", cookie.id%>
+  <% end %>
+
+  <%if wine %>
+  <%=  hidden_field_tag "wine", wine.id%>
+  <% end %>
   <%= submit_tag("Sort") %>
 <% end %>

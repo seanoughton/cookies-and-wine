@@ -17,8 +17,7 @@
    </div><!--end column -->
 
   <div class="col-sm-10 ">
-    <%= link_to 'Pairings for this cookie', cooky_pairings_url(@cookie) %>
-    <%= render 'wine_pairings', cookie: @cookie %>
+    <%= link_to 'Wine Pairings for this Cookie', cooky_pairings_url(@cookie) %>
   </div><!--end column -->
   <div class="col-sm-1 ">
   </div><!--end column -->
@@ -29,7 +28,9 @@
   </div><!--end column -->
 
  <div class="col-sm-10 ">
-   <%= render 'create_pairing', pairing: @pairing, cookie: @cookie, current_user: @current_user %>
+   <%= link_to 'Create a Pairing for this Cookie', new_cooky_pairing_url(@cookie) %>
+  <!--
+   <%= render 'create_pairing', pairing: @pairing, cookie: @cookie, current_user: @current_user %>-->
  </div><!--end column -->
  <div class="col-sm-1 ">
  </div><!--end column -->

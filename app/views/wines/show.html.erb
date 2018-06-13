@@ -21,7 +21,7 @@
    </div><!--end column -->
 
   <div class="col-sm-8 ">
-    <%= render 'cookie_pairings', wine: @wine %>
+    <%= link_to 'Cookie Pairings for this Wine', wine_pairings_url(@wine) %>
   </div><!--end column -->
 
   <div class="col-sm-2 ">
@@ -34,7 +34,8 @@
    </div><!--end column -->
 
   <div class="col-sm-8 ">
-    <%= render 'create_pairing', wine: @wine, current_user: @current_user %>
+    <%= link_to 'Create a Pairing for this Wine', new_wine_pairing_url(@wine) %>
+    <!--<%= render 'create_pairing', wine: @wine, current_user: @current_user %>-->
   </div><!--end column -->
 
   <div class="col-sm-2 ">
