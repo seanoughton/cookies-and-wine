@@ -3,9 +3,9 @@ class CommentsController < ApplicationController
   before_action :current_user
 
   def index
-    @comments = Comment.find_each
-    check_for_user(params)
-    check_for_pairing(params)
+    check_for_user_by_id(params[:user_id]) if params[:user_id]
+    check_for_pairing_by_id(params[:pairing_id]) if params[:pairing_id]
+    get_comments(params)
   end
 
   def new #CREATES A COMMENT FOR A SPECIFIC PAIRING
@@ -30,9 +30,10 @@ class CommentsController < ApplicationController
 
   end
 
-  def show #SHOWS A COMMENT FOR A SPECIFIC PAIRING
-    find_comment(params[:id])
-    find_pairing(params[:pairing_id],@comment)
+  def show
+    check_for_comment_by_id(params[:id])
+    check_for_user_by_id(params[:user_id]) if params[:user_id]
+    check_for_pairing_by_id(params[:pairing_id]) if params[:pairing_id]
   end
 
   def edit #EDITS A COMMENT FOR A SPECIFIC PAIRING

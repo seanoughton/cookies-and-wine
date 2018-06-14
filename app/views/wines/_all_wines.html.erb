@@ -1,7 +1,12 @@
 <ul>
   <%@wines.each do |wine| %>
     <li>
-      <%=link_to wine.wine_name, wine_path(wine)%>
+      <%if @user %>
+        <%=link_to wine.wine_name, user_wine_path(user,wine)%>
+      <%else%>
+        <%=link_to wine.wine_name, wine_path(wine)%>
+      <%end%>
+
     </li>
   <%end%>
 </ul>

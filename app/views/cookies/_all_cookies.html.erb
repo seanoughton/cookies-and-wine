@@ -1,7 +1,12 @@
 <ul>
   <%@cookies.each do |cookie| %>
     <li>
-      <%= link_to cookie.cookie_name, cooky_url(cookie)%>
+      <%if @user%>
+        <%= link_to cookie.cookie_name, user_cooky_url(user,cookie)%>
+      <%else%>
+        <%= link_to cookie.cookie_name, cooky_url(cookie)%>
+      <%end%>
+
     </li>
   <%end%>
 </ul>

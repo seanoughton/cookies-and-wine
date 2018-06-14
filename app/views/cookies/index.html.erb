@@ -1,6 +1,11 @@
 <%= render :partial => 'layouts/navbar' %>
 
 <div class="container-fluid main_body_style">
+  
+  <% flash.each do |key, value| %>
+        <div class="alert alert-danger"> <%= key.upcase %>: <%= value %></div>
+  <% end %>
+
   <div class="row">
     <div class="col-sm-2 ">
     </div><!--end column -->
@@ -13,7 +18,7 @@
      <% end %>
 
      Click the cookie to see what wines it pairs with
-     <%= render 'all_cookies', cookies: @cookies %>
+     <%= render 'all_cookies', cookies: @cookies, user: @user %>
    </div><!--end column -->
 
    <div class="col-sm-2 ">

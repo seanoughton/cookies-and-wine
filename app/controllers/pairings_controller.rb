@@ -3,10 +3,10 @@ class PairingsController < ApplicationController
   before_action :current_user
 
   def index
-    @pairings = Pairing.find_each
-    check_for_user(params)
-    check_for_cookie(params)
-    check_for_wine(params)
+    check_for_user_by_id(params[:user_id]) if params[:user_id]
+    check_for_wine_by_id(params[:wine_id]) if params[:wine_id]
+    check_for_cookie_by_id(params[:cooky_id]) if params[:cooky_id]
+    get_pairings(params)
   end
 
   def sort
@@ -54,8 +54,10 @@ class PairingsController < ApplicationController
   end
 
   def show
-    check_for_pairing(params)
-    @comments = Comment.find_each
+    check_for_pairing_by_id(params[:id])
+    check_for_user_by_id(params[:user_id]) if params[:user_id]
+    check_for_wine_by_id(params[:wine_id]) if params[:wine_id]
+    check_for_cookie_by_id(params[:cooky_id]) if params[:cooky_id]
   end
 
   def edit

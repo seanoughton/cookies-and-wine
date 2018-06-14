@@ -21,12 +21,12 @@
    </div><!--end column -->
 
   <div class="col-sm-8 ">
-    <%= link_to 'Cookie Pairings for this Wine', wine_pairings_url(@wine) %>
+    <h4><%= link_to 'Cookie Pairings for this Wine', wine_pairings_url(@wine) %><h4><br>
   </div><!--end column -->
 
   <div class="col-sm-2 ">
   </div><!--end column -->
-</div> <!--end row --><br>
+</div> <!--end row -->
 
 
  <div class="row">
@@ -34,8 +34,7 @@
    </div><!--end column -->
 
   <div class="col-sm-8 ">
-    <%= link_to 'Create a Pairing for this Wine', new_wine_pairing_url(@wine) %>
-    <!--<%= render 'create_pairing', wine: @wine, current_user: @current_user %>-->
+    <h4><%= link_to 'Create a Pairing for this Wine', new_wine_pairing_url(@wine) %><h4><br>
   </div><!--end column -->
 
   <div class="col-sm-2 ">

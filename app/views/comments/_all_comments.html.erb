@@ -1,8 +1,18 @@
 <ol>
   <%@comments.each do |comment| %>
     <li>
-      <%=link_to comment.body, "/pairings/#{comment.pairing_id}/comments/#{comment.id}"%>(Created by:
-      <%=link_to comment.user.user_name, user_url(comment.user), :class => 'text-success'%>), For this pairing: <%= link_to comment.pairing.wine.wine_name + " and " + comment.pairing.cookie.cookie_name.titlecase, pairing_url(comment.pairing)%>
+      <%if @user %>
+        <%=link_to comment.body, user_comment_url(user,comment)%>(Created by:
+        <%=link_to comment.user.user_name, user_url(comment.user), :class => 'text-success'%>), For this pairing: <%= link_to comment.pairing.wine.wine_name + " and " + comment.pairing.cookie.cookie_name.titlecase, user_pairing_url(user,comment.pairing)%>
+      <% elsif @pairing %>
+        <%=link_to comment.body, "/pairings/#{comment.pairing_id}/comments/#{comment.id}"%>(Created by:
+        <%=link_to comment.user.user_name, user_url(comment.user), :class => 'text-success'%>), For this pairing: <%= link_to comment.pairing.wine.wine_name + " and " + comment.pairing.cookie.cookie_name.titlecase, pairing_url(comment.pairing)%>
+      <%else%>
+        <%=link_to comment.body, comment_url(comment)%>(Created by:
+        <%=link_to comment.user.user_name, user_url(comment.user), :class => 'text-success'%>), For this pairing: <%= link_to comment.pairing.wine.wine_name + " and " + comment.pairing.cookie.cookie_name.titlecase, pairing_url(comment.pairing)%>
+
+      <%end%>
+
     </li>
   <%end%>
 </ol>

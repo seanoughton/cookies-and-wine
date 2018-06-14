@@ -1,7 +1,12 @@
 <ul>
   <%@pairings.each do |pairing| %>
     <li>
-      <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", pairing_path(pairing) %><br>
+      <%if @user %>
+        <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", user_pairing_path(user,pairing) %>
+      <%else%>
+      <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", pairing_path(pairing) %>
+      <%end%>
+      <br>
         Rating: <%=pairing.user_rating%> ,
         Comments: <%=pairing.comments_count%>
         Pairing Creator: <%=link_to pairing.user.user_name, user_url(pairing.user)%>

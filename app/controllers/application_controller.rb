@@ -23,51 +23,56 @@ class ApplicationController < ActionController::Base
     session[:user_id] == params_id.to_i
   end
 
-  def check_for_user(params)
-    if params[:id]
-      params[:user_id] = params[:id]
-    end
-    if params[:user_id] && User.exists?(params[:user_id])
-        @user = User.find(params[:user_id])
-        @pairings = @user.pairings
-        @comments = @user.comments
-        @cookies = @user.cookies
-        @wines = @user.wines
-    elsif params[:user_id] && !User.exists?(params[:user_id])
-        redirect_to users_path, alert: "User not found."
+  def check_for_comment_by_id(id)
+    @comment = Comment.find(id) if Comment.exists?(id)
+    redirect_to comments_path, alert: "Comment not found." if !Comment.exists?(id)
+  end
+
+  def check_for_user_by_id(id)
+    if id == "most_pairings"
+      @user = User.most_pairings
+    else
+      @user = User.find(id) if User.exists?(id)
+      redirect_to users_path, alert: "User not found." if !User.exists?(id)
     end
   end
 
+  def check_for_pairing_by_id(id)
+    @pairing = Pairing.return_pairing(id)
+    redirect_to pairings_path, alert: "Pairing not found." if !Pairing.return_pairing(id)
+  end
 
-    def check_for_cookie(params)
-      if params[:cooky_id] && Cookie.exists?(params[:cooky_id])
-        @cookie = Cookie.find(params[:cooky_id])
-        @pairings = @cookie.pairings
-      elsif params[:cooky_id] && !Cookie.exists?(params[:cooky_id])
-        redirect_to pairings_path, alert: "Cookie not found."
-      end
-    end
+  def check_for_cookie_by_id(id)
+    @cookie = Cookie.find(id) if Cookie.exists?(id)
+    redirect_to cookies_path, alert: "Cookie not found." if !Cookie.exists?(id)
+  end
 
-    def check_for_wine(params)
-      if params[:wine_id] && Wine.exists?(params[:wine_id])
-        @wine = Wine.find(params[:wine_id])
-        @pairings = @wine.pairings
-      elsif params[:wine_id] && !Wine.exists?(params[:wine_id])
-        redirect_to pairings_path, alert: "Wine not found."
-      end
-    end
+  def check_for_wine_by_id(id)
+    redirect_to wines_path, alert: "Wine not found." if !Wine.exists?(id)
+    @wine = Wine.find(id) if Wine.exists?(id)
+  end
 
-    def check_for_pairing(params)
-      if params[:id]
-        params[:pairing_id] = params[:id]
-      end
-      if params[:pairing_id] && Pairing.return_pairing(params[:pairing_id])
-        @pairing = Pairing.return_pairing(params[:pairing_id])
-        @comments = @pairing.comments
-      elsif params[:pairing_id] && !Pairing.exists?(params[:pairing_id])
-        redirect_to pairings_path, alert: "Pairing not found."
-      end
+  def get_pairings(params)
+    if params[:wine_id] && Wine.exists?(params[:wine_id])
+      @pairings = Wine.find(params[:wine_id]).pairings
+    elsif params[:cooky_id] && Cookie.exists?(params[:cooky_id])
+      @pairings = Cookie.find(params[:cooky_id]).pairings
+    elsif params[:user_id] && User.exists?(params[:user_id])
+      @pairings = User.find(params[:user_id]).pairings
+    else
+      @pairings = Pairing.find_each
     end
+  end
+
+  def get_comments(params)
+    if params[:pairing_id] && Pairing.exists?(params[:pairing_id])
+      @comments = Pairing.find(params[:pairing_id]).comments
+    elsif params[:user_id] && User.exists?(params[:user_id])
+      @comments = User.find(params[:user_id]).comments
+    else
+      @comments = Comment.find_each
+    end
+  end
 
 
 end

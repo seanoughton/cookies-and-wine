@@ -4,7 +4,7 @@ class WinesController < ApplicationController
 
   def index
     @wines = Wine.find_each
-    check_for_user(params)
+    check_for_user_by_id(params[:user_id]) if params[:user_id]
   end
 
 
@@ -24,8 +24,8 @@ class WinesController < ApplicationController
   end
 
   def show
-    find_wine(params[:id])
-    @pairing = Pairing.new(wine_id: params[:id])
+    check_for_user_by_id(params[:user_id]) if params[:user_id]
+    check_for_wine_by_id(params[:id])
   end
 
   def edit

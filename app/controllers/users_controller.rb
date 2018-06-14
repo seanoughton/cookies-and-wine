@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    check_for_user(params)
+    check_for_user_by_id(params[:id])
   end
 
   def edit

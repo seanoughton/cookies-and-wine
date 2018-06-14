@@ -4,7 +4,7 @@ class CookiesController < ApplicationController
 
   def index
     @cookies = Cookie.find_each
-    check_for_user(params)
+    check_for_user_by_id(params[:user_id]) if params[:user_id]
   end
 
 
@@ -23,9 +23,8 @@ class CookiesController < ApplicationController
   end
 
   def show
-    find_cookie(params[:id])
-    @cookies = Cookie.find_each
-    @pairing = Pairing.new(cookie_id: params[:id])
+    check_for_user_by_id(params[:user_id]) if params[:user_id]
+    check_for_cookie_by_id(params[:id])
   end
 
   def edit

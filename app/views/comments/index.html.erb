@@ -1,13 +1,17 @@
 <%= render :partial => 'layouts/navbar' %>
 
 <div class="container-fluid main_body_style">
+  <% flash.each do |key, value| %>
+        <div class="alert alert-danger"> <%= key.upcase %>: <%= value %></div>
+  <% end %>
+  
   <div class="row">
     <div class="col-sm-2 ">
     </div><!--end column -->
 
    <div class="col-sm-8 ">
      <h2> Here are all of the Comments </h2>
-     <%= render 'all_comments', comment: @comment %>
+     <%= render 'all_comments', comment: @comment, user:@user %>
    </div><!--end column -->
 
    <div class="col-sm-2 ">
