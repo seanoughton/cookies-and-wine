@@ -4,7 +4,7 @@ class CookiesController < ApplicationController
 
   def index
     @cookies = Cookie.find_each
-    check_for_user_by_id(params[:user_id]) if params[:user_id]
+    get_all_instance_variables(params)
   end
 
 
@@ -23,8 +23,8 @@ class CookiesController < ApplicationController
   end
 
   def show
-    check_for_user_by_id(params[:user_id]) if params[:user_id]
-    check_for_cookie_by_id(params[:id])
+    get_all_instance_variables(params)
+    return_instance_if_it_exists(Cookie,params[:id])
   end
 
   def edit

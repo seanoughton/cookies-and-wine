@@ -4,7 +4,7 @@ class WinesController < ApplicationController
 
   def index
     @wines = Wine.find_each
-    check_for_user_by_id(params[:user_id]) if params[:user_id]
+    get_all_instance_variables(params)
   end
 
 
@@ -24,8 +24,8 @@ class WinesController < ApplicationController
   end
 
   def show
-    check_for_user_by_id(params[:user_id]) if params[:user_id]
-    check_for_wine_by_id(params[:id])
+    get_all_instance_variables(params)
+    return_instance_if_it_exists(Wine,params[:id])
   end
 
   def edit

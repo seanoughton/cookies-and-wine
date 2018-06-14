@@ -3,9 +3,7 @@ class PairingsController < ApplicationController
   before_action :current_user
 
   def index
-    check_for_user_by_id(params[:user_id]) if params[:user_id]
-    check_for_wine_by_id(params[:wine_id]) if params[:wine_id]
-    check_for_cookie_by_id(params[:cooky_id]) if params[:cooky_id]
+    get_all_instance_variables(params)
     get_pairings(params)
   end
 
@@ -54,10 +52,8 @@ class PairingsController < ApplicationController
   end
 
   def show
-    check_for_pairing_by_id(params[:id])
-    check_for_user_by_id(params[:user_id]) if params[:user_id]
-    check_for_wine_by_id(params[:wine_id]) if params[:wine_id]
-    check_for_cookie_by_id(params[:cooky_id]) if params[:cooky_id]
+    get_all_instance_variables(params)
+    return_instance_if_it_exists(Pairing,params[:id])
   end
 
   def edit

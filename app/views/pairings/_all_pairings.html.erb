@@ -3,6 +3,10 @@
     <li>
       <%if @user %>
         <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", user_pairing_path(user,pairing) %>
+      <%elsif @cookie %>
+        <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", cooky_pairing_path(cookie,pairing) %>
+      <%elsif @wine %>
+        <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", wine_pairing_path(wine,pairing) %>
       <%else%>
       <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", pairing_path(pairing) %>
       <%end%>

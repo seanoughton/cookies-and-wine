@@ -127,7 +127,7 @@ class Pairing < ApplicationRecord
 
 	def update_rating #updates the user_rating
 		ratings_array = Rating.all.select do |rating|
-			rating.pairing = self
+			rating.pairing == self
 		end
 		ratings_values = ratings_array.collect do |rating|
 			rating.rating_value

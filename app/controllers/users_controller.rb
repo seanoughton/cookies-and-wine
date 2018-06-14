@@ -22,7 +22,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    check_for_user_by_id(params[:id])
+    return_instance_if_it_exists(User,params[:id])
   end
 
   def edit

@@ -23,33 +23,29 @@ class ApplicationController < ActionController::Base
     session[:user_id] == params_id.to_i
   end
 
-  def check_for_comment_by_id(id)
-    @comment = Comment.find(id) if Comment.exists?(id)
-    redirect_to comments_path, alert: "Comment not found." if !Comment.exists?(id)
+  def return_instance_if_it_exists(class_name,id)
+    if class_name.to_s == "Pairing"
+      check_for_pairing_by_id(id)
+    elsif id == "most_pairings"
+        @user = User.most_pairings
+    else
+      instance_variable_set("@#{class_name.to_s.downcase}", class_name.find(id) ) if class_name.exists?(id)
+      redirect_to "/#{class_name.to_s.downcase}s", alert: "#{class_name} not found." if !class_name.exists?(id)
+    end
   end
 
-  def check_for_user_by_id(id)
-    if id == "most_pairings"
-      @user = User.most_pairings
-    else
-      @user = User.find(id) if User.exists?(id)
-      redirect_to users_path, alert: "User not found." if !User.exists?(id)
-    end
+  def get_all_instance_variables(params)
+    return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
+    return_instance_if_it_exists(Pairing,params[:pairing_id]) if params[:pairing_id]
+    return_instance_if_it_exists(Cookie,params[:cooky_id]) if params[:cooky_id]
+    return_instance_if_it_exists(Wine,params[:wine_id]) if params[:wine_id]
+    get_pairings(params)
+    return_instance_if_it_exists(Comment,params[:comment_id]) if params[:comment_id]
   end
 
   def check_for_pairing_by_id(id)
     @pairing = Pairing.return_pairing(id)
     redirect_to pairings_path, alert: "Pairing not found." if !Pairing.return_pairing(id)
-  end
-
-  def check_for_cookie_by_id(id)
-    @cookie = Cookie.find(id) if Cookie.exists?(id)
-    redirect_to cookies_path, alert: "Cookie not found." if !Cookie.exists?(id)
-  end
-
-  def check_for_wine_by_id(id)
-    redirect_to wines_path, alert: "Wine not found." if !Wine.exists?(id)
-    @wine = Wine.find(id) if Wine.exists?(id)
   end
 
   def get_pairings(params)
@@ -73,6 +69,10 @@ class ApplicationController < ActionController::Base
       @comments = Comment.find_each
     end
   end
+
+
+
+
 
 
 end

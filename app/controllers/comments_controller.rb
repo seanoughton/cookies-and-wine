@@ -3,8 +3,7 @@ class CommentsController < ApplicationController
   before_action :current_user
 
   def index
-    check_for_user_by_id(params[:user_id]) if params[:user_id]
-    check_for_pairing_by_id(params[:pairing_id]) if params[:pairing_id]
+    get_all_instance_variables(params)
     get_comments(params)
   end
 
@@ -31,9 +30,8 @@ class CommentsController < ApplicationController
   end
 
   def show
-    check_for_comment_by_id(params[:id])
-    check_for_user_by_id(params[:user_id]) if params[:user_id]
-    check_for_pairing_by_id(params[:pairing_id]) if params[:pairing_id]
+    get_all_instance_variables(params)
+    return_instance_if_it_exists(Comment,params[:id])
   end
 
   def edit #EDITS A COMMENT FOR A SPECIFIC PAIRING

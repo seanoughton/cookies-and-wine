@@ -13,8 +13,11 @@
    <div class="col-sm-10">
      <!-- If this is the pairings for a particular cookie then show that here-->
      <h3> Here are all of the pairings </h3>
-     <%= render 'sort', cookie: @cookie, wine: @wine, user: @user %>
-     <%= render 'all_pairings', pairings: @pairings, user: @user %>
+     <% if @pairings.count > 1 %>
+       <%= render 'sort', cookie: @cookie, wine: @wine, user: @user %>
+     <% end %>
+
+     <%= render 'all_pairings', pairings: @pairings, user: @user, wine: @wine, cookie:  @cookie %>
    </div><!--end column -->
 
    <div class="col-sm-1 ">
