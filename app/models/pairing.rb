@@ -76,6 +76,7 @@ class Pairing < ApplicationRecord
 		self.find(random_number)
 	end
 
+#METHODS HAVING TO DO WITH SORTING THE PAIRINGS
 
 	def self.sort_order(sort_input)
 		#take the sort input and a cookie id or a wine id and call the appropriate function
@@ -121,6 +122,8 @@ class Pairing < ApplicationRecord
 		end
 		@pairings
 	end
+
+
 
 	def self.return_pairing(params)
 		if params == "highest_rated"

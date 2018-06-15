@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :current_user
+  before_action :run_permission, only: [:edit, :update, :destroy]
 
   def index
     @users = User.find_each

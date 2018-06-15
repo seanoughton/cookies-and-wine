@@ -73,9 +73,16 @@ class ApplicationController < ActionController::Base
   def validate_instance_and_redirect(instance,redirect_route,render_route)
     if instance.valid?
       instance.save
+
+      #EDGE CASES
+      if instance == @pairing
+        @rating = Rating.create(rating_value: 1, pairing_id: @pairing.id, user_id: current_user.id)
+      end
+
       if instance == @user
         log_in(instance)
       end
+
       redirect_to redirect_route
     else
       render render_route
