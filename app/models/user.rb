@@ -30,6 +30,34 @@ class User < ApplicationRecord
 	#AUTHORIZATIONS (STUFF THE ADMIN CAN DO)
 	#EDIT/DELETE A User, Pairing, Wine, Cookie, Comment
 
+	def user_permission(instance,current_user) #either admin or user created item
+		if self.admin || instance.user == current_user#|| Thread.current[:current_user] == self
+			true
+		else
+			false
+		end
+	end
+
+
+=begin
+	def user_permission
+		if Thread.current[:current_user] == self.user
+			true
+		else
+			errors.add(:pairing, "You don't have permission")
+		end
+	end
+=end
+	#WHAT DOES THE USER HAVE PERMISSION TO DO ON THIS THING
+	def permission(thing)
+		if self.admin || self == thing.user
+			true
+		else
+			false
+		end
+	end
+
+
 	def permission_to_edit?(current_user)
 		current_user.admin? || self == current_user
 	end

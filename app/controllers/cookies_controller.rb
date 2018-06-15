@@ -1,6 +1,10 @@
 class CookiesController < ApplicationController
   before_action :require_logged_in
   before_action :current_user
+  before_action :run_permission, only: [:edit, :update, :destroy]
+
+
+
 
   def index
     @cookies = Cookie.find_each
@@ -27,7 +31,7 @@ class CookiesController < ApplicationController
 
   def update
     return_instance_if_it_exists(Cookie,params[:id])
-    @cookie.update(cookie_params)
+    @cookie.update (cookie_params)
     validate_instance_and_redirect(@cookie,@cookie,"edit")
   end
 

@@ -82,5 +82,22 @@ class ApplicationController < ActionController::Base
     end
   end
 
+=begin
+  def set_thread
+    Thread.current[:current_user] = current_user
+  end
+=end
+  def run_permission
+    model = params[:controller].to_s.chop.titlecase
+    #converts the string to a class
+    instance = model.camelize.constantize.find(params[:id])
+    redirect_to current_user, alert: "You do not have permission to do this." if !current_user.user_permission(instance,current_user)
+
+=begin
+    @cookie = Cookie.find(params[:id])
+    redirect_to current_user, alert: "You do not have permission to do this." if !current_user.user_permission(@cookie,current_user)
+=end
+  end
+
 
 end

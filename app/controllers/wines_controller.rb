@@ -1,6 +1,7 @@
 class WinesController < ApplicationController
   before_action :require_logged_in
   before_action :current_user
+  before_action :run_permission, only: [:edit, :update, :destroy]
 
   def index
     @wines = Wine.find_each
