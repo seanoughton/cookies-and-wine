@@ -2,13 +2,10 @@ class CookiesController < ApplicationController
   before_action :require_logged_in
   before_action :current_user
   before_action :run_permission, only: [:edit, :update, :destroy]
-
-
-
+  before_action :get_all_instance_variables, only: [:index, :new, :show]
 
   def index
     @cookies = Cookie.find_each
-    get_all_instance_variables(params)
   end
 
   def new
@@ -21,7 +18,6 @@ class CookiesController < ApplicationController
   end
 
   def show
-    get_all_instance_variables(params)
     return_instance_if_it_exists(Cookie,params[:id])
   end
 
@@ -41,7 +37,6 @@ class CookiesController < ApplicationController
     redirect_to cookies_url
   end
 
-  #HELPERS
 
 
   private

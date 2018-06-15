@@ -2,9 +2,9 @@ class RatingsController < ApplicationController
 
   before_action :require_logged_in
   before_action :current_user
+  before_action :get_all_instance_variables, only: [:new]
 
   def new
-    check_for_pairing_by_id(params[:pairing_id])
     @rating = Rating.new(pairing_id: params[:pairing_id]) if params[:pairing_id]
   end
 

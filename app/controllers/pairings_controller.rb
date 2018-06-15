@@ -2,9 +2,9 @@ class PairingsController < ApplicationController
   before_action :require_logged_in
   before_action :current_user
   before_action :run_permission, only: [:edit, :update, :destroy]
+  before_action :get_all_instance_variables, only: [:index, :new, :show]
 
   def index
-    get_all_instance_variables(params)
     get_pairings(params)
   end
 
@@ -14,7 +14,6 @@ class PairingsController < ApplicationController
   end
 
   def new
-    get_all_instance_variables(params)
     @pairing = Pairing.new
   end
 
@@ -24,7 +23,6 @@ class PairingsController < ApplicationController
   end
 
   def show
-    get_all_instance_variables(params)
     return_instance_if_it_exists(Pairing,params[:id])
   end
 

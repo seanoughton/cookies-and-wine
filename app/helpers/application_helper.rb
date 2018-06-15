@@ -1,5 +1,8 @@
 module ApplicationHelper
 
+
+#VIEW HELPERS
+
   #RETURNS A HIDDEN FIELD TAG WITH THE PARENT ID OF AN ITEM
   def id_field(item,parent)
     hidden_field_tag "#{item.class.to_s.downcase}[#{parent.class.to_s.downcase}_id]", parent.id

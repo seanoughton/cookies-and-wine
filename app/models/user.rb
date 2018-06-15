@@ -31,19 +31,22 @@ class User < ApplicationRecord
 	#EDIT/DELETE A User, Pairing, Wine, Cookie, Comment
 
 	def user_permission(instance,current_user) #either admin or user created item
-		if self.class == User
-			if self.admin || self == current_user
+
+		if instance.class == User
+			if self.admin || instance == current_user
 				true
 			else
 				false
 			end
 		else
-			if self.admin || instance.user == current_user#|| Thread.current[:current_user] == self
+			if self.admin || instance.user == current_user
 				true
 			else
 				false
-			end
+			end		
 		end
+
+
 	end
 
 
