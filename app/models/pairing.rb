@@ -9,7 +9,7 @@ class Pairing < ApplicationRecord
 	#VALIDATIONS
 	validates :wine_id, presence: {message: "Must Have a Wine"}
 	validates :cookie_id, presence: {message: "Must Have a Cookie"}
-	validate :pairing_already_exists
+	validate :pairing_already_exists, on: :create
 
 	#CUSTOM VALIDATIONS
 	def pairing_already_exists
@@ -76,22 +76,50 @@ class Pairing < ApplicationRecord
 		self.find(random_number)
 	end
 
+
 	def self.sort_order(sort_input)
 		#take the sort input and a cookie id or a wine id and call the appropriate function
 		case sort_input
-    when "highest rated"
-      highest_to_lowest
-    when "lowest rated"
-      lowest_to_highest
-    when "most commented"
-      most_commented_list
-    when "newest"
-      newest_list
-    when "oldest"
-      oldest_list
-    else
-      all
-    end
+		when "highest rated"
+			highest_to_lowest
+		when "lowest rated"
+			lowest_to_highest
+		when "most commented"
+			most_commented_list
+		when "newest"
+			newest_list
+		when "oldest"
+			oldest_list
+		else
+			all
+		end
+	end
+
+
+	def self.sort_the_pairings(params)
+		#THIS SORTS THE PAIRINGS BASED ON THE SORT ORDER. FOR INSTANCE "NEWEST"
+		@sorted_pairings = Pairing.sort_order(params[:sort])
+
+		#THIS SCOPES THE OVERALL SORTED PAIRINGS BASED ON THE PARENT(COOKIE,WINE,USER). FOR INSTANCE, ONLY SHOW THE SORTED PAIRINGS THAT BELONG TO A SPECIFIC COOKIE
+		if params[:cookie]
+			@cookie = Cookie.find(params[:cookie])
+			@pairings = @sorted_pairings.select do |pairing|
+				pairing.cookie == @cookie
+			end
+		elsif params[:wine]
+			@wine = Wine.find(params[:wine])
+			@pairings = @sorted_pairings.select do |pairing|
+				pairing.wine == @wine
+			end
+		elsif params[:user]
+			@user = User.find(params[:user])
+			@pairings = @sorted_pairings.select do |pairing|
+				pairing.user == @user
+			end
+		else
+			@pairings = @sorted_pairings
+		end
+		@pairings
 	end
 
 	def self.return_pairing(params)

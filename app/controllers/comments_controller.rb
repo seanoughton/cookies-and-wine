@@ -7,26 +7,15 @@ class CommentsController < ApplicationController
     get_comments(params)
   end
 
-  def new #CREATES A COMMENT FOR A SPECIFIC PAIRING
-    if !params[:pairing_id] || !Pairing.pairing_exists?(params[:pairing_id])
-      redirect_to pairings_path, alert: "Pairing not found."
-    else
-      create_empty_comment(params[:pairing_id])
-      find_pairing(params[:pairing_id],@comment)
-    end
-
+  def new
+    return_instance_if_it_exists(Pairing,params[:pairing_id])
+    @comment = Comment.new(pairing_id: params[:pairing_id])
   end
 
-  def create #CREATES A COMMENT FOR A SPECIFIC PAIRING
+  def create
     @comment = Comment.new(comment_params)
-    find_pairing((params[:comment][:pairing_id]),@comment)
-    if @comment.valid?
-      @comment.save
-      redirect_to pairing_path(@pairing)
-    else
-      render :new
-    end
-
+    return_instance_if_it_exists(Pairing,params[:comment][:pairing_id])
+    validate_instance_and_redirect(@comment,@pairing,"new")
   end
 
   def show
@@ -34,49 +23,22 @@ class CommentsController < ApplicationController
     return_instance_if_it_exists(Comment,params[:id])
   end
 
-  def edit #EDITS A COMMENT FOR A SPECIFIC PAIRING
-    find_comment(params[:id])
-    find_pairing(params[:pairing_id],@comment)
+  def edit
+    @comment = Comment.find(params[:id])
+    return_instance_if_it_exists(Pairing,params[:id])
   end
 
-  def update #UPDATES A COMMENT FOR A SPECIFIC PAIRING
-
-    find_comment(params[:id])
-    find_pairing(params[:comment][:pairing_id],@comment)
-    @comment.update(comment_params)
-    redirect_to @pairing if @comment.valid?
-    render :edit if !@comment.valid?
-
+  def update
+    return_instance_if_it_exists(Pairing,params[:id])
+    Comment.find(params[:id]).update(comment_params)
+    validate_instance_and_redirect(Comment.find(params[:id]),@pairing,"edit")
   end
 
   def destroy
-    find_comment(params[:id])
-    find_pairing(@comment.pairing.id,@comment)
-    @comment.destroy
-    redirect_to @pairing
+    Comment.find(params[:id]).destroy
+    redirect_to comments_url
   end
 
-  #helpers
-
-  #FINDS A PAIRING WITH A PAIRING ID
-  #IF PAIRING ID DOES NOT EXIST IN THE PARAMS
-  #ASSINGS PAIRING BASED ON THE COMMENT'S PARENT PAIRING
-  def find_pairing(pairing_id,comment)
-    if Pairing.exists?(pairing_id)
-      @pairing = Pairing.find(pairing_id)
-    else
-      @pairing = comment.pairing
-    end
-  end
-
-
-  def find_comment(id)
-    @comment = Comment.find(id)
-  end
-
-  def create_empty_comment(pairing_id)
-    @comment = Comment.new(pairing_id: pairing_id)
-  end
 
   private
 

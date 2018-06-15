@@ -7,19 +7,13 @@ class CookiesController < ApplicationController
     get_all_instance_variables(params)
   end
 
-
   def new
     @cookie = Cookie.new
   end
 
   def create
     @cookie = Cookie.new(cookie_params)
-    if @cookie.valid?
-      @cookie.save
-      redirect_to @cookie
-    else
-      render :new
-    end
+    validate_instance_and_redirect(@cookie,@cookie,"new")
   end
 
   def show
@@ -28,26 +22,22 @@ class CookiesController < ApplicationController
   end
 
   def edit
-    find_cookie(params[:id])
+    return_instance_if_it_exists(Cookie,params[:id])
   end
 
   def update
-    find_cookie(params[:id])
+    return_instance_if_it_exists(Cookie,params[:id])
     @cookie.update(cookie_params)
-    redirect_to @cookie if @cookie.valid?
-    render :edit if !@cookie.valid?
+    validate_instance_and_redirect(@cookie,@cookie,"edit")
   end
 
   def destroy
-    find_cookie(params[:id]).destroy
+    return_instance_if_it_exists(Cookie,params[:id])
+    @cookie.destroy
     redirect_to cookies_url
   end
 
   #HELPERS
-  def find_cookie(id)
-    @cookie = Cookie.find(id)
-  end
-
 
 
   private

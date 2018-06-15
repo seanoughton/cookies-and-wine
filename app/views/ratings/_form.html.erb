@@ -3,6 +3,7 @@
   <%=shows_error_messages(@rating)%><br>
 
   <%= id_field(@rating,@pairing) %>
+  <%= id_field(@rating,user) %>
   <%= f.label :rating_value %>
   <%= f.select :rating_value, ['1', '2', '3','4','5']%>
 

@@ -4,31 +4,15 @@ class RatingsController < ApplicationController
   before_action :current_user
 
   def new
-    if !Pairing.exists?(params[:pairing_id])
-      redirect_to pairings_path, alert: "Pairing not found."
-    else
-      @rating = Rating.new(pairing_id: params[:pairing_id])
-      @pairing = Pairing.find(params[:pairing_id])
-    end
+    check_for_pairing_by_id(params[:pairing_id])
+    @rating = Rating.new(pairing_id: params[:pairing_id]) if params[:pairing_id]
   end
 
   def create
-    params[:rating][:user_id] = current_user.id
     @rating = Rating.new(rating_params)
-    if @rating.valid?
-      @rating.save
-      update_pairing_rating(params[:rating][:pairing_id])
-      redirect_to pairing_path(@pairing)
-    else
-      render :new
-    end
-  end
-
-
-  #HELPERS
-  def update_pairing_rating(pairing_id)
-    @pairing = Pairing.find(pairing_id)
+    check_for_pairing_by_id(params[:rating][:pairing_id])
     @pairing.update_rating
+    validate_instance_and_redirect(@rating,@pairing,"new")
   end
 
 private

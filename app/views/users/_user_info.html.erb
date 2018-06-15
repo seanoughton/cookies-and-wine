@@ -2,7 +2,9 @@
   User Name: <%=@user.user_name%>
   <% if user_current_user? || user_admin? %>
     <%= link_to '(Edit Profile)', edit_user_path(@user)%><br>
+    <%=delete_user(@user)%>
   <% end %>
+
   <h2>
 
    <% if @user.pairings.empty? && @user == @current_user %>

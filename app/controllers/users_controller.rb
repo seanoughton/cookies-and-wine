@@ -12,6 +12,8 @@ class UsersController < ApplicationController
 
   def create #signup
     @user = User.new(user_params)
+    validate_instance_and_redirect(@user,@user,"new")
+=begin
     if @user.valid?
       @user.save
       log_in(@user)
@@ -19,6 +21,7 @@ class UsersController < ApplicationController
     else
       render :new
     end
+=end
   end
 
   def show
@@ -26,23 +29,27 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if is_current_user?(params[:id]) || current_user.admin?
-      @user = User.find(params[:id])
-    else
+    return_instance_if_it_exists(User,params[:id]) if params[:id]
+    if @user && !@user.permission_to_edit?(current_user)
       redirect_to controller: 'sessions', action: 'new'
     end
   end
 
   def update
-    @user = User.find(params[:id])
-    if is_current_user?(params[:id]) || current_user.admin?
-      @user.update(user_params)
-      redirect_to @user if @user.valid?
-      render :edit if !@user.valid?
-    else
-      redirect_to controller: 'sessions', action: 'new'
-    end
+    return_instance_if_it_exists(User,params[:id]) if params[:id]
 
+    redirect_to controller: 'sessions', action: 'new' if !@user.permission_to_edit?(current_user)
+
+    if @user.permission_to_edit?(current_user)
+      @user.update(user_params)
+      validate_instance_and_redirect(@user,@user,"edit")
+    end
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to users_url
   end
 
   private

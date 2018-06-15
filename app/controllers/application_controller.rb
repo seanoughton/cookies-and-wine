@@ -70,9 +70,17 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
-
-
+  def validate_instance_and_redirect(instance,redirect_route,render_route)
+    if instance.valid?
+      instance.save
+      if instance == @user
+        log_in(instance)
+      end
+      redirect_to redirect_route
+    else
+      render render_route
+    end
+  end
 
 
 end

@@ -2,14 +2,8 @@ class WelcomeController < ApplicationController
   before_action :require_logged_in
   before_action :current_user
 
-  def index
-  end
-
   def home
-    @highest_rated_pairing = Pairing.highest_rated
-    @most_commented_pairing = Pairing.most_commented
-    @newest_pairing = Pairing.newest
-    @oldest_pairing = Pairing.oldest
+    
   end
 
 end

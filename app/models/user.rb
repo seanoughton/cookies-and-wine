@@ -30,6 +30,10 @@ class User < ApplicationRecord
 	#AUTHORIZATIONS (STUFF THE ADMIN CAN DO)
 	#EDIT/DELETE A User, Pairing, Wine, Cookie, Comment
 
+	def permission_to_edit?(current_user)
+		current_user.admin? || self == current_user
+	end
+
 	def is_admin?
 		self.admin
 	end

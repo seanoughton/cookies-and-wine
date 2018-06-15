@@ -12,6 +12,10 @@ module ApplicationHelper
     end
   end
 
+  def delete_user(user)
+    link_to "Delete User", user, method: :delete, data: {confirm: "Really?!"} ,:class => 'btn btn-danger'
+  end
+
   #CREATES A LINK TO EDIT AN ITEM, WORKS FOR ANY ITEM CREATED BY A USER
   def edit(item)
     if current_user_created_this_item?(item) || user_admin?

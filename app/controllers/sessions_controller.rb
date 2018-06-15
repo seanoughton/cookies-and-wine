@@ -1,18 +1,9 @@
 class SessionsController < ApplicationController
 
-  def new
-
-  end
 
   def create
-    if params[:code]
-      facebook_login(params)
-      redirect_the_user(@user)
-    else
-      regular_login(params)
-      redirect_the_user(@user)
-    end
-
+      facebook_login(params) if params[:code]
+      regular_login(params) if !params[:code]
   end
 
   def destroy
@@ -28,12 +19,14 @@ class SessionsController < ApplicationController
       u.image = auth['info']['image']
       u.password = SecureRandom.urlsafe_base64#create random password for facebook login
     end
+    redirect_the_user(@user)
   end
 
   def regular_login(params)
     @user = User.find_by(user_name: params[:user][:user_name])
     @user = @user.try(:authenticate, params[:user][:password])
     #try will return nil if it cannot authenticate, and then make @user nil
+    redirect_the_user(@user)
   end
 
   def redirect_the_user(user)

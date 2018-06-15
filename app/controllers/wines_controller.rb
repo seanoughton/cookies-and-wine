@@ -14,13 +14,7 @@ class WinesController < ApplicationController
 
   def create
     @wine = Wine.new(wine_params)
-    if @wine.valid?
-      @wine.save
-      redirect_to @wine
-    else
-      render :new
-    end
-
+    validate_instance_and_redirect(@wine,@wine,"new")
   end
 
   def show
@@ -29,26 +23,22 @@ class WinesController < ApplicationController
   end
 
   def edit
-    find_wine(params[:id])
+    return_instance_if_it_exists(Wine,params[:id])
   end
 
 
   def update
-    find_wine(params[:id])
+    return_instance_if_it_exists(Wine,params[:id])
     @wine.update(wine_params)
-    redirect_to @wine if @wine.valid?
-    render :edit if !@wine.valid?
+    validate_instance_and_redirect(@wine,@wine,"edit")
   end
 
   def destroy
-    Wine.find(params[:id]).destroy
+    return_instance_if_it_exists(Wine,params[:id])
+    @wine.destroy
     redirect_to wines_url
   end
 
-  #HELPERS
-  def find_wine(id)
-    @wine = Wine.find(id)
-  end
 
   private
   def wine_params

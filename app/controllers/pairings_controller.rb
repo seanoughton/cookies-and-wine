@@ -8,47 +8,18 @@ class PairingsController < ApplicationController
   end
 
   def sort
-    @sorted_pairings = Pairing.sort_order(params[:sort])
-    if params[:cookie]
-      @cookie = Cookie.find(params[:cookie])
-      @pairings = @sorted_pairings.select do |pairing|
-        pairing.cookie == @cookie
-      end
-    elsif params[:wine]
-      @wine = Wine.find(params[:wine])
-      @pairings = @sorted_pairings.select do |pairing|
-        pairing.wine == @wine
-      end
-    elsif params[:user]
-      @user = User.find(params[:user])
-      @pairings = @sorted_pairings.select do |pairing|
-        pairing.user == @user
-      end
-    else
-      @pairings = @sorted_pairings
-    end
+    @pairings = Pairing.sort_the_pairings(params)
     render :index
   end
 
   def new
-    if params[:cooky_id]
-      @cookie = Cookie.find(params[:cooky_id])
-    elsif params[:wine_id]
-      @wine = Wine.find(params[:wine_id])
-    else
-    end
+    get_all_instance_variables(params)
     @pairing = Pairing.new
   end
 
   def create
     @pairing = Pairing.new(pairing_params)
-    if @pairing.valid?
-      @pairing.save
-      redirect_to @pairing
-    else
-      render :new
-    end
-
+    validate_instance_and_redirect(@pairing,@pairing,"new")
   end
 
   def show
@@ -61,15 +32,9 @@ class PairingsController < ApplicationController
   end
 
   def update
-    @pairing = Pairing.new(pairing_params)
-    #THE VALIDATION IS DONE THIS WAY, BECAUSE WHEN YOU UPDATE THE PAIRING WITH THE NEW INPUTS AND IT IS SAVED TO THE DATABASE,AND THEN YOU CHECK TO SEE IF IT IS VALID, IT WILL COME BACK AS INVALID, BECAUSE THE PAIRING EXISTS, WHICH CAUSES A VALIDATION ERROR
-    if @pairing.valid?
-      @pairing = Pairing.find(params[:id])
-      @pairing.update(pairing_params)
-      redirect_to @pairing
-    else
-      render :edit
-    end
+    return_instance_if_it_exists(Pairing,params[:id])
+    @pairing.update(pairing_params)
+    validate_instance_and_redirect(@pairing,@pairing,"edit")
   end
 
   def destroy
@@ -77,9 +42,6 @@ class PairingsController < ApplicationController
     @pairing.destroy
     redirect_to pairings_url
   end
-
-  #HELPERS
-
 
 
   private
