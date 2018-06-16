@@ -5,6 +5,7 @@ class Pairing < ApplicationRecord
 	belongs_to :cookie
 	belongs_to :user, :counter_cache => true #counts the number of pairings for a specific user
 	has_many :comments, dependent: :destroy
+	has_many :ratings, dependent: :destroy
 
 	#VALIDATIONS
 	validates :wine_id, presence: {message: "Must Have a Wine"}
@@ -19,13 +20,7 @@ class Pairing < ApplicationRecord
 		end
 	end
 
-	def self.pairing_exists?(pairing_id)
-		self.exists?(pairing_id)
-	end
-
-
 	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
-
 	def self.highest_to_lowest
 		order(user_rating: :desc).to_a
 	end
@@ -40,7 +35,6 @@ class Pairing < ApplicationRecord
 
 	def self.lowest_rated
 		order(user_rating: :asc).limit(1).first
-		#where('rating < ?', '2')
 	end
 
 	def self.most_commented_list
@@ -55,12 +49,12 @@ class Pairing < ApplicationRecord
 		order(created_at: :desc).first
 	end
 
-	def self.oldest
-		order(created_at: :asc).first
-	end
-
 	def self.newest_list
 		order(created_at: :desc).to_a
+	end
+
+	def self.oldest
+		order(created_at: :asc).first
 	end
 
 	def self.oldest_list
@@ -76,55 +70,9 @@ class Pairing < ApplicationRecord
 		self.find(random_number)
 	end
 
-#METHODS HAVING TO DO WITH SORTING THE PAIRINGS
+#SORTING PAIRINGS METHODS
 
-	def self.sort_order(sort_input)
-		#take the sort input and a cookie id or a wine id and call the appropriate function
-		case sort_input
-		when "highest rated"
-			highest_to_lowest
-		when "lowest rated"
-			lowest_to_highest
-		when "most commented"
-			most_commented_list
-		when "newest"
-			newest_list
-		when "oldest"
-			oldest_list
-		else
-			all
-		end
-	end
-
-
-	def self.sort_the_pairings(params)
-		#THIS SORTS THE PAIRINGS BASED ON THE SORT ORDER. FOR INSTANCE "NEWEST"
-		@sorted_pairings = Pairing.sort_order(params[:sort])
-
-		#THIS SCOPES THE OVERALL SORTED PAIRINGS BASED ON THE PARENT(COOKIE,WINE,USER). FOR INSTANCE, ONLY SHOW THE SORTED PAIRINGS THAT BELONG TO A SPECIFIC COOKIE
-		if params[:cookie]
-			@cookie = Cookie.find(params[:cookie])
-			@pairings = @sorted_pairings.select do |pairing|
-				pairing.cookie == @cookie
-			end
-		elsif params[:wine]
-			@wine = Wine.find(params[:wine])
-			@pairings = @sorted_pairings.select do |pairing|
-				pairing.wine == @wine
-			end
-		elsif params[:user]
-			@user = User.find(params[:user])
-			@pairings = @sorted_pairings.select do |pairing|
-				pairing.user == @user
-			end
-		else
-			@pairings = @sorted_pairings
-		end
-		@pairings
-	end
-
-
-
+#RETURNS A SINGLE PAIRING SCOPED TO THE INPUT, FOR INSTANCE WILL RETURN THE SINGLE PAIRING WHICH IS THE HIGHEST RATED
 	def self.return_pairing(params)
 		if params == "highest_rated"
 			@pairing = Pairing.highest_rated
@@ -141,39 +89,30 @@ class Pairing < ApplicationRecord
 		end
 	end
 
-
-
+#SORTS ALL OF THE PAIRINGS BASED ON THE SORT INPUT
+	def self.sort_order(sort_input)
+		case sort_input
+		when "highest rated"
+			highest_to_lowest
+		when "lowest rated"
+			lowest_to_highest
+		when "most commented"
+			most_commented_list
+		when "newest"
+			newest_list
+		when "oldest"
+			oldest_list
+		else
+			all
+		end
+	end
 
 #INSTANCE METHODS
 
-	def pairings_for_specific_cookie(cookie_id)
-		byebug
-		cookie = Cookie.find(cookie_id)
-		self.collect do |pairing|
-			pairing.cookie
-		end
-	end
-
-
-
-	def update_rating #updates the user_rating
-		ratings_array = Rating.all.select do |rating|
-			rating.pairing == self
-		end
-		ratings_values = ratings_array.collect do |rating|
-			rating.rating_value
-		end
-		self.user_rating = ratings_values.sum/ratings_values.count
+#UPDATES THE USER RATING VALUE OF THE PAIRING
+	def update_rating
+		self.user_rating = self.ratings.sum("rating_value")/self.ratings.count
 		self.save(validate: false)
-	end
-
-	def delete_pairings_comments_ratings
-		self.comments.each do |comment|
-      comment.destroy
-    end
-    self.ratings.each do |rating|
-      rating.destroy
-    end
 	end
 
 end

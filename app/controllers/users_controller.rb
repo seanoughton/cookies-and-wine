@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    validate_instance_and_redirect(@user,@user,"new")
+    validate_instance_and_redirect(@user,@user,"new",true)
   end
 
   def show
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   def update
     return_instance_if_it_exists(User,params[:id]) if params[:id]
     @user.update(user_params)
-    validate_instance_and_redirect(@user,@user,"edit")
+    validate_instance_and_redirect(@user,@user,"edit",false)
   end
 
   def destroy

@@ -20,11 +20,14 @@
   <%= f.text_field :zipcode %><br>
 
 <!-- if user logged in with facebook then they don't need to be able to change the password -->
-  <% if !@user.uid %>
-    <%= f.label :password, :class => 'text-white' %>
+<!-- if the user is not a facebook user or user is the admin then show the password
+you need to know that you are editing, and if the user is both a facebook login or the admin
+ -->
+  <% if !@user.uid #&& @edit == true #&& !@current_user.admin #&& @user == @current_user%>
+    <%= f.label :password %>
     <%= f.password_field :password %><br>
 
-    <%= f.label :password_confirmation, :class => 'text-white' %>
+    <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation %><br>
   <%end%>
 

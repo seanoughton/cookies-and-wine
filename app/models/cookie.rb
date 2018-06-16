@@ -15,11 +15,4 @@ class Cookie < ApplicationRecord
 	validates :link, url: true #uses gem to validate that the url is in proper format
 	validates :link, uniqueness: true ,on: :create
 
-
-
-	#PAIRINGS FOR A SPECIFIC COOKIE - returns all wines paired with a specific cookie
-	def paired_wines #instance method
-		self.wines
-	end
-
 end

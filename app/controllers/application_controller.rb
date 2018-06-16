@@ -107,7 +107,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def validate_instance_and_redirect(instance,redirect_route,render_route)
+  def validate_instance_and_redirect(instance,redirect_route,render_route,login=false)
     if instance.valid?
       instance.save
 
@@ -117,9 +117,7 @@ class ApplicationController < ActionController::Base
       end
 
       #EDGE CASE
-      if instance == @user
-        log_in(instance)
-      end
+      log_in(instance) if login == true
 
       redirect_to redirect_route
     else

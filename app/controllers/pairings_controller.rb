@@ -9,7 +9,7 @@ class PairingsController < ApplicationController
   end
 
   def sort
-    @pairings = Pairing.sort_the_pairings(params)
+    @pairings = Pairing.sort_order(params[:sort])
     render :index
   end
 

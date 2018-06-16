@@ -15,9 +15,5 @@ class Wine < ApplicationRecord
 	validates :description, length: {maximum: 50, too_long: "%{count} characters is the maximum allowed" }
 	validates :description, length: {minimum: 2, too_short: "%{count} characters is the minimum allowed" }
 
-	#INSTANCE METHODS
-	def paired_cookies
-		self.cookies
-	end
 
 end
