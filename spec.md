@@ -7,13 +7,13 @@ Specs:
 - [x] Include at least one has_many through relationship (A Cookie has many Wines through Pairings)
 - [x] The "through" part of the has_many through includes at least one user submittable attribute (A pairing has an attribute of user rating)
 - [x] Include reasonable validations for simple model objects (Cookies,Wines and Comments cannot be added to the database unless all fields are filled out appropriately. Otherwise Error messages prompt the user to enter in the correct information.)
-- [ ] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
+- [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
 - [x] Include signup (Custom Signup with validatios)
 - [x] Include login (Custom)
 - [x] Include logout (Custom, delete the user_id from the session)
 - [x] Include third party signup/login (OmniAuth through Facebook)
-- [ ] Include nested resource show or index (URL pairings/1/comments/show)
-- [ ] Include nested resource "new" form (URL pairings/1/comments/new)
+- [x] Include nested resource show or index (URL pairings/1/comments/show)
+- [x] Include nested resource "new" form (URL pairings/1/comments/new)
 - [x] Include form display of validation errors (all forms have validation errors)
 
 Confirm:
