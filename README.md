@@ -1,27 +1,41 @@
-# README
-#Application Description
-#Installation guide (e.g. fork and clone repo, migrate db, bundle install, etc)
+# Cookies and Wine
 
-This is a Fantasy Basketball Sinatra app. Mulitple users can create Fantasy NBA Basketball teams out of a pool of available players.  A user can also add players to the pool of available players by creating players.
+*A Cookie and Wine Pairing Platform*
+
+Users share their Cookie and Wine Pairings with the platform, by creating pairings with existing Cookies and Wines, or by adding their own Cookies and Wines.  Users can rate and comment on pairings.  Also the app will let User's know where they can buy the Wines or find recipes for the cookies.
 
 
 ## Installation
 
-Fork and clone this repository. Navigate to the root folder. Use bundle install to install all of the necessary gems. There is a database of players already. However, if you want to find or create your own CSV list of players, you can do that. Place the csv file in the db/csv folder. Update the name of the csv file in the Rake Task seed_db. Then run rake seed_db in the console to seed the database with your players.
+1. Download this repository
+2. `cd` into repository directory
+3. Run `rake db:migrate` to build the database
+4. Run `rake db:seed` to seed the database with Cookies and Wines
+5. Run `rails s` to start the server
+6. Visit the address provided for the local server (i.e. `http://localhost:3000`)
 
 
 ## Usage
 
-Run: Use shotgun to start the app and navigate to the url that shotgun provides.
+After creating an account, a user will be directed to their homepage. From there, the user can:
+1. View all of the Pairings
+2. View an individual Pairing
+3. Create a Pairing from existing Cookies and Wines
+4. Add a Wine and/or a Cookie to the Database
+5. Create a pairing from the new Cookie and/or Wine
+6. Edit a Pairing/Cookie or Wine if they create it
+7. Rate a Pairing
+8. Comment on a Pairing
+9. Edit their own user profile
+
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/seanoughton/cookies-and-wine. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/seanoughton/cookies-and-wine.
 
 ## License
 
 The app is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Code of Conduct
-
-Everyone interacting in the Sinatra-Portfolio-Project-Fantasy-Basketball project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/sf_bay_area_concerts_cli_app/blob/master/CODE_OF_CONDUCT.md).
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
