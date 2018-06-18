@@ -14,6 +14,7 @@ class PairingsController < ApplicationController
   end
 
   def new
+    #byebug
     @pairing = Pairing.new
   end
 

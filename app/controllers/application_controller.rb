@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   end
 
 
-#REDIRECTS IF PAIRING ISN'T FOUND 
+#REDIRECTS IF PAIRING ISN'T FOUND
   def check_for_pairing_by_id(id)
     @pairing = Pairing.return_pairing(id)
     redirect_to pairings_path, alert: "Pairing not found." if !Pairing.return_pairing(id)
@@ -97,11 +97,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  #CHECKS THE PERMISSIONS FOR THE USER
   def run_permission
     model = params[:controller].to_s.chop.titlecase
     #converts the string to a class
     instance = model.camelize.constantize.find(params[:id])
     redirect_to current_user, alert: "You do not have permission to do this." if !current_user.user_permission(instance,current_user)
+  end
+
+  #DETERMINES IF THE USER EDIT PAGE WILL SHOW A PASSWORD OR NOT
+  def show_password(user)
+    @show_password = true
+    @show_password = false if (current_user.admin && !user.admin) || user.uid
+    @show_password
   end
 
 
