@@ -1,3 +1,4 @@
+<!-- FORM TO CREATE/EDIT A COOKIE --> 
 <%= form_for @cookie  do |f| %>
 
   <%=shows_error_messages(@cookie)%>
@@ -10,7 +11,7 @@
 
   <%= f.label :link %>
   <%= f.text_field :link %><br>
-  
+
   <%=id_field(@cookie,@current_user)%><br>
   <%= f.submit :class => 'btn btn-primary' %>
 <% end %>

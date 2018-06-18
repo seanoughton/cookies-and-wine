@@ -1,23 +1,19 @@
+<!-- FORM TO CREATE/EDIT A PAIRING -->
 <h1> Create a Pairing </h1>
-
-
 <%= form_for @pairing  do |f| %>
-
   <%=shows_error_messages(@pairing)%><br>
 
-
-
-  <% if @cookie %>
+  <% if @cookie %> <!-- IF CREATING A PAIRING FOR A SPECIFIC COOKIE-->
     <%= f.label :Wine %>
     <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%><br>
     <%= f.label :Cookie %>: <%=@cookie.cookie_name.titlecase%><br>
     <%= id_field(@pairing,@cookie) %>
-  <% elsif @wine %>
+  <% elsif @wine %><!-- IF CREATING A PAIRING FOR A SPECIFIC WINE-->
     <%= f.label :Cookie %>
     <%= f.collection_select :cookie_id, Cookie.all,:id,:cookie_name%><br>
     <%= f.label :Wine %>: <%=@wine.wine_name.titlecase%><br>
     <%= id_field(@pairing,@wine) %>
-  <% else %>
+  <% else %> <!-- NO WINE OR COOKIE SPECIFIED-->
     <%= f.label :Wine %>
     <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%><br>
     <%= f.label :Cookie %>
@@ -25,7 +21,7 @@
   <% end %>
 
 
-  <%=id_field(@pairing,@current_user)%>
+  <%=id_field(@pairing,@current_user)%> <!-- HIDDEN ID FIELDS -->
   <%=hidden_field_tag "pairing[user_rating]", 1%>
 
   <%= f.submit :class => 'btn btn-primary'%>

@@ -45,14 +45,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-# TO BE DELETED
-=begin
-  def is_current_user?(params_id)
-    session[:user_id] == params_id.to_i
-  end
-=end
 
-#THIS TAKES THE
+#REDIRECTS IF PAIRING ISN'T FOUND 
   def check_for_pairing_by_id(id)
     @pairing = Pairing.return_pairing(id)
     redirect_to pairings_path, alert: "Pairing not found." if !Pairing.return_pairing(id)
@@ -80,32 +74,10 @@ class ApplicationController < ActionController::Base
     return_instance_if_it_exists(Pairing,params[:pairing_id]) if params[:pairing_id]
     return_instance_if_it_exists(Cookie,params[:cooky_id]) if params[:cooky_id]
     return_instance_if_it_exists(Wine,params[:wine_id]) if params[:wine_id]
-    get_pairings(params)
+    Pairing.get_pairings(params)
     return_instance_if_it_exists(Comment,params[:comment_id]) if params[:comment_id]
   end
 
-
-  def get_pairings(params)
-    if params[:wine_id] && Wine.exists?(params[:wine_id])
-      @pairings = Wine.find(params[:wine_id]).pairings
-    elsif params[:cooky_id] && Cookie.exists?(params[:cooky_id])
-      @pairings = Cookie.find(params[:cooky_id]).pairings
-    elsif params[:user_id] && User.exists?(params[:user_id])
-      @pairings = User.find(params[:user_id]).pairings
-    else
-      @pairings = Pairing.find_each
-    end
-  end
-
-  def get_comments(params)
-    if params[:pairing_id] && Pairing.exists?(params[:pairing_id])
-      @comments = Pairing.find(params[:pairing_id]).comments
-    elsif params[:user_id] && User.exists?(params[:user_id])
-      @comments = User.find(params[:user_id]).comments
-    else
-      @comments = Comment.find_each
-    end
-  end
 
   def validate_instance_and_redirect(instance,redirect_route,render_route,login=false)
     if instance.valid?
@@ -131,4 +103,6 @@ class ApplicationController < ActionController::Base
     instance = model.camelize.constantize.find(params[:id])
     redirect_to current_user, alert: "You do not have permission to do this." if !current_user.user_permission(instance,current_user)
   end
+
+
 end

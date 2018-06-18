@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   before_action :get_all_instance_variables, only: [:index, :new, :show]
 
   def index
-    get_comments(params)
+    @comments = Comment.get_comments(params)
   end
 
   def new

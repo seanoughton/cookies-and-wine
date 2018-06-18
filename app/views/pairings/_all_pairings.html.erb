@@ -1,15 +1,12 @@
+<!-- SHOWS ALL OF THE PAIRINGS OR PAIRINGS SCOPED BY USER,COOKIE, OR WINE -->
 <ul>
   <%@pairings.each do |pairing| %>
+  <% generated_pairing_path = user_pairing_path(user,pairing) if @user%>
+  <% generated_pairing_path = user_pairing_path(cookie,pairing) if @cookie%>
+  <% generated_pairing_path = user_pairing_path(wine,pairing) if @wine%>
+  <% generated_pairing_path = pairing_path(pairing) if !@wine && !@cookie && !@user%>
     <li>
-      <%if @user %>
-        <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", user_pairing_path(user,pairing) %>
-      <%elsif @cookie %>
-        <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", cooky_pairing_path(cookie,pairing) %>
-      <%elsif @wine %>
-        <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", wine_pairing_path(wine,pairing) %>
-      <%else%>
-      <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", pairing_path(pairing) %>
-      <%end%>
+        <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", generated_pairing_path %>
       <br>
         Rating: <%=pairing.user_rating%> ,
         Comments: <%=pairing.comments_count%>

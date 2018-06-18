@@ -1,3 +1,4 @@
+<!-- EITHER SHOWS LIST OF ALL COOKIES, OR SHOW A LIST OF THE USER'S COOKIES -->
 <ul>
   <%@cookies.each do |cookie| %>
     <li>
@@ -6,7 +7,6 @@
       <%else%>
         <%= link_to cookie.cookie_name, cooky_url(cookie)%>
       <%end%>
-
     </li>
   <%end%>
 </ul>

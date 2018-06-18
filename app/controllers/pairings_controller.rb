@@ -5,7 +5,7 @@ class PairingsController < ApplicationController
   before_action :get_all_instance_variables, only: [:index, :new, :show]
 
   def index
-    get_pairings(params)
+    @pairings = Pairing.get_pairings(params)
   end
 
   def sort

@@ -15,5 +15,18 @@ class Wine < ApplicationRecord
 	validates :description, length: {maximum: 50, too_long: "%{count} characters is the maximum allowed" }
 	validates :description, length: {minimum: 2, too_short: "%{count} characters is the minimum allowed" }
 
+	# =>ACTIVE RECORD METHODS
+
+	#RETURNS COLLECTION OF WINES: EITHER ALL WINES OR JUST A USER'S WINES
+	def self.get_wines(params)
+		if params[:user_id] && User.exists?(params[:user_id])
+			user = User.find(params[:user_id])
+			wines = user.wines
+		else
+			wines = Wine.find_each
+		end
+		wines
+	end
+
 
 end

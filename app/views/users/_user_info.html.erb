@@ -1,3 +1,5 @@
+<!-- USER SHOW PAGE -->
+
 <h2>
   User Name: <%=@user.user_name%>
   <% if user_current_user? || user_admin? %>
@@ -5,25 +7,23 @@
     <%=delete_user(@user)%>
   <% end %>
 
-  <h2>
+<h2>
 
-   <% if @user.pairings.empty? && @user == @current_user %>
-      <h3>
-        You Don't have any Pairings
-        <%= link_to "Create a Pairing", new_pairing_url%>
-      </h3>
-   <% else %>
-     <%= link_to "Pairings for #{@user.user_name}", user_pairings_url(@user) %><br>
-   <%end%>
+<% if @user.pairings.empty? && @user == @current_user %>
+  <h3>
+    You Don't have any Pairings
+    <%= link_to "Create a Pairing", new_pairing_url%>
+  </h3>
+<%elsif !@user.pairings.empty? %>
+  <%= link_to "Pairings for #{@user.user_name}", user_pairings_url(@user) %><br>
+<%elsif @user.pairings.empty? && @user != @current_user%>
+  <h3> This User has no Pairings. </h3>
+<%end%>
 
-   <% if !@user.comments.empty? %>
-        <%= link_to "Comments made by #{@user.user_name}", user_comments_url(@user) %><br>
-   <%end%>
+<%= link_to "Comments made by #{@user.user_name}", user_comments_url(@user) if !@user.comments.empty?%><br>
 
-   <% if !@user.cookies.empty? %>
-        <%= link_to "Cookies added by #{@user.user_name}", user_cookies_url(@user) %><br>
-   <%end%>
 
-   <% if !@user.wines.empty? %>
-        <%= link_to "Wines added by #{@user.user_name}", user_wines_url(@user) %>
-   <%end%>
+<%= link_to "Cookies added by #{@user.user_name}", user_cookies_url(@user) if !@user.cookies.empty? %><br>
+
+
+<%= link_to "Wines added by #{@user.user_name}", user_wines_url(@user) if !@user.wines.empty? %>

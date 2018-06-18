@@ -1,8 +1,8 @@
 <h3> Here are all of the cookies this wine pairs with:</h3>
 <ul>
   <%@wine.cookies.each do |cookie|%>
-<li>
-  <%= link_to cookie.cookie_name, cooky_path(cookie) %>
-</li>
-<%end%>
+    <li>
+      <%= link_to cookie.cookie_name, cooky_path(cookie) %>
+    </li>
+  <%end%>
 </ul>

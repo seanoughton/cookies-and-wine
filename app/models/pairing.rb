@@ -21,6 +21,23 @@ class Pairing < ApplicationRecord
 	end
 
 	#ACTIVE RECORD SCOPE METHODS (MODEL CLASS METHODS)
+
+	def self.get_pairings(params)
+		if params[:wine_id] && Wine.exists?(params[:wine_id])
+			pairings = Wine.find(params[:wine_id]).pairings
+		elsif params[:cooky_id] && Cookie.exists?(params[:cooky_id])
+			pairings = Cookie.find(params[:cooky_id]).pairings
+		elsif params[:user_id] && User.exists?(params[:user_id])
+			pairings = User.find(params[:user_id]).pairings
+		else
+			pairings = Pairing.find_each
+		end
+		pairings
+	end
+
+
+
+
 	def self.highest_to_lowest
 		order(user_rating: :desc).to_a
 	end

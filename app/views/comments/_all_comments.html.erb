@@ -1,18 +1,13 @@
+<!-- SHOWS ALL OF THE COMMENTS -->
+<!-- Changes what link url is displayed depending on the nested_route: users/comments or pairings/comments or all comments /comments -->
 <ol>
   <%@comments.each do |comment| %>
+    <% generated_comment_path = user_comment_url(user,comment) if @user%>
+    <% generated_comment_path = "/pairings/#{comment.pairing_id}/comments/#{comment.id}" if @pairing%>
+      <% generated_comment_path = comment_url(comment) if !@user && !@pairing%>
     <li>
-      <%if @user %>
-        <%=link_to comment.body, user_comment_url(user,comment)%>(Created by:
-        <%=link_to comment.user.user_name, user_url(comment.user), :class => 'text-success'%>), For this pairing: <%= link_to comment.pairing.wine.wine_name + " and " + comment.pairing.cookie.cookie_name.titlecase, user_pairing_url(user,comment.pairing)%>
-      <% elsif @pairing %>
-        <%=link_to comment.body, "/pairings/#{comment.pairing_id}/comments/#{comment.id}"%>(Created by:
-        <%=link_to comment.user.user_name, user_url(comment.user), :class => 'text-success'%>), For this pairing: <%= link_to comment.pairing.wine.wine_name + " and " + comment.pairing.cookie.cookie_name.titlecase, pairing_url(comment.pairing)%>
-      <%else%>
-        <%=link_to comment.body, comment_url(comment)%>(Created by:
-        <%=link_to comment.user.user_name, user_url(comment.user), :class => 'text-success'%>), For this pairing: <%= link_to comment.pairing.wine.wine_name + " and " + comment.pairing.cookie.cookie_name.titlecase, pairing_url(comment.pairing)%>
-
-      <%end%>
-
+      <%=link_to comment.body, generated_comment_path%>(Created by:
+      <%=link_to comment.user.user_name, user_url(comment.user), :class => 'text-success'%>), For this pairing: <%= link_to comment.pairing.wine.wine_name + " and " + comment.pairing.cookie.cookie_name.titlecase, user_pairing_url(user,comment.pairing)%>
     </li>
   <%end%>
 </ol>

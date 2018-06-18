@@ -5,7 +5,7 @@ class WinesController < ApplicationController
   before_action :get_all_instance_variables, only: [:index, :new, :show]
 
   def index
-    @wines = Wine.find_each
+    @wines = Wine.get_wines(params)
   end
 
 

@@ -9,7 +9,7 @@
 
    <div class="col-sm-8 ">
      <h2> Here are all of the Comments </h2>
-     <%= render 'all_comments', comment: @comment, user:@user %>
+     <%= render 'all_comments', comment: @comment, user:@current_user, pairing: @pairing %>
    </div><!--end column -->
 
    <div class="col-sm-2 ">

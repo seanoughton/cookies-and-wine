@@ -1,8 +1,7 @@
+<!-- FORM TO CREATE/EDIT A USER -->
 <%= form_for @user, controller: 'users', action: 'create' do |f| %>
-
-<%= render :partial => 'layouts/error_messages' %>
-
-<%=shows_error_messages(@user)%>
+  <%= render :partial => 'layouts/error_messages' %>
+  <%=shows_error_messages(@user)%>
 
   <%= f.label :name%>
   <%= f.text_field :user_name %><br>

@@ -5,7 +5,7 @@ class CookiesController < ApplicationController
   before_action :get_all_instance_variables, only: [:index, :new, :show]
 
   def index
-    @cookies = Cookie.find_each
+    @cookies = Cookie.get_cookies(params)
   end
 
   def new

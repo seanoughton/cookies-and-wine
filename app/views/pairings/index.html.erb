@@ -10,9 +10,8 @@
    <div class="col-sm-10">
      <h3> Here are all of the pairings </h3>
      <% if @pairings.count > 1 && !@cookie && !@wine && !@user %>
-       <%= render 'sort', cookie: @cookie, wine: @wine, user: @user %>
+       <%= render 'sort' %>
      <% end %>
-
      <%= render 'all_pairings', pairings: @pairings, user: @user, wine: @wine, cookie:  @cookie %>
    </div><!--end column -->
 

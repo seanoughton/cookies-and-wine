@@ -1,20 +1,10 @@
+<!-- SORT FORM FOR ALL PAIRINGS -->
 <%= form_tag(controller: "pairings", action: "sort", method: "post") do %>
 
- <%= select_tag 'sort', options_for_select(["Choose a Sort Type", "highest rated", "lowest rated", "most commented","newest","oldest"])
+  <%= select_tag 'sort', options_for_select(["Choose a Sort Type", "highest rated", "lowest rated", "most commented","newest","oldest"])
   %>
 
-  <%if cookie %>
-  <%=  hidden_field_tag "cookie", cookie.id%>
-  <% end %>
-
-  <%if wine %>
-  <%=  hidden_field_tag "wine", wine.id%>
-  <% end %>
-
-  <%if user %>
-  <%=  hidden_field_tag "user", user.id%>
-  <% end %>
-
+  
 
   <%= submit_tag("Sort") %>
 <% end %>
