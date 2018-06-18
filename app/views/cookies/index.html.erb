@@ -1,10 +1,8 @@
 <%= render :partial => 'layouts/navbar' %>
 
 <div class="container-fluid main_body_style">
-  
-  <% flash.each do |key, value| %>
-        <div class="alert alert-danger"> <%= key.upcase %>: <%= value %></div>
-  <% end %>
+
+  <%= render :partial => 'layouts/error_messages' %>
 
   <div class="row">
     <div class="col-sm-2 ">
