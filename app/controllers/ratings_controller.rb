@@ -9,10 +9,9 @@ class RatingsController < ApplicationController
   end
 
   def create
-    @rating = Rating.new(rating_params)
     check_for_pairing_by_id(params[:rating][:pairing_id])
     @pairing.update_rating
-    validate_instance_and_redirect(@rating,@pairing,"new")
+    validate_instance_and_redirect(Rating.new(rating_params),@pairing,"new")
   end
 
 private

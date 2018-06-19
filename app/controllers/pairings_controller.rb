@@ -14,7 +14,6 @@ class PairingsController < ApplicationController
   end
 
   def new
-    #byebug
     @pairing = Pairing.new
   end
 
@@ -38,7 +37,7 @@ class PairingsController < ApplicationController
   end
 
   def destroy
-    @pairing = Pairing.find(params[:id])
+    return_instance_if_it_exists(Pairing,params[:id])
     @pairing.destroy
     redirect_to pairings_url
   end

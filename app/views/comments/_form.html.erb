@@ -6,7 +6,7 @@
   <%= f.label :Add_Comment %>
   <%= f.text_field :body %><br>
 
-  <%=id_field(@comment,@pairing)%>
+  <%=id_field(@comment,@pairing) if @pairing%>
   <%=id_field(@comment,@current_user)%>
 
   <%=f.submit :class => 'btn btn-primary'%>

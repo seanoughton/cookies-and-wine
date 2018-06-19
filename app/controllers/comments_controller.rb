@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
   before_action :require_logged_in
   before_action :current_user
-  before_action :run_permission, only: [:edit, :update, :destroy]
-  before_action :get_all_instance_variables, only: [:index, :new, :show]
+  before_action :get_all_instance_variables
+  before_action :run_permission, only: [:update, :destroy]
 
   def index
     @comments = Comment.get_comments(params)
@@ -23,8 +23,8 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    @comment = Comment.find(params[:id])
-    return_instance_if_it_exists(Pairing,params[:id])
+    return_instance_if_it_exists(Comment,params[:id])
+    return_instance_if_it_exists(User,params[:user_id])
   end
 
   def update

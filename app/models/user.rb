@@ -22,6 +22,7 @@ class User < ApplicationRecord
 		order( "pairings_count desc" ).first
 	end
 
+
 	#AUTHORIZATIONS
 	def user_permission(instance,current_user)
 		case instance

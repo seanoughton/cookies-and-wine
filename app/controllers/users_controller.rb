@@ -9,10 +9,12 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @show_password = true
   end
 
   def create
     @user = User.new(user_params)
+    @show_password = true
     validate_instance_and_redirect(@user,@user,"new",true)
   end
 
