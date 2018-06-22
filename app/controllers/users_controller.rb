@@ -24,7 +24,8 @@ class UsersController < ApplicationController
 
   def edit
     return_instance_if_it_exists(User,params[:id]) if params[:id]
-    show_password(@user) #RETURNS TRUE OR FALSE TO SHOW THE PASSWORD ON THE EDIT PAGE
+    @show_password = @user.show_password(current_user)
+    #RETURNS TRUE OR FALSE TO SHOW THE PASSWORD ON THE EDIT PAGE
   end
 
   def update

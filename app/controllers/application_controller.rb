@@ -2,23 +2,39 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   protect_from_forgery with: :exception
 
+  #RETURNS THE CURRENTLY LOGGED IN USER
   def current_user
     @current_user = (User.find_by(id: session[:user_id]) || User.new)
   end
 
+  #RETURNS TRUE/FALSE IF USER IS LOGGED IN OR NOT
   def logged_in?
     current_user.id != nil
   end
 
-  def log_in(user) #LOGS THE USER IN
+  #LOGS THE USER IN
+  def log_in(user)
     session[:user_id] = user.id
   end
 
+  #RE-ROUTES THE USER TO THE LOGIN PAGE IF THEY ARE NOT LOGGED IN
   def require_logged_in
     return redirect_to(controller: 'sessions', action: 'new') unless logged_in?
   end
 
   #LOG IN HELPERS
+
+  #EITHER REDIRECTS USER TO LOGIN PAGE OR LOGS THE USER IN AND REDIRECTS THE USER TO THE USER'S PROFILE PAGE
+  def redirect_the_user(user)
+    if !user
+      redirect_to(controller: 'sessions', action: 'new')
+    else
+      log_in(user)
+      redirect_to "/home"
+    end
+  end
+
+  #LOGS THE USER IN WITH OMNIAUTH THROUGH FACEBOOK
   def facebook_login(params)
     @user = User.find_or_create_by(uid: auth['uid']) do |u|
       u.user_name = auth['info']['name']
@@ -29,20 +45,13 @@ class ApplicationController < ActionController::Base
     redirect_the_user(@user)
   end
 
+  #LOGS THE USER IN WITH USER NAME AND PASSWORD
+  #AUTHENTICATES USER NAME AND PASSWORD
   def regular_login(params)
     @user = User.find_by(user_name: params[:user][:user_name])
     @user = @user.try(:authenticate, params[:user][:password])
     #try will return nil if it cannot authenticate, and then make @user nil
     redirect_the_user(@user)
-  end
-
-  def redirect_the_user(user)
-    if !user
-      redirect_to(controller: 'sessions', action: 'new')
-    else
-      log_in(user)
-      redirect_to "/home"
-    end
   end
 
 
@@ -53,9 +62,10 @@ class ApplicationController < ActionController::Base
   end
 
 #RETURNS ANY TYPE OF CLASS INSTANCE AND CHECKS IF IT EXISTS FIRST
+#IF INSTANCE ISN'T FOUND, REDIRECTS USER WITH ALERT
 #WORKS WITH Class Name and  params[:id]
   def return_instance_if_it_exists(class_name,id)
-    #PAIRINGS HAVE SORT PARAMETERS, THIS CODE ACCOUNT FOR THE SORT PARAMETERS
+    #EDGE CASE: PAIRINGS HAVE SORT PARAMETERS, THIS CODE ACCOUNT FOR THE SORT PARAMETERS
     if class_name.to_s == "Pairing"
       check_for_pairing_by_id(id)
     elsif id == "most_pairings"
@@ -66,29 +76,18 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  #RETURNS Instance variables with the parent_id
-  #WORKS WITH Class Name and  params[:parent_id]
-  #Looks in the params and creats any instances that are needed for a specific action based on the params[:parent_id]
-  def get_all_instance_variables#(params)
-    return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
-    return_instance_if_it_exists(Pairing,params[:pairing_id]) if params[:pairing_id]
-    return_instance_if_it_exists(Cookie,params[:cooky_id]) if params[:cooky_id]
-    return_instance_if_it_exists(Wine,params[:wine_id]) if params[:wine_id]
-    Pairing.get_pairings(params)
-    return_instance_if_it_exists(Comment,params[:comment_id]) if params[:comment_id]
-  end
 
-
-  def validate_instance_and_redirect(instance,redirect_route,render_route,login=false)
+  #CHECKS TO SEE IF AN INSTANCE IS VALID AND REDIRECTS
+  def validate_instance_and_redirect(instance,redirect_route,render_route,login=false)#login is an optional argument.  If a user is being created or if an already exisiting user is being validated then the login parameter is submitted.
     if instance.valid?
       instance.save
 
-      #EDGE CASE
+      #EDGE CASE: CREATES A BASE RATING OF 1 FOR ANY PAIRING THAT IS CREATED. PREVENTS A PAIRING FROM BEING CREATED WITHOUT A USER RATING.
       if instance == @pairing
         @rating = Rating.create(rating_value: 1, pairing_id: @pairing.id, user_id: current_user.id)
       end
 
-      #EDGE CASE
+      #EDGE CASE: THIS IS FOR WHEN A USER IS CREATED AND THE USER IS VALID
       log_in(instance) if login == true
 
       redirect_to redirect_route
@@ -99,18 +98,20 @@ class ApplicationController < ActionController::Base
 
   #CHECKS THE PERMISSIONS FOR THE USER
   def run_permission
+    #this turns the controller name into a model name, ex. comments_controller becomes "Comment"
     model = params[:controller].to_s.chop.titlecase
-    #converts the string to a class
+
+    #this returns and instance of a Class based on the params[:id]
+    #the instance is the the thing that the user wants to change
+    #we are checking to see if the user has permission to change it
     instance = model.camelize.constantize.find(params[:id])
+    #camelize converts a string from snake case to camel case
+    #constantize turns a string into a constant, ex. "Comment" becomes Comment, in this case, it turns it into a Class
+    #ex. instance = Comment.find(params[:id])
+
     redirect_to current_user, alert: "You do not have permission to do this." if !current_user.user_permission(instance,current_user)
   end
 
-  #DETERMINES IF THE USER EDIT PAGE WILL SHOW A PASSWORD OR NOT
-  def show_password(user)
-    @show_password = true
-    @show_password = false if (current_user.admin && !user.admin) || user.uid
-    @show_password
-  end
 
 
 end

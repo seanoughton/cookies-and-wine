@@ -1,10 +1,19 @@
 <!-- SHOWS ALL OF THE PAIRINGS OR PAIRINGS SCOPED BY USER,COOKIE, OR WINE -->
+
+<h3> Here are all of the pairings </h3>
+
+<!-- Shows a sort dropdown if there is more than one pairing -->
+  <%= render 'sort' if @pairings.count > 1 && !@cookie && !@wine && !@user%>
 <ul>
+  <!-- Changes what link url is displayed depending on the nested_route and who the parent is -->
   <%@pairings.each do |pairing| %>
   <% generated_pairing_path = user_pairing_path(user,pairing) if @user%>
   <% generated_pairing_path = user_pairing_path(cookie,pairing) if @cookie%>
   <% generated_pairing_path = user_pairing_path(wine,pairing) if @wine%>
   <% generated_pairing_path = pairing_path(pairing) if !@wine && !@cookie && !@user%>
+  <!--                    -->
+
+
     <li>
         <%= link_to "#{pairing.wine.wine_name} is paired with #{pairing.cookie.cookie_name.titlecase}", generated_pairing_path %>
       <br>

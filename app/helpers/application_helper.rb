@@ -1,6 +1,5 @@
 module ApplicationHelper
 
-
 #VIEW HELPERS
 
   #RETURNS A HIDDEN FIELD TAG WITH THE PARENT ID OF AN ITEM
@@ -10,28 +9,22 @@ module ApplicationHelper
 
   #CREATES A LINK TO DELETE AN ITEM, WORKS FOR ANY ITEM CREATED BY A USER
   def delete(item)
-    #if current_user_created_this_item?(item) || user_admin?
       link_to "Delete #{item.class.to_s}", item, method: :delete, data: {confirm: "Really?!"} ,:class => 'btn btn-danger'
-    #end
   end
 
+  #CREATES A LINK TO DELETE A USER
   def delete_user(user)
     link_to "Delete User", user, method: :delete, data: {confirm: "Really?!"} ,:class => 'btn btn-danger'
   end
 
   #CREATES A LINK TO EDIT AN ITEM, WORKS FOR ANY ITEM CREATED BY A USER
   def edit(item)
-    #if current_user_created_this_item?(item) || user_admin?
       link_to "Edit #{item.class.to_s}", "/#{item.class.to_s.downcase}s/#{item.id}/edit", :class=> "btn btn-warning "
-    #end
   end
 
-  #CREATES A LINK TO EDIT AN ITEM ASSOCIATED WITH A PARENT
+  #CREATES A LINK TO EDIT AN ITEM ASSOCIATED WITH A PARENT LEADING TO THE CORRECT NESTED/ROUTE
   def edit_with_parent(parent,child)
-    #if current_user_created_this_item?(child) || user_admin?
       link_to "Edit #{child.class.to_s}", "/#{parent.class.to_s.downcase}s/#{parent.id}/#{child.class.to_s.downcase}s/#{child.id}/edit",  :class=> "btn btn-warning"
-    #end
-
   end
 
   #CREATES HTML TO SHOW ERROR MESSAGES FOR ANY ERRORS/MODELS

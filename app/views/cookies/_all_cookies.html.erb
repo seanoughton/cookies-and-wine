@@ -1,4 +1,7 @@
 <!-- EITHER SHOWS LIST OF ALL COOKIES, OR SHOW A LIST OF THE USER'S COOKIES -->
+<h3> Here are all of <%=@user.user_name.titlecase if @user%> Cookies</h3>
+
+Click the cookie to see what wines it pairs with
 <ul>
   <%@cookies.each do |cookie| %>
     <li>

@@ -2,10 +2,10 @@ class PairingsController < ApplicationController
   before_action :require_logged_in
   before_action :current_user
   before_action :run_permission, only: [:edit, :update, :destroy]
-  before_action :get_all_instance_variables, only: [:index, :new, :show]
 
   def index
     @pairings = Pairing.get_pairings(params)
+    return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
   end
 
   def sort
@@ -15,6 +15,8 @@ class PairingsController < ApplicationController
 
   def new
     @pairing = Pairing.new
+    return_instance_if_it_exists(Cookie,params[:cooky_id]) if params[:cooky_id]
+    return_instance_if_it_exists(Wine,params[:wine_id]) if params[:wine_id]
   end
 
   def create

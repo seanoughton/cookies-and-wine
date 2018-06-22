@@ -1,9 +1,10 @@
 class Wine < ApplicationRecord
 
 	#RELATIONSHIPS
-	has_many :pairings, dependent: :destroy
+	has_many :pairings, dependent: :destroy#THIS DESTROYS ALL OF THE DIRECT DEPENDENTS BASED ON THE has_many RELATIONSHIP
+
 	#a wine has many cookies that it can pair with
-	has_many :cookies, through: :pairings, :source => :cookie #this solves a problem with the plurality of cookie
+	has_many :cookies, through: :pairings, :source => :cookie #this solves a problem with the way ruby pluralizes cookie
 	belongs_to :user
 
 	#VALIDATIONS

@@ -1,3 +1,8 @@
+
+<h3> Here are all of <%=@user.user_name.titlecase if @user %> Wines</h3>
+
+<h3>Click the wine to see what cookies it pairs with</h3>
+
 <ul>
   <%@wines.each do |wine| %>
     <li>

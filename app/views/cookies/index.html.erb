@@ -9,13 +9,6 @@
     </div><!--end column -->
 
    <div class="col-sm-8 ">
-     <% if @user %>
-       <h3> Here are all of <%=@user.user_name.titlecase%> Cookies</h3>
-     <% else %>
-       <h3> Here are all of the cookies</h3>
-     <% end %>
-
-     Click the cookie to see what wines it pairs with
      <%= render 'all_cookies', cookies: @cookies, user: @user %>
    </div><!--end column -->
 

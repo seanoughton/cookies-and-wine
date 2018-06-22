@@ -2,10 +2,10 @@ class RatingsController < ApplicationController
 
   before_action :require_logged_in
   before_action :current_user
-  before_action :get_all_instance_variables, only: [:new]
 
   def new
     @rating = Rating.new(pairing_id: params[:pairing_id]) if params[:pairing_id]
+    return_instance_if_it_exists(Pairing,params[:pairing_id]) if params[:pairing_id]
   end
 
   def create

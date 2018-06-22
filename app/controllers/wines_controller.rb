@@ -2,10 +2,10 @@ class WinesController < ApplicationController
   before_action :require_logged_in
   before_action :current_user
   before_action :run_permission, only: [:edit, :update, :destroy]
-  before_action :get_all_instance_variables, only: [:index, :new, :show]
 
   def index
     @wines = Wine.get_wines(params)
+    return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
   end
 
 
