@@ -19,7 +19,8 @@ class ApplicationController < ActionController::Base
 
   #RE-ROUTES THE USER TO THE LOGIN PAGE IF THEY ARE NOT LOGGED IN
   def require_logged_in
-    return redirect_to(controller: 'sessions', action: 'new') unless logged_in?
+    #return redirect_to(controller: 'sessions', action: 'new')unless logged_in?
+    redirect_to login_path, alert: "You must be logged in to view this." unless logged_in?
   end
 
   #LOG IN HELPERS
@@ -27,7 +28,8 @@ class ApplicationController < ActionController::Base
   #EITHER REDIRECTS USER TO LOGIN PAGE OR LOGS THE USER IN AND REDIRECTS THE USER TO THE USER'S PROFILE PAGE
   def redirect_the_user(user)
     if !user
-      redirect_to(controller: 'sessions', action: 'new')
+      #redirect_to(controller: 'sessions', action: 'new')
+      redirect_to login_path, alert: "You must be logged in to view this."
     else
       log_in(user)
       redirect_to "/home"

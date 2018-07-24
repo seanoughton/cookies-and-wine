@@ -3,12 +3,13 @@
 <%= form_for @pairing  do |f| %>
   <%=shows_error_messages(@pairing)%><br>
 
-  <% if @cookie %> <!-- IF CREATING A PAIRING FOR A SPECIFIC COOKIE-->
+
+  <% if @pairing.cookie_id %> <!-- IF CREATING A PAIRING FOR A SPECIFIC COOKIE-->
     <%= f.label :Wine %>
     <%= f.collection_select :wine_id, Wine.all,:id,:wine_name%><br>
     <%= f.label :Cookie %>: <%=@cookie.cookie_name.titlecase%><br>
     <%= id_field(@pairing,@cookie) %>
-  <% elsif @wine %><!-- IF CREATING A PAIRING FOR A SPECIFIC WINE-->
+  <% elsif @pairing.wine_id%><!-- IF CREATING A PAIRING FOR A SPECIFIC WINE-->
     <%= f.label :Cookie %>
     <%= f.collection_select :cookie_id, Cookie.all,:id,:cookie_name%><br>
     <%= f.label :Wine %>: <%=@wine.wine_name.titlecase%><br>

@@ -13,14 +13,18 @@ class Comment < ApplicationRecord
 
 	#RETRIEVES ALL OF THE COMMENTS FOR A PAIRING OR A USER OR JUST ALL COMMENTS
 	def self.get_comments(params)
+
     if params[:pairing_id] && Pairing.exists?(params[:pairing_id])
-      comments = Pairing.find(params[:pairing_id]).comments
+			comments = Comment.where("pairing_id = ?", params[:pairing_id])
+      #comments = Pairing.find(params[:pairing_id]).comments
     elsif params[:user_id] && User.exists?(params[:user_id])
-      comments = User.find(params[:user_id]).comments
+			comments = Comment.where("user_id = ?", params[:user_id])
+			#comments = User.find(params[:user_id]).comments
     else
       comments = Comment.find_each
     end
 		comments
+
   end
 
 end

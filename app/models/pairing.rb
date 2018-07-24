@@ -41,10 +41,14 @@ class Pairing < ApplicationRecord
 
 
 	#SORTING METHODS RETURNING A COLLECTION
+
+	scope :highest_to_lowest, -> {order(user_rating: :desc).to_a }
+
+=begin
 	def self.highest_to_lowest
 		order(user_rating: :desc).to_a
 	end
-
+=end
 	def self.lowest_to_highest
 		order(user_rating: :asc).to_a
 	end

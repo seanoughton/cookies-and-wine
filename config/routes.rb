@@ -28,8 +28,8 @@ Rails.application.routes.draw do
 
   resources :welcome
 
-  get 'home' => 'welcome#home'
-  get 'login' => 'sessions#new'
+  get 'home' => 'welcome#home', as: 'home'
+  get 'login' => 'sessions#new', as: 'login'
   post 'login' => 'sessions#create'
   post '/logout' => 'sessions#destroy'
 
