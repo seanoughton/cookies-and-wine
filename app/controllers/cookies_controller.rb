@@ -6,6 +6,10 @@ class CookiesController < ApplicationController
   def index
     @cookies = Cookie.get_cookies(params)
     return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
+    respond_to do |format|
+      format.html { render :index}
+      format.json { render json: @cookies.to_json}
+    end
   end
 
   def new

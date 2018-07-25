@@ -15,3 +15,4 @@
 //= require jquery_ujs
 //= require pairings
 //= require comments
+//= require cookies
