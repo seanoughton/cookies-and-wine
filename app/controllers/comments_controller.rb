@@ -6,6 +6,10 @@ class CommentsController < ApplicationController
   def index
     @comments = Comment.get_comments(params)
     return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @comments.to_json}
+    end
   end
 
   def new

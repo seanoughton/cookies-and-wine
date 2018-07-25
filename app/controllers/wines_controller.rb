@@ -20,6 +20,10 @@ class WinesController < ApplicationController
 
   def show
     return_instance_if_it_exists(Wine,params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @wine.to_json}
+    end
   end
 
   def edit

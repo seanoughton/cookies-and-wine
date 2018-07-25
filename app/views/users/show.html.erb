@@ -11,6 +11,18 @@
    <div class="col-sm-8 ">
 
      <%= render 'user_info', user: @user %>
+     <button id="pairings">show pairings</button><br>
+     <button id="comments" data-id=<%=@user.id%> >show comments</button><br><br>
+     <div id="allPairings">
+       <ul>
+       </ul>
+     </div><br>
+     <div id="allComments">
+       <ul>
+       </ul>
+     </div><br>
+
+
 
    </div><!--end column -->
 

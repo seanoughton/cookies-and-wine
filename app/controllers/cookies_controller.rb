@@ -19,6 +19,10 @@ class CookiesController < ApplicationController
 
   def show
     return_instance_if_it_exists(Cookie,params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @cookie.to_json}
+    end
   end
 
   def edit
