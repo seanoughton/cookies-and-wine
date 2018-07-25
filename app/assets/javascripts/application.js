@@ -16,3 +16,4 @@
 //= require pairings
 //= require comments
 //= require cookies
+//= require wines

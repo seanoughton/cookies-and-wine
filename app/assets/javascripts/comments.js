@@ -12,8 +12,7 @@ class Comment {
 }//end class definition
 
 //get all of this users comments when the page loads and store them in an array
-function createComments(){
-  let id = $('#comments').attr('data-id')
+function createComments(id){
   $.getJSON( `/users/${id}/comments`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
@@ -23,7 +22,12 @@ function createComments(){
 }// end createComments
 
 $( document ).ready(function() {
-  createComments();
+
+  let id = $('#comments').attr('data')// this is getting the userid
+  if(id){
+    createComments(id);
+  }
+
 
   $("#comments").click(function() {
     let commentsDiv = $("#allComments ul");

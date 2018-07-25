@@ -13,18 +13,20 @@ class Cookie {
 }//end class definition
 
 //get all of this users comments when the page loads and store them in an array
-function createCookies(){
-  let id = $('#comments').attr('data-id')// this is getting the userid
+function createCookies(id){
   $.getJSON( `/users/${id}/cookies`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
        let cookie = new Cookie(value.id,value.cookie_name,value.description,value.link,value.user_id);
     });//end .each
   });// end getJSON
-}// end createComments
+}// end createCookies
 
 $( document ).ready(function() {
-  createCookies();
+  let id = $('#comments').attr('data')// this is getting the userid
+  if (id){ //if this user id exists on the page then fire the AJAX
+    createCookies(id);
+  }
 
   $("#cookies").click(function() {
     let cookiesDiv = $("#allCookies ul");
@@ -32,6 +34,7 @@ $( document ).ready(function() {
       cookiesDiv.append(`<li>` + value.cookieName + `.</li><br>`);
     })//end .each
   });// end click function
+
 
 });//end document.ready
 

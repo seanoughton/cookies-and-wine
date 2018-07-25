@@ -15,15 +15,21 @@
     <%= link_to "Create a Pairing", new_pairing_url%>
   </h3>
 <%elsif !@user.pairings.empty? %>
-  <%= link_to "Pairings for #{@user.user_name}", user_pairings_url(@user) %><br>
+  <%#= link_to "Pairings for #{@user.user_name}", user_pairings_url(@user) %>
+  <%= button_tag "User Pairings", id: "pairings" %><br>
 <%elsif @user.pairings.empty? && @user != @current_user%>
   <h3> This User has no Pairings. </h3>
 <%end%>
 
-<%= link_to "Comments made by #{@user.user_name}", user_comments_url(@user) if !@user.comments.empty?%><br>
 
+<%#= link_to "Comments made by #{@user.user_name}", user_comments_url(@user) if !@user.comments.empty?%>
+<%#= link_to "Cookies added by #{@user.user_name}", user_cookies_url(@user) if !@user.cookies.empty? %>
+<%#= link_to "Wines added by #{@user.user_name}", user_wines_url(@user) if !@user.wines.empty? %>
 
-<%= link_to "Cookies added by #{@user.user_name}", user_cookies_url(@user) if !@user.cookies.empty? %><br>
-
-
-<%= link_to "Wines added by #{@user.user_name}", user_wines_url(@user) if !@user.wines.empty? %>
+<%= button_tag "User Comments", id: "comments", data: @user.id %><br>
+<%= button_tag "User Cookies", id: "cookies" %><br>
+<%= button_tag "User Wines", id: "wines" %><br>
+<!--
+<button id="comments" data-id=<%=@user.id%> >show comments</button><br>
+<button id="cookies">show cookies</button><br>
+<button id="wines">show wines</button><br><br> -->
