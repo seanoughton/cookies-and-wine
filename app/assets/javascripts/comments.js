@@ -32,6 +32,7 @@ $( document ).ready(function() {
   $("#comments").click(function() {
     let commentsDiv = $("#allComments ul");
     $.each( commentsArray, function(key, value){
+      clearDivs();
       commentsDiv.append(`<li>` + value.body + `.</li><br>`);
     })//end .each
     //make these links to the comments themselves

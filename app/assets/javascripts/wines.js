@@ -32,6 +32,7 @@ $( document ).ready(function() {
 
   $("#wines").click(function() {
     let winesDiv = $("#allWines ul");
+    clearDivs();
     $.each( winesArray, function(key, value){
       winesDiv.append(`<li>` + value.wineName + `.</li><br>`);
     })//end .each

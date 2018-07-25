@@ -51,6 +51,7 @@ $( document ).ready(function() {
 
   $("#pairings").click(function() {
     let pairingsDiv = $("#allPairings ul");
+    clearDivs();
     $.each( pairingsArray, function(key, value){
       pairingsDiv.append(`<li>` + value.wineName + ` is paired with ` + value.cookieName + `.</li><br>`);
     })//end .each
