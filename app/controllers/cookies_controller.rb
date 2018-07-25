@@ -8,7 +8,7 @@ class CookiesController < ApplicationController
     return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
     respond_to do |format|
       format.html { render :index}
-      format.json { render json: @cookies.to_json}
+      format.json { render json: @cookies}
     end
   end
 
@@ -25,7 +25,7 @@ class CookiesController < ApplicationController
     return_instance_if_it_exists(Cookie,params[:id])
     respond_to do |format|
       format.html { render :show }
-      format.json { render json: @cookie.to_json}
+      format.json { render json: @cookie}
     end
   end
 

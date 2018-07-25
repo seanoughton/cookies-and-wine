@@ -2,15 +2,15 @@ let pairingsArray = [];
 
 //// Class Constructors
 class Pairing {
-  constructor(id,wineId,cookieId,userId,userRating,commentsCount){
+  constructor(id,wineId,cookieId,userId,userRating,commentsCount,wineName,cookieName){
     this.id = id;
     this.wineId = wineId;
     this.cookieId = cookieId;
     this.userId = userId;
     this.userRating = userRating;
     this.commentsCount = commentsCount;
-    this.wineName = "default";
-    this.cookieName = "default";
+    this.wineName = wineName;
+    this.cookieName = cookieName;
 
     pairingsArray.push(this)
   }//end constructor
@@ -20,9 +20,11 @@ function createPairings(id){
   $.getJSON( `/users/${id}/pairings`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
-       let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count);
+      console.log(value.cookie.cookie_name);
+       let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name);
 
        // Assign the associated wine name
+       /**
        $.getJSON( `/wines/${pairing.wineId}`, function( data ) {
        }).done(function( data ) {
          pairing.wineName = data.wine_name
@@ -32,7 +34,7 @@ function createPairings(id){
        $.getJSON( `/cookies/${pairing.cookieId}`, function( data ) {
        }).done(function( data ) {
          pairing.cookieName = data.cookie_name
-       });// end getJSON for cookieName
+       });// end getJSON for cookieName **/
 
 
     });//end .each
