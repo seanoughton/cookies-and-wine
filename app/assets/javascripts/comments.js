@@ -1,6 +1,4 @@
-
-let commentsArray = [];
-  //// Class Constructors
+//// CLASS CONSTRUCTORS
 class Comment {
   constructor(id,body,userId,pairingId){
     this.id = id;
@@ -10,6 +8,11 @@ class Comment {
     commentsArray.push(this)
   }//end constructor
 }//end class definition
+
+// GLOBAL VARIABLES
+let commentsArray = [];
+
+//GLOBAL FUNCTIONS
 
 //get all of this users comments when the page loads and store them in an array
 function createComments(id){
@@ -22,22 +25,18 @@ function createComments(id){
 }// end createComments
 
 $( document ).ready(function() {
-
   let id = $('#comments').attr('data')// this is getting the userid
   if(id){
     createComments(id);
   }
 
-
+  /// CLICK FUNCTIONS
   $("#comments").click(function() {
     let commentsDiv = $("#allComments ul");
     $.each( commentsArray, function(key, value){
       clearDivs();
-      //commentsDiv.append(`<li>` + value.body + `.</li><br>`);
       commentsDiv.append(`<li><a href='/comments/${value.id}'> ${value.body}</a></li>`);
     })//end .each
-    //make these links to the comments themselves
-    // add the pairings names that these are comments for with link
   });// end click function
 
 });//end document.ready

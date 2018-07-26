@@ -1,6 +1,4 @@
-
-let winesArray = [];
-  //// Class Constructors
+//// CLASS CONSTRUCTORS
 class Wine {
   constructor(id,wineName,grapeVarietal,origin,description,userId){
     this.id = id;
@@ -12,6 +10,11 @@ class Wine {
     winesArray.push(this)
   }//end constructor
 }//end class definition
+
+// GLOBAL VARIABLES
+let winesArray = [];
+
+//GLOBAL FUNCTIONS
 
 //get all of this users comments when the page loads and store them in an array
 function createWines(id){
@@ -30,6 +33,7 @@ $( document ).ready(function() {
     createWines(id);
   }
 
+  /// CLICK FUNCTIONS
   $("#wines").click(function() {
     let winesDiv = $("#allWines ul");
     clearDivs();
