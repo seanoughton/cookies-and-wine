@@ -32,11 +32,16 @@ function getNumberOfPairings() {
   });// end getJSON for pairing
 }//end getNumberOfPairings
 
+function createPairing(value){
+  let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name);
+  return pairing
+};//end createPairing
+
 function createUserPairings(id){
   $.getJSON( `/users/${id}/pairings`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
-       let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name);
+      createPairing(value);
     });//end .each
   });// end getJSON for pairing
 };// end createUserPairings
@@ -54,10 +59,10 @@ function addPairing(pairing){
   pairingsDiv.html(pairingShowHtml);
 };// end addPairing
 
-  function getPairings(id){
+  function getPairing(id){
     $.getJSON( `/pairings/${id}`, function( value ) {
     }).done(function( value ) {
-      let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name);
+      let pairing = createPairing(value)
       addPairing(pairing);
     });// end getJSON for pairing
   };// end getPairings
@@ -70,19 +75,17 @@ $( document ).ready(function() {
 
   ///CALL GLOBAL FUNCTIONS NEEDED FOR PAGE FUNCTION
 
-  // GETS THE NUMBER OF PAIRINGS FOR THE NEXT CLICK FUNCTION
-  getNumberOfPairings();
+  getNumberOfPairings(); // GETS THE NUMBER OF PAIRINGS FOR THE NEXT CLICK FUNCTION
 
-  ///GETS THE USER'S PAIRINGS FROM THE DB AND PUTS THEM ON THE PAGE
-  //PRELOADS THE PAIRINGS BEFOR THE USER CLICKS ON SHOW PAIRINGS
+  //PRELOADS THE USERS PAIRINGS
   let id = $('#comments').attr('data')
   if(id){
     createUserPairings(id);
   };
+  ////
 
   /////  ADD HANDLEBARS TEMPLATES
   prevNextBtnsHtml = HandlebarsTemplates['previous_next_btns'](
-    //pairing need to pass in the pairing so I can get the pairing id
     {pairingId: $("#pairing-id").attr('data-id')}
   );
   $("#prev-next-buttons").html(prevNextBtnsHtml);
@@ -104,10 +107,8 @@ $( document ).ready(function() {
     //account for the last pairing
     if (id < pairingsLength){
       let nextPairingId = parseInt(id, 10) + 1;
-      // query the DB with the next pairing id and turn it into a jscript object
-      getPairings(nextPairingId);
+      getPairing(nextPairingId);
     }; // end if
-
   });//end click function
 
   $("#previous").click(function(){
@@ -115,17 +116,10 @@ $( document ).ready(function() {
     //account for first pairing
     if (id>1){
       let previousPairingId = parseInt(id, 10) - 1;
-      // query the DB with the next pairing id and turn it into a jscript object
-      getPairings(previousPairingId);
+      getPairing(previousPairingId);
     };// end if
   });//end click function
 
   /// END CLICK FUNCTIONS
 
 });//end document.ready
-
-
-
-
-
-/////
