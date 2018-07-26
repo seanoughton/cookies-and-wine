@@ -79,7 +79,6 @@ function addPairing(pairing){
 
   function showPairingsComments(){
     let id = $("#pairing-id").attr('data-id');
-
     if ($("#comments ul li").length < 1) {
       $.getJSON( `/pairings/${id}`, function( value ) {
       }).done(function( value ) {
@@ -90,6 +89,29 @@ function addPairing(pairing){
       });// end getJSON for pairing
     };// end if
   };//end showPairingsComments
+
+  function addCommentForm(){
+    let id = $("#pairing-id").attr("data-id")
+
+    $.getJSON( `/pairings/${id}`, function( value ) {
+    }).done(function( value ) {
+      let pairing = createPairing(value)
+      pairing.currentUser = $("#user-id").attr('data-id')
+      createCommentForm = HandlebarsTemplates['create_comment_form'](
+        pairing
+      );
+      $("#comment-form-container").html(createCommentForm)
+    });// end getJSON for pairing
+
+  };//end addCommentForm
+
+
+  // on pairings show page, create a button that loads a form
+  // create listner for button that fires a function that loads the form on the page
+  // form is HANDLEBARS template
+  // the form is for a comment
+  // comment gets created through AJAX
+  // new comment is appended to the DOM
 
 
 //END GLOBAL FUNCTIONS
@@ -117,6 +139,8 @@ $( document ).ready(function() {
     {pairingId: $("#pairing-id").attr('data-id')}
   );
   $("#prev-next-buttons").html(prevNextBtnsHtml);
+
+
   /////// END HANDLEBARS TEMPLATES
 
 
@@ -151,8 +175,11 @@ $( document ).ready(function() {
   });//end click function
 
   $("#show-comments").click(function(){
-    console.log("test")
     showPairingsComments();
+  });//end click function
+
+  $("#add-comment").click(function(){
+    addCommentForm();
   });//end click function
 
   /// END CLICK FUNCTIONS

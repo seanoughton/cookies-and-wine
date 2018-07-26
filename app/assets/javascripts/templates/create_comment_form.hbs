@@ -1,0 +1,14 @@
+<div class="col-sm-3 ">
+     <!-- FORM TO CREATE/EDIT A COMMENT -->
+    <form class="new_comment" id="new_comment" action="/comments" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="8kl2fO6VwxWVdN5oHR0omhaVAcaqSR+10gBwHFb4MPGevHqTc/ivayreSV/sQ1g9Ot8O3ECaP76+1ZtGisaYPA==">
+
+      <input type="text" name="comment[body]" id="comment_body"><br>
+
+      <input type="hidden" name="comment[pairing_id]" id="comment_pairing_id" value="{{id}}">
+      <input type="hidden" name="comment[user_id]" id="comment_user_id" value="{{currentUser}}"><br>
+
+      <input type="submit" name="commit" value="Create Comment" class="btn btn-success" data-disable-with="Create Comment">
+    </form>
+
+</div>
+<br><br>
