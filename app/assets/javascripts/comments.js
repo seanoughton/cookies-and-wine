@@ -33,7 +33,8 @@ $( document ).ready(function() {
     let commentsDiv = $("#allComments ul");
     $.each( commentsArray, function(key, value){
       clearDivs();
-      commentsDiv.append(`<li>` + value.body + `.</li><br>`);
+      //commentsDiv.append(`<li>` + value.body + `.</li><br>`);
+      commentsDiv.append(`<li><a href='/comments/${value.id}'> ${value.body}</a></li>`);
     })//end .each
     //make these links to the comments themselves
     // add the pairings names that these are comments for with link

@@ -32,6 +32,10 @@ class PairingsController < ApplicationController
 
   def show
     return_instance_if_it_exists(Pairing,params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @pairing}
+    end
   end
 
   def edit

@@ -34,7 +34,7 @@ $( document ).ready(function() {
     let winesDiv = $("#allWines ul");
     clearDivs();
     $.each( winesArray, function(key, value){
-      winesDiv.append(`<li>` + value.wineName + `.</li><br>`);
+      winesDiv.append(`<li><a href='/wines/${value.id}'> ${value.wineName}</a></li>`);
     })//end .each
   });// end click function
 

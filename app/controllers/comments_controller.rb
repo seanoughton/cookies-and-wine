@@ -8,7 +8,8 @@ class CommentsController < ApplicationController
     return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
     respond_to do |format|
       format.html { render :index }
-      format.json { render json: @comments.to_json}
+      #format.json { render json: @comments.to_json}
+      format.json { render json: @comments}
     end
   end
 
@@ -25,6 +26,11 @@ class CommentsController < ApplicationController
 
   def show
     return_instance_if_it_exists(Comment,params[:id])
+    respond_to do |format|
+      format.html { render :show }
+      #format.json { render json: @comments.to_json}
+      format.json { render json: @comment}
+    end
   end
 
   def edit

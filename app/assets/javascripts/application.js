@@ -13,6 +13,7 @@
 
 //= require jquery3
 //= require jquery_ujs
+
 //= require helpers
 //= require pairings
 //= require comments

@@ -32,7 +32,7 @@ $( document ).ready(function() {
     let cookiesDiv = $("#allCookies ul");
     clearDivs();
     $.each( cookiesArray, function(key, value){
-      cookiesDiv.append(`<li>` + value.cookieName + `.</li><br>`);
+      cookiesDiv.append(`<li><a href='/cookies/${value.id}'> ${value.cookieName}</a></li>`);
     })//end .each
   });// end click function
 
