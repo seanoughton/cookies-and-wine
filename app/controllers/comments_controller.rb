@@ -19,9 +19,11 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
+    #@comment = Comment.new(comment_params)
+    @comment = Comment.create(comment_params)
     @pairing = Pairing.find(params[:comment][:pairing_id])
-    validate_instance_and_redirect(@comment,@pairing,"new")
+    #validate_instance_and_redirect(@comment,@pairing,"new")
+    render json: @comment, status: 201
   end
 
   def show

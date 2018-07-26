@@ -101,17 +101,25 @@ function addPairing(pairing){
         pairing
       );
       $("#comment-form-container").html(createCommentForm)
+      $('form').submit(function(event) {
+       event.preventDefault();
+       let values = $(this).serialize();
+       let posting = $.post('/comments', values);
+       posting.done(function(data) {
+          console.log(data.body)
+          let returnHtml = `<h2>Here is your new comment:<br> ${data.body}</h2><br><br>`
+          $("#comment-form-container").html(returnHtml);
+          if ($("#comments ul li").length > 0) {
+            $("#comments ul ").empty();
+            showPairingsComments();
+          };// end if
+        });
+      });//end form submit
     });// end getJSON for pairing
-
   };//end addCommentForm
 
 
-  // on pairings show page, create a button that loads a form
-  // create listner for button that fires a function that loads the form on the page
-  // form is HANDLEBARS template
-  // the form is for a comment
-  // comment gets created through AJAX
-  // new comment is appended to the DOM
+
 
 
 //END GLOBAL FUNCTIONS
@@ -181,6 +189,10 @@ $( document ).ready(function() {
   $("#add-comment").click(function(){
     addCommentForm();
   });//end click function
+
+
+
+
 
   /// END CLICK FUNCTIONS
 
