@@ -1,6 +1,6 @@
 //// CLASS CONSTRUCTORS
 class Pairing {
-  constructor(id,wineId,cookieId,userId,userRating,commentsCount,wineName,cookieName,userName){
+  constructor(id,wineId,cookieId,userId,userRating,commentsCount,wineName,cookieName,userName,comments){
     this.id = id;
     this.wineId = wineId;
     this.cookieId = cookieId;
@@ -10,6 +10,7 @@ class Pairing {
     this.wineName = wineName;
     this.cookieName = cookieName;
     this.userName = userName;
+    this.comments = comments;
     /// add this pairing to the pairingsArray
     pairingsArray.push(this)
   }//end constructor
@@ -18,6 +19,7 @@ class Pairing {
 // GLOBAL VARIABLES
 let pairingsArray = [];
 let pairingsLength = 0;
+let currentPairing = {};
 //
 
 //GLOBAL FUNCTIONS
@@ -33,10 +35,12 @@ function getNumberOfPairings() {
 }//end getNumberOfPairings
 
 function createPairing(value){
-  let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name);
+  let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name,value.comments);
   return pairing
 };//end createPairing
 
+///this function is called when a users show page is loaded
+/// gets all of the users pairings
 function createUserPairings(id){
   $.getJSON( `/users/${id}/pairings`, function( data ) {
   }).done(function( data ) {
@@ -46,26 +50,47 @@ function createUserPairings(id){
   });// end getJSON for pairing
 };// end createUserPairings
 
+//this function adds pairing data to the pairing show page
 function addPairing(pairing){
   let pairingsDiv = $("#pairing-info");
   pairingsDiv.empty();
   $("#rating-info").empty();
   $("#comment-count").empty();
   $("#comments-link").empty();
-  $("#edit-delete-buttons").empty();
+  //$("#edit-delete-buttons").empty();
   pairingShowHtml = HandlebarsTemplates['pairing_show'](
     pairing
   );
   pairingsDiv.html(pairingShowHtml);
 };// end addPairing
 
-  function getPairing(id){
+
+
+
+//this function gets an individual pairing based on the pairing id
+// only called when the user clicks prev or next
+  function getPairingForShow(id){
     $.getJSON( `/pairings/${id}`, function( value ) {
     }).done(function( value ) {
       let pairing = createPairing(value)
-      addPairing(pairing);
+      addPairing(pairing);// this is adding the pairing to the pairing show page
     });// end getJSON for pairing
   };// end getPairings
+
+  function showPairingsComments(){
+    let id = $("#pairing-id").attr('data-id');
+
+    if ($("#comments ul li").length < 1) {
+      $.getJSON( `/pairings/${id}`, function( value ) {
+      }).done(function( value ) {
+        $.each( value.comments, function( key, value ) {
+          $("#comments ul").append(`<li> ${value.body} </li>`)
+          // create a HANDLEBARS template for this?
+        });//end .each
+      });// end getJSON for pairing
+    };// end if
+  };//end showPairingsComments
+
 
 //END GLOBAL FUNCTIONS
 
@@ -76,6 +101,9 @@ $( document ).ready(function() {
   ///CALL GLOBAL FUNCTIONS NEEDED FOR PAGE FUNCTION
 
   getNumberOfPairings(); // GETS THE NUMBER OF PAIRINGS FOR THE NEXT CLICK FUNCTION
+
+
+  /// when the page loads, need to get current pairing as a javascript object
 
   //PRELOADS THE USERS PAIRINGS
   let id = $('#comments').attr('data')
@@ -107,7 +135,8 @@ $( document ).ready(function() {
     //account for the last pairing
     if (id < pairingsLength){
       let nextPairingId = parseInt(id, 10) + 1;
-      getPairing(nextPairingId);
+      getPairingForShow(nextPairingId);
+      $("#comments ul").empty();
     }; // end if
   });//end click function
 
@@ -116,8 +145,14 @@ $( document ).ready(function() {
     //account for first pairing
     if (id>1){
       let previousPairingId = parseInt(id, 10) - 1;
-      getPairing(previousPairingId);
+      getPairingForShow(previousPairingId);
+      $("#comments ul").empty();
     };// end if
+  });//end click function
+
+  $("#show-comments").click(function(){
+    console.log("test")
+    showPairingsComments();
   });//end click function
 
   /// END CLICK FUNCTIONS

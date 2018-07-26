@@ -3,4 +3,5 @@ class PairingSerializer < ActiveModel::Serializer
   belongs_to :user
   belongs_to :wine
   belongs_to :cookie
+  has_many :comments
 end

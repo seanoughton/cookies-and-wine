@@ -1,3 +1,8 @@
+
+// GLOBAL VARIABLES
+let commentsArray = [];
+
+
 //// CLASS CONSTRUCTORS
 class Comment {
   constructor(id,body,userId,pairingId){
@@ -9,13 +14,12 @@ class Comment {
   }//end constructor
 }//end class definition
 
-// GLOBAL VARIABLES
-let commentsArray = [];
+
 
 //GLOBAL FUNCTIONS
 
 //get all of this users comments when the page loads and store them in an array
-function createComments(id){
+function createUserComments(id){
   $.getJSON( `/users/${id}/comments`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
@@ -27,14 +31,15 @@ function createComments(id){
 $( document ).ready(function() {
   let id = $('#comments').attr('data')// this is getting the userid
   if(id){
-    createComments(id);
+    createUserComments(id);
   }
 
   /// CLICK FUNCTIONS
   $("#comments").click(function() {
+    console.log(commentsArray)
     let commentsDiv = $("#allComments ul");
+    clearDivs();
     $.each( commentsArray, function(key, value){
-      clearDivs();
       commentsDiv.append(`<li><a href='/comments/${value.id}'> ${value.body}</a></li>`);
     })//end .each
   });// end click function
