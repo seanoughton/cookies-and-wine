@@ -47,6 +47,7 @@ gem 'dotenv-rails'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'active_model_serializers'
+gem 'handlebars_assets'
 
 
 group :development, :test do

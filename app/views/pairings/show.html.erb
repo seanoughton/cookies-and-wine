@@ -1,6 +1,6 @@
 
 <%= render :partial => 'layouts/navbar' %>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
 
 <div class="container-fluid main_body_style">
 
@@ -9,6 +9,7 @@
     </div><!--end column -->
 
    <div id="pairing-info" class="col-sm-10">
+     <div id="pairing-id" data-id="<%=@pairing.id%>"></div>
      <%= render 'pairing_info', pairing: @pairing %>
    </div><!--end column -->
 
@@ -78,9 +79,7 @@
   <div class="col-sm-1 ">
   </div><!--end column -->
 
- <div class="col-sm-10 ">
-    <%= button_tag "Previous Pairing", id: "previous" ,data: @pairing.id%>
-    <%= button_tag "Next Pairing", id: "next",data: @pairing.id%>
+ <div id="prev-next-buttons" class="col-sm-10">
  </div><!--end column -->
 
 
@@ -92,15 +91,3 @@
 
 
 </div><!--end container -->
-
-
-<script id="pairing-template" type="text/x-handlebars-template">
-  <h3><a href = "../wines/{{wineId}}">{{wineName}}</a> is paired with  <a href = "../cookies/{{cookieId}}">{{cookieName}}</a> </h3>
-  <div><h2>---------------------------------------------------------</h2></div>
-  <h3> Creator: <a href ="../users/{{userId}}">{{userName}}</a> </h3>
-  <h3>Rating: {{userRating}} <a href = "{{id}}/ratings/new">(Add a Rating)</a><h3>
-  <h3>Comments: {{commentsCount}} <a href = "{{id}}/comments/new">(Add a Comment)</a></h3>
-  <h4><a href = "{{id}}/comments"> Click here to see all the comments for this Pairing</a></h4><br><br>
-  <%= link_to "Edit Pairing", "/", :class=> "btn btn-warning "%>
-  <%= link_to "Delete Pairing", "/", :class=> "btn btn-danger "%>
-</script>

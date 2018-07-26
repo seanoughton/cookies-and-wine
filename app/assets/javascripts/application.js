@@ -13,7 +13,8 @@
 
 //= require jquery3
 //= require jquery_ujs
-
+//= require handlebars
+//= require_tree ./templates
 //= require helpers
 //= require pairings
 //= require comments
