@@ -22,18 +22,6 @@ function createCookies(id){
   });// end getJSON
 }// end createCookies
 
-$( document ).ready(function() {
 
-
-  $("#cookies").click(function() {
-    let cookiesDiv = $("#allCookies ul");
-    clearDivs();
-    $.each( cookiesArray, function(key, value){
-      cookiesDiv.append(`<li><a href='/cookies/${value.id}'> ${value.cookieName}</a></li>`);
-    })//end .each
-  });// end click function
-
-
-});//end document.ready
 
 ////////////////////////////////////////////////////////////////

@@ -22,3 +22,4 @@
 //= require cookies
 //= require wines
 //= require users_show_page
+//= require pairings_show_page

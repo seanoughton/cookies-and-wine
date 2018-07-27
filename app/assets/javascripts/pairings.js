@@ -19,10 +19,12 @@ class Pairing {
 // GLOBAL VARIABLES
 let pairingsArray = [];
 let pairingsLength = 0;
-let currentPairing = {};
+//let currentPairing = {};
 //
 
 //GLOBAL FUNCTIONS
+
+/// GET THE NUMBER OF PAIRINGS TO TEST THE LENGTH FOR THE PREVIOUS/NEXT BUTTONS
 function numberOfPairings(length){
   return pairingsLength = length;
 };
@@ -33,6 +35,7 @@ function getNumberOfPairings() {
     numberOfPairings(data.length);
   });// end getJSON for pairing
 }//end getNumberOfPairings
+
 
 function createPairing(value){
   let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name,value.comments);
@@ -50,21 +53,6 @@ function createUserPairings(id){
   });// end getJSON for pairing
 };// end createUserPairings
 
-//this function adds pairing data to the pairing show page
-function addPairing(pairing){
-  let pairingsDiv = $("#pairing-info");
-  pairingsDiv.empty();
-  $("#rating-info").empty();
-  $("#comment-count").empty();
-  $("#comments-link").empty();
-  //$("#edit-delete-buttons").empty();
-  pairingShowHtml = HandlebarsTemplates['pairing_show'](
-    pairing
-  );
-  pairingsDiv.html(pairingShowHtml);
-};// end addPairing
-
-
 
 
 //this function gets an individual pairing based on the pairing id
@@ -77,6 +65,8 @@ function addPairing(pairing){
     });// end getJSON for pairing
   };// end getPairings
 
+
+//GETS THE COMMENTS FOR A SPECIFIC PAIRING AND ADDS THEM TO THE DOM
   function showPairingsComments(){
     let id = $("#pairing-id").attr('data-id');
     if ($("#comments ul li").length < 1) {
@@ -84,120 +74,67 @@ function addPairing(pairing){
       }).done(function( value ) {
         $.each( value.comments, function( key, value ) {
           $("#comments ul").append(`<li> ${value.body} </li>`)
-          // create a HANDLEBARS template for this?
         });//end .each
       });// end getJSON for pairing
     };// end if
   };//end showPairingsComments
 
-  function addCommentForm(){
-    let id = $("#pairing-id").attr("data-id")
 
+//ALL THE FUNCTIONALITY FOR THE COMMENT FORM
+  function CommentForm(){
+
+    // create pairing for this page as javascript object
+    // then create the form
+    // then handle form submission
+    let id = $("#pairing-id").attr("data-id")
     $.getJSON( `/pairings/${id}`, function( value ) {
     }).done(function( value ) {
       let pairing = createPairing(value)
       pairing.currentUser = $("#user-id").attr('data-id')
+      createCommentForm(pairing)
+      handleFormSubmission()
+    });// end getJSON for pairing
+
+    function createCommentForm(pairing){
       createCommentForm = HandlebarsTemplates['create_comment_form'](
         pairing
       );
       $("#comment-form-container").html(createCommentForm)
+    };//end createCommentForm
+
+    function addFormDataToDOM(comment){
+      let returnHtml = `<h2>Here is your new comment ${comment.formatAuthorName()}:<br> ${comment.body}</h2><br><br>`
+       $("#comment-form-container").html(returnHtml);
+       if ($("#comments ul li").length > 0) {
+         $("#comments ul ").empty();
+         showPairingsComments();
+       };// end if
+    }// end addFormDataToDOM
+
+    function handleFormSubmission(){
+      /// HANDLE FORM SUBMISSION
       $('form').submit(function(event) {
        event.preventDefault();
        // client side validation
-       var commentBody = $( "#comment_body" ).val();
+       let commentBody = $( "#comment_body" ).val();
        if ( (commentBody.length < 2) || (commentBody.length > 50)){
          alert("The comment has to be at least 2 characters and no more than 50 characters");
-         addCommentForm();
+         CommentForm();//RECURSIVELY CALLS ITSELF IF VALIDATION FAILS
        } else {
          let values = $(this).serialize();
          let posting = $.post('/comments', values);
          posting.done(function(value) {
            let comment = createComment(value);
-            let returnHtml = `<h2>Here is your new comment ${comment.formatAuthorName()}:<br> ${comment.body}</h2><br><br>`
-            $("#comment-form-container").html(returnHtml);
-            if ($("#comments ul li").length > 0) {
-              $("#comments ul ").empty();
-              showPairingsComments();
-            };// end if
+           addFormDataToDOM(comment)
           });//end posting.done
        };// end if/else
-
       });//end form submit
-    });// end getJSON for pairing
-  };//end addCommentForm
+    }// end handleFormSubmission
+
+  };//end CommentForm
 
 
 
 
 
 //END GLOBAL FUNCTIONS
-
-
-
-$( document ).ready(function() {
-//$(document).on('turbolinks:load', function() {
-
-
-  ///CALL GLOBAL FUNCTIONS NEEDED FOR PAGE FUNCTION
-
-  getNumberOfPairings(); // GETS THE NUMBER OF PAIRINGS FOR THE NEXT CLICK FUNCTION
-
-
-  /// when the page loads, need to get current pairing as a javascript object
-
-
-  /////  ADD HANDLEBARS TEMPLATES
-  prevNextBtnsHtml = HandlebarsTemplates['previous_next_btns'](
-    {pairingId: $("#pairing-id").attr('data-id')}
-  );
-  $("#prev-next-buttons").html(prevNextBtnsHtml);
-
-
-  /////// END HANDLEBARS TEMPLATES
-
-
-  /// CLICK FUNCTIONS
-
-  $("#pairings").click(function() {
-    let pairingsDiv = $("#allPairings ul");
-    clearDivs();
-    $.each( pairingsArray, function(key, value){
-      pairingsDiv.append(`<li><a href='/pairings/${value.id}'> ${value.wineName} is paired with ${value.cookieName} </a></li>`);
-    })//end .each
-  });// end click function
-
-  $("#next").click(function(){
-    let id = $("#pairing-id").attr('data-id')
-    //account for the last pairing
-    if (id < pairingsLength){
-      let nextPairingId = parseInt(id, 10) + 1;
-      getPairingForShow(nextPairingId);
-      $("#comments ul").empty();
-    }; // end if
-  });//end click function
-
-  $("#previous").click(function(){
-    let id = $("#pairing-id").attr('data-id')
-    //account for first pairing
-    if (id>1){
-      let previousPairingId = parseInt(id, 10) - 1;
-      getPairingForShow(previousPairingId);
-      $("#comments ul").empty();
-    };// end if
-  });//end click function
-
-  $("#show-comments").click(function(){
-    showPairingsComments();
-  });//end click function
-
-  $("#add-comment").click(function(){
-    addCommentForm();
-  });//end click function
-
-
-
-
-
-  /// END CLICK FUNCTIONS
-
-});//end document.ready

@@ -26,18 +26,6 @@ function createWines(id){
   });// end getJSON
 }// end createWines
 
-$( document ).ready(function() {
 
-
-  /// CLICK FUNCTIONS
-  $("#wines").click(function() {
-    let winesDiv = $("#allWines ul");
-    clearDivs();
-    $.each( winesArray, function(key, value){
-      winesDiv.append(`<li><a href='/wines/${value.id}'> ${value.wineName}</a></li>`);
-    })//end .each
-  });// end click function
-
-});//end document.ready
 
 ////////////////////////////////////////////////////////////////
