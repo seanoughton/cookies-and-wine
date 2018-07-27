@@ -103,17 +103,24 @@ function addPairing(pairing){
       $("#comment-form-container").html(createCommentForm)
       $('form').submit(function(event) {
        event.preventDefault();
-       let values = $(this).serialize();
-       let posting = $.post('/comments', values);
-       posting.done(function(data) {
-          console.log(data.body)
-          let returnHtml = `<h2>Here is your new comment:<br> ${data.body}</h2><br><br>`
-          $("#comment-form-container").html(returnHtml);
-          if ($("#comments ul li").length > 0) {
-            $("#comments ul ").empty();
-            showPairingsComments();
-          };// end if
-        });
+       // client side validation
+       var commentBody = $( "#comment_body" ).val();
+       if ( (commentBody.length < 2) || (commentBody.length > 50)){
+         alert("The comment has to be at least 2 characters and no more than 50 characters");
+         addCommentForm();
+       } else {
+         let values = $(this).serialize();
+         let posting = $.post('/comments', values);
+         posting.done(function(data) {
+            let returnHtml = `<h2>Here is your new comment:<br> ${data.body}</h2><br><br>`
+            $("#comment-form-container").html(returnHtml);
+            if ($("#comments ul li").length > 0) {
+              $("#comments ul ").empty();
+              showPairingsComments();
+            };// end if
+          });//end posting.done
+       };// end if/else
+
       });//end form submit
     });// end getJSON for pairing
   };//end addCommentForm
@@ -127,6 +134,8 @@ function addPairing(pairing){
 
 
 $( document ).ready(function() {
+//$(document).on('turbolinks:load', function() {
+
 
   ///CALL GLOBAL FUNCTIONS NEEDED FOR PAGE FUNCTION
 

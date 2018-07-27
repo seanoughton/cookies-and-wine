@@ -13,7 +13,6 @@
 
 //= require jquery3
 //= require jquery_ujs
-//= require turbolinks
 //= require handlebars
 //= require_tree ./templates
 //= require helpers
