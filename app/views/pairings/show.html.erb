@@ -42,7 +42,8 @@
  <div id="comment-count"class="col-sm-10 ">
    <h3>
       <%=show_comment_count(@pairing)%>
-      <%= link_to "(Add a Comment)", new_pairing_comment_path(@pairing)%><br>
+      <!--
+      <%= link_to "(Add a Comment)", new_pairing_comment_path(@pairing)%><br> -->
    </h3>
  </div><!--end column -->
 
@@ -50,7 +51,7 @@
  </div><!--end column -->
 </div> <!--end row -->
 
-<div class="row">
+<div class="row" id="show-comments-div">
   <div class="col-sm-1 ">
   </div><!--end column -->
 
@@ -65,7 +66,7 @@
 </div> <!--end row -->
 
 
-<div class="row">
+<div class="row" id="add-comments-div">
   <div class="col-sm-1 ">
   </div><!--end column -->
 
@@ -122,10 +123,8 @@
   </div><!--end column -->
 
  <div id="edit-delete-buttons" class="col-sm-10 ">
-   <a href="../users/{{userId}}/pairings/{{id}}/edit" class="btn btn-warning">Edit Pairing</a>
-   <a data-confirm="Really?!" class="btn btn-danger" rel="nofollow" data-method="delete" href="../pairings/{{id}}">Delete Pairing</a><br><br><br>
-    <!-- <%=edit_with_parent(@current_user,@pairing)%> -->
-     <!-- <%=delete(@pairing)%> -->
+    <%=edit_with_parent(@current_user,@pairing)%>
+    <%=delete(@pairing)%>
  </div><!--end column -->
 
 

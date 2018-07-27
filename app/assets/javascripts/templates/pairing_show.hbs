@@ -3,10 +3,12 @@
 <div><h2>---------------------------------------------------------</h2></div>
 <h3> Creator: <a href ="../users/{{userId}}">{{userName}}</a> </h3>
 <h3>Rating: {{userRating}} <a href = "{{id}}/ratings/new">(Add a Rating)</a><h3>
-<h3>Comments: {{commentsCount}} <a href = "{{id}}/comments/new">(Add a Comment)</a></h3>
+<h3>Comments: {{commentsCount}} </h3>
+<h3>
+   <button class="btn btn-primary" name="button" type="submit" id="show-comments">Show Comments</button>
+</h3><br>
+<button class="btn btn-success" name="button" type="submit" id="add-comment">Add a Comment</button><br><br>
 
 
-
-<!--
-<h4><a href = "{{id}}/comments"> Click here to see all the comments for this Pairing</a></h4><br><br>
--->
+<a href="../users/{{userId}}/pairings/{{id}}/edit" class="btn btn-warning">Edit Pairing</a>
+<a data-confirm="Really?!" class="btn btn-danger" rel="nofollow" data-method="delete" href="../pairings/{{id}}">Delete Pairing</a><br><br><br>

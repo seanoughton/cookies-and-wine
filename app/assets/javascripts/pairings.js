@@ -19,10 +19,15 @@ class Pairing {
 // GLOBAL VARIABLES
 let pairingsArray = [];
 let pairingsLength = 0;
-//let currentPairing = {};
+let currentPairing = {};
 //
 
 //GLOBAL FUNCTIONS
+
+
+function setCurrentPairing(pairing){
+  currentPairing = pairing;
+};// end setCurrentPairing
 
 /// GET THE NUMBER OF PAIRINGS TO TEST THE LENGTH FOR THE PREVIOUS/NEXT BUTTONS
 function numberOfPairings(length){
@@ -50,6 +55,14 @@ function createUserPairings(id){
     $.each( data, function( key, value ) {
       createPairing(value);
     });//end .each
+  });// end getJSON for pairing
+};// end createUserPairings
+
+function getPairing(id){
+  $.getJSON( `/pairings/${id}`, function( data ) {
+  }).done(function( data ) {
+      let pairing = createPairing(data);
+      setCurrentPairing(pairing);
   });// end getJSON for pairing
 };// end createUserPairings
 

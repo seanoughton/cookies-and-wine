@@ -2,6 +2,7 @@ $( document ).ready(function() {
 
   getNumberOfPairings(); // GETS THE NUMBER OF PAIRINGS FOR THE NEXT CLICK FUNCTION
 
+
   /////  ADD HANDLEBARS TEMPLATES
   prevNextBtnsHtml = HandlebarsTemplates['previous_next_btns'](
     {pairingId: $("#pairing-id").attr('data-id')}
@@ -19,6 +20,7 @@ $( document ).ready(function() {
       getPairingForShow(nextPairingId);
       $("#comments ul").empty();
     }; // end if
+
   });//end click function
 
   $("#previous").click(function(){
@@ -50,7 +52,10 @@ function addPairing(pairing){
   $("#rating-info").empty();
   $("#comment-count").empty();
   $("#comments-link").empty();
-  //$("#edit-delete-buttons").empty();
+  $("#edit-delete-buttons").empty();
+  $("#show-comments-div").empty();
+  $("#add-comments-div").empty();
+
   pairingShowHtml = HandlebarsTemplates['pairing_show'](
     pairing
   );

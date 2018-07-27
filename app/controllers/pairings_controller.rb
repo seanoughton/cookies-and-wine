@@ -40,6 +40,8 @@ class PairingsController < ApplicationController
 
   def edit
     @pairing = Pairing.find(params[:id])
+    @cookie = Cookie.find(@pairing.cookie_id)
+    @wine = Wine.find(@pairing.wine_id)
   end
 
   def update
