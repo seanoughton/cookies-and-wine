@@ -48,16 +48,24 @@ $( document ).ready(function() {
 //this function adds pairing data to the pairing show page
 function addPairing(pairing){
   let pairingsDiv = $("#pairing-info");
+  let editDeleteBtnsDiv = $("#edit-delete-buttons")
   pairingsDiv.empty();
   $("#rating-info").empty();
   $("#comment-count").empty();
   $("#comments-link").empty();
   $("#edit-delete-buttons").empty();
-  $("#show-comments-div").empty();
-  $("#add-comments-div").empty();
+  //$("#show-comments-div").empty();
+  //$("#add-comments-div").empty();
 
   pairingShowHtml = HandlebarsTemplates['pairing_show'](
     pairing
   );
   pairingsDiv.html(pairingShowHtml);
+
+  editDeleteBtnsHtml = HandlebarsTemplates['edit_delete_btns'](
+    pairing
+  );
+  editDeleteBtnsDiv.html(editDeleteBtnsHtml);
+
+
 };// end addPairing
