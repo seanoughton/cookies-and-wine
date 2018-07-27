@@ -15,7 +15,12 @@ class PairingsController < ApplicationController
 
   def sort
     @pairings = Pairing.sort_order(params[:sort])
-    render :index
+    #render :index
+    respond_to do |format|
+      format.html { render :index }
+      #format.json { render json: @pairings.to_json}
+      format.json { render json: @pairings}
+    end
   end
 
   def new

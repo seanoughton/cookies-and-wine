@@ -4,7 +4,7 @@
 
 <!-- Shows a sort dropdown if there is more than one pairing -->
   <%= render 'sort' if @pairings.count > 1 && !@cookie && !@wine && !@user%>
-<ul>
+<ul id="pairings-list">
   <!-- Changes what link url is displayed depending on the nested_route and who the parent is -->
   <%@pairings.each do |pairing| %>
   <% generated_pairing_path = user_pairing_path(user,pairing) if @user%>

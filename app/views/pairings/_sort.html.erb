@@ -1,10 +1,8 @@
 <!-- SORT FORM FOR ALL PAIRINGS -->
-<%= form_tag(controller: "pairings", action: "sort", method: "post") do %>
+<%= form_tag({controller: "pairings", action: "sort"}, method: "post", id: "sort-form") do %>
 
   <%= select_tag 'sort', options_for_select(["Choose a Sort Type", "highest rated", "lowest rated", "most commented","newest","oldest"])
   %>
-
-  
 
   <%= submit_tag("Sort") %>
 <% end %>
