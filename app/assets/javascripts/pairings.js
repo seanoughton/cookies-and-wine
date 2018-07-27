@@ -111,8 +111,9 @@ function addPairing(pairing){
        } else {
          let values = $(this).serialize();
          let posting = $.post('/comments', values);
-         posting.done(function(data) {
-            let returnHtml = `<h2>Here is your new comment:<br> ${data.body}</h2><br><br>`
+         posting.done(function(value) {
+           let comment = createComment(value);
+            let returnHtml = `<h2>Here is your new comment ${comment.formatAuthorName()}:<br> ${comment.body}</h2><br><br>`
             $("#comment-form-container").html(returnHtml);
             if ($("#comments ul li").length > 0) {
               $("#comments ul ").empty();
