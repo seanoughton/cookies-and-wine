@@ -11,6 +11,7 @@
 // about supported directives.
 //
 
+
 //= require jquery3
 //= require jquery_ujs
 //= require handlebars
@@ -20,3 +21,4 @@
 //= require comments
 //= require cookies
 //= require wines
+//= require users_show_page

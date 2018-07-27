@@ -145,12 +145,6 @@ $( document ).ready(function() {
 
   /// when the page loads, need to get current pairing as a javascript object
 
-  //PRELOADS THE USERS PAIRINGS
-  let id = $('#comments').attr('data')
-  if(id){
-    createUserPairings(id);
-  };
-  ////
 
   /////  ADD HANDLEBARS TEMPLATES
   prevNextBtnsHtml = HandlebarsTemplates['previous_next_btns'](

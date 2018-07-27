@@ -26,35 +26,22 @@ class Comment {
 
 //GLOBAL FUNCTIONS
 
+function createComment(value){
+  return new Comment(value.id,value.body,value.user_id,value.pairing_id,value.user.user_name);
+}//end createComment
+
+
 //get all of this users comments when the page loads and store them in an array
 function createUserComments(id){
   $.getJSON( `/users/${id}/comments`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
-       let comment = new Comment(value.id,value.body,value.user_id,value.pairing_id,value.user.user_name);
+       let comment = createComment(value)
     });//end .each
   });// end getJSON
 }// end createComments
 
-function createComment(value){
-  return new Comment(value.id,value.body,value.user_id,value.pairing_id,value.user.user_name);
-}
 
-$( document ).ready(function() {
-  let id = $('#comments').attr('data')// this is getting the userid
-  if(id){
-    createUserComments(id);
-  }
 
-  /// CLICK FUNCTIONS
-  $("#comments").click(function() {
-    let commentsDiv = $("#allComments ul");
-    clearDivs();
-    $.each( commentsArray, function(key, value){
-      commentsDiv.append(`<li><a href='/comments/${value.id}'> ${value.body}</a></li>`);
-    })//end .each
-  });// end click function
-
-});//end document.ready
 
 ////////////////////////////////////////////////////////////////

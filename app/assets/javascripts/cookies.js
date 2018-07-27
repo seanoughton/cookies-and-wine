@@ -23,10 +23,7 @@ function createCookies(id){
 }// end createCookies
 
 $( document ).ready(function() {
-  let id = $('#comments').attr('data')// this is getting the userid
-  if (id){ //if this user id exists on the page then fire the AJAX
-    createCookies(id);
-  }
+
 
   $("#cookies").click(function() {
     let cookiesDiv = $("#allCookies ul");
