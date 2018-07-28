@@ -4,6 +4,19 @@ class PairingsController < ApplicationController
   before_action :run_permission, only: [:edit, :update, :destroy]
 
   def index
+    if params[:sort]
+      @pairings = Pairing.sort_order(params[:sort])
+    else
+      @pairings = Pairing.get_pairings(params)
+      return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
+    end
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @pairings}
+    end
+
+    ## below code works
+=begin
     @pairings = Pairing.get_pairings(params)
     return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
     respond_to do |format|
@@ -11,6 +24,7 @@ class PairingsController < ApplicationController
       #format.json { render json: @pairings.to_json}
       format.json { render json: @pairings}
     end
+=end
   end
 
   def sort
@@ -18,9 +32,9 @@ class PairingsController < ApplicationController
     #render :index
     respond_to do |format|
       format.html { render :index }
-      #format.json { render json: @pairings.to_json}
       format.json { render json: @pairings}
     end
+
   end
 
   def new

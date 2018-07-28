@@ -6,23 +6,31 @@ $( document ).ready(function() {
 
   $("#sort-form").submit(function(event) {
     event.preventDefault();
-    let pairingsArray = [];
     $("#pairings-list").empty();
     let values = $(this).serialize();
-    let get = $.getJSON('/sort', values);
-    get.done(function(values) {
-      console.log(values)
-      $.each( values, function( key, value ) {
-        let pairing = createPairing(value);
-        //use handlebars here?
-        $("#pairings-list").append(`<li>
-          <a href="/pairings/${pairing.id}"> ${pairing.wineName} is paired with  ${pairing.cookieName}</a>
-        <p>Rating: ${pairing.userRating} Comments: ${pairing.commentsCount} Pairing Creator: <a href="../users/${pairing.userId}">${pairing.userName} </a></p>
-          </li>`)
-      });//end .each
-    });//end get.done
-    //clear out sort form
-    $(this).unbind('submit').submit()
+    getSortedPairings(values)
+    $(this).unbind('submit').submit() // re enable the sort button
   });// end submit
 
 });//end document.ready
+
+// adds sorted pairings to the DOM with handlebars template
+function addSortedPairings(pairing){
+  pairingHtml = HandlebarsTemplates['pairing_list_template'](
+    pairing
+  );
+  $("#pairings-list").append(pairingHtml);
+};// end addSortedPairings
+
+
+// gets the sorted pairings and adds them to the DOM
+function getSortedPairings(values){
+  let pairingsArray = [];
+  let get = $.getJSON('/sort', values);
+  get.done(function(values) {
+    $.each( values, function( key, value ) {
+      let pairing = createPairing(value);
+      addSortedPairings(pairing)
+    });//end .each
+  });//end get.done
+};//end getSortedPairings
