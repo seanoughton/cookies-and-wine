@@ -42,7 +42,7 @@ $( document ).ready(function() {
     } else if ( $("#show-comments").text() === "Hide Comments" ) {
       $("#show-comments").text("Show Comments")
       $("#comments ul").empty()
-    }// end if 
+    }// end if
 
   });//end click function
 
@@ -53,6 +53,8 @@ $( document ).ready(function() {
 
 
 });//end document.ready
+
+//update the comments count on the page when you add a comment
 
 //this function adds pairing data to the pairing show page
 function addPairing(pairing){

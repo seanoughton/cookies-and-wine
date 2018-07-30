@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2018_06_04_161250) do
     t.integer "wine_id"
     t.integer "cookie_id"
     t.integer "user_id"
-    t.integer "comments_count"
+    t.integer "comments_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

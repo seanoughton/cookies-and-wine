@@ -94,6 +94,10 @@ class ApplicationController < ActionController::Base
 
       redirect_to redirect_route
     else
+      if instance == @pairing #RESET COOKIE AND PAIRING ID TO NIL FOR INVALID PAIRING
+        @pairing.cookie_id = nil
+        @pairing.wine_id = nil
+      end
       render render_route
     end
   end

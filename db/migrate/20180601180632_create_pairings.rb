@@ -5,7 +5,7 @@ class CreatePairings < ActiveRecord::Migration[5.2]
     	t.integer :wine_id
     	t.integer :cookie_id
     	t.integer :user_id
-      t.integer :comments_count
+      t.integer :comments_count, default: 0
       t.timestamps
     end
   end

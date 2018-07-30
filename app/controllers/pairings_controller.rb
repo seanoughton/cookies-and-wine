@@ -38,8 +38,8 @@ class PairingsController < ApplicationController
   end
 
   def new
-    @pairing = Pairing.new(cookie_id: params[:cooky_id],wine_id: params[:wine_id])
-    #@pairing = Pairing.new
+    #@pairing = Pairing.new(cookie_id: params[:cooky_id],wine_id: params[:wine_id])
+    @pairing = Pairing.new
     return_instance_if_it_exists(Cookie,params[:cooky_id]) if params[:cooky_id]
     return_instance_if_it_exists(Wine,params[:wine_id]) if params[:wine_id]
   end

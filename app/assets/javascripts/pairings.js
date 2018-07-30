@@ -126,7 +126,7 @@ function getPairing(id){
       let pairing = createPairing(value)
       pairing.currentUser = $("#user-id").attr('data-id')
       createCommentForm(pairing)
-      handleFormSubmission()
+      handleFormSubmission(pairing)
     });// end getJSON for pairing
 
     function createCommentForm(pairing){
@@ -145,7 +145,7 @@ function getPairing(id){
        };// end if
     }// end addFormDataToDOM
 
-    function handleFormSubmission(){
+    function handleFormSubmission(pairing){
       /// HANDLE FORM SUBMISSION
       $('form').submit(function(event) {
        event.preventDefault();
@@ -160,6 +160,18 @@ function getPairing(id){
          posting.done(function(value) {
            let comment = createComment(value);
            addFormDataToDOM(comment)
+           //grab the comments count and update it
+           //console.log(pairing.commentsCount)
+           //$("#comment-count h3").text("Comments: " +  (pairing.commentsCount + 1) )
+           pairing.commentsCount += 1
+           let pairingsDiv = $("#pairing-info");
+           pairingsDiv.empty();
+           $("#rating-info").empty();
+           $("#comment-count").empty();
+           pairingShowHtml = HandlebarsTemplates['pairing_show'](
+             pairing
+           );
+           pairingsDiv.html(pairingShowHtml);
           });//end posting.done
        };// end if/else
       });//end form submit
