@@ -12,12 +12,10 @@ $( document ).ready(function() {
   /// CLICK FUNCTIONS
 
   $("#pairings").click(function() {
-    let pairingsDiv = $("#allPairings ul");
     clearDivs();
     $.each( pairingsArray, function(key, value){
-      let pairing = value;
       pairingHtml = HandlebarsTemplates['pairing_for_show_template'](
-        pairing
+        value
       );
       $("#allPairings ul").append(pairingHtml);
     })//end .each
@@ -27,7 +25,11 @@ $( document ).ready(function() {
     let commentsDiv = $("#allComments ul");
     clearDivs();
     $.each( commentsArray, function(key, value){
-      commentsDiv.append(`<li><a href='/comments/${value.id}'> ${value.body}</a></li>`);
+      commentHtml = HandlebarsTemplates['users_comments_template'](
+        value
+      );
+      $("#allComments ul").append(commentHtml);
+      //commentsDiv.append(`<li><a href='/comments/${value.id}'> ${value.body}</a></li>`);
     })//end .each
   });// end click function
 
