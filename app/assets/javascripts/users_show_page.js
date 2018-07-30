@@ -22,30 +22,32 @@ $( document ).ready(function() {
   });// end click function
 
   $("#comments").click(function() {
-    let commentsDiv = $("#allComments ul");
     clearDivs();
     $.each( commentsArray, function(key, value){
-      commentHtml = HandlebarsTemplates['users_comments_template'](
+      commentHtml = HandlebarsTemplates['users_comment_template'](
         value
       );
       $("#allComments ul").append(commentHtml);
-      //commentsDiv.append(`<li><a href='/comments/${value.id}'> ${value.body}</a></li>`);
     })//end .each
   });// end click function
 
   $("#cookies").click(function() {
-    let cookiesDiv = $("#allCookies ul");
     clearDivs();
     $.each( cookiesArray, function(key, value){
-      cookiesDiv.append(`<li><a href='/cookies/${value.id}'> ${value.cookieName}</a></li>`);
+      cookieHtml = HandlebarsTemplates['users_cookie_template'](
+        value
+      );
+      $("#allCookies ul").append(cookieHtml);
     })//end .each
   });// end click function
 
   $("#wines").click(function() {
-    let winesDiv = $("#allWines ul");
     clearDivs();
     $.each( winesArray, function(key, value){
-      winesDiv.append(`<li><a href='/wines/${value.id}'> ${value.wineName}</a></li>`);
+      wineHtml = HandlebarsTemplates['users_wine_template'](
+        value
+      );
+      $("#allWines ul").append(wineHtml);
     })//end .each
   });// end click function
 
