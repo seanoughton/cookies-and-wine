@@ -87,7 +87,10 @@ function getPairing(id){
       }).done(function( values ) {
         $.each( values, function( key, value ) {
           let comment = createComment(value)
-          $("#comments ul").append(`<li> ${comment.body} :<a href="../users/${comment.userId}"> ${comment.formatAuthorName()}</a> </li>`)
+          commentHtml = HandlebarsTemplates['pairing_comments_template'](
+            comment
+          );
+          $("#comments ul").append(commentHtml);
         });//end .each
       });// end getJSON for pairing
     };// end if
