@@ -20,6 +20,7 @@ class Pairing {
 let pairingsArray = [];
 let pairingsLength = 0;
 let currentPairing = {};
+let commentsCount = 0;
 //
 
 //GLOBAL FUNCTIONS
@@ -34,6 +35,10 @@ function numberOfPairings(length){
   return pairingsLength = length;
 };
 
+function numberOfComments(commentsNum){
+  return commentsCount = commentsNum;
+};
+
 function getNumberOfPairings() {
   $.getJSON( `/pairings`, function( data ) {
   }).done(function( data ) {
@@ -41,11 +46,22 @@ function getNumberOfPairings() {
   });// end getJSON for pairing
 }//end getNumberOfPairings
 
-
 function createPairing(value){
   let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name,value.comments);
   return pairing
 };//end createPairing
+
+function getNumberOfComments() {
+  let id = $("#pairing-id").attr('data-id');
+  $.getJSON( `/pairings/${id}`, function( data ) {
+  }).done(function( data ) {
+    let pairing = createPairing(data)
+    numberOfComments(pairing.commentsCount)
+  });// end getJSON for pairing
+}//end getNumberOfPairings
+
+
+
 
 ///this function is called when a users show page is loaded
 /// gets all of the users pairings
@@ -93,6 +109,7 @@ function getPairing(id){
           $("#comments ul").append(commentHtml);
         });//end .each
       });// end getJSON for pairing
+
     };// end if
   };//end showPairingsComments
 

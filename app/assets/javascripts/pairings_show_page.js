@@ -1,6 +1,7 @@
 $( document ).ready(function() {
 
   getNumberOfPairings(); // GETS THE NUMBER OF PAIRINGS FOR THE NEXT CLICK FUNCTION
+  getNumberOfComments();
 
 
   /////  ADD HANDLEBARS TEMPLATES
@@ -34,7 +35,15 @@ $( document ).ready(function() {
   });//end click function
 
   $("#show-comments").click(function(){
-    showPairingsComments();
+
+    if ( (commentsCount > 0) &&  ( $("#show-comments").text() === "Show Comments") ) {
+      $("#show-comments").text("Hide Comments")
+      showPairingsComments();
+    } else if ( $("#show-comments").text() === "Hide Comments" ) {
+      $("#show-comments").text("Show Comments")
+      $("#comments ul").empty()
+    }// end if 
+
   });//end click function
 
   $("#add-comment").click(function(){
