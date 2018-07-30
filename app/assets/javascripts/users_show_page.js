@@ -15,7 +15,11 @@ $( document ).ready(function() {
     let pairingsDiv = $("#allPairings ul");
     clearDivs();
     $.each( pairingsArray, function(key, value){
-      pairingsDiv.append(`<li><a href='/pairings/${value.id}'> ${value.wineName} is paired with ${value.cookieName} </a></li>`);
+      let pairing = value;
+      pairingHtml = HandlebarsTemplates['pairing_for_show_template'](
+        pairing
+      );
+      $("#allPairings ul").append(pairingHtml);
     })//end .each
   });// end click function
 
