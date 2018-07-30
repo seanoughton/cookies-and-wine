@@ -14,7 +14,7 @@ $( document ).ready(function() {
   $("#pairings").click(function() {
     clearDivs();
     $.each( pairingsArray, function(key, value){
-      pairingHtml = HandlebarsTemplates['pairing_for_show_template'](
+      pairingHtml = HandlebarsTemplates['users_pairing_template'](
         value
       );
       $("#allPairings ul").append(pairingHtml);

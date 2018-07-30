@@ -83,10 +83,11 @@ function getPairing(id){
   function showPairingsComments(){
     let id = $("#pairing-id").attr('data-id');
     if ($("#comments ul li").length < 1) {
-      $.getJSON( `/pairings/${id}`, function( value ) {
-      }).done(function( value ) {
-        $.each( value.comments, function( key, value ) {
-          $("#comments ul").append(`<li> ${value.body} </li>`)
+      $.getJSON( `/pairings/${id}/comments`, function( value ) {
+      }).done(function( values ) {
+        $.each( values, function( key, value ) {
+          let comment = createComment(value)
+          $("#comments ul").append(`<li> ${comment.body} :<a href="../users/${comment.userId}"> ${comment.formatAuthorName()}</a> </li>`)
         });//end .each
       });// end getJSON for pairing
     };// end if
