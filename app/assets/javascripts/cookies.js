@@ -12,15 +12,18 @@ class Cookie {
   }//end constructor
 }//end class definition
 
-//get all of this users comments when the page loads and store them in an array
-function createCookies(id){
+//get all of this users cookies when the page loads and store them in an array
+
+const createCookies = (id) => {
   $.getJSON( `/users/${id}/cookies`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
        let cookie = new Cookie(value.id,value.cookie_name,value.description,value.link,value.user_id);
     });//end .each
   });// end getJSON
-}// end createCookies
+}//end createCookies
+
+
 
 
 
