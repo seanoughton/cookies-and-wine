@@ -26,20 +26,25 @@ let commentsCount = 0;
 //GLOBAL FUNCTIONS
 
 // SETS THE CURRENT PAIRING
-function setCurrentPairing(pairing){
+const setCurrentPairing = pairing => {
   currentPairing = pairing;
-};// end setCurrentPairing
-
-/// GET THE NUMBER OF PAIRINGS TO TEST THE LENGTH FOR THE PREVIOUS/NEXT BUTTONS
-function numberOfPairings(length){
-  return pairingsLength = length;
-};
-
-function numberOfComments(commentsNum){
-  return commentsCount = commentsNum;
-};
+}// end setCurrentPairing
 
 
+/// ASSIGNS AND RETURNS THE NUMBER OF PAIRINGS TO TEST THE LENGTH FOR THE PREVIOUS/NEXT BUTTONS
+const numberOfPairings = length => {
+  return pairingsLength = length
+}// end numberOfPairings
+
+// ASSIGNS AND RETURNS THE NUMBER OF COMMENTS ASSOCIATED WITH A PAIRING FOR THE PREV/NEXT BUTTONS
+const numberOfComments = commentsNum => {
+  return commentsCount = commentsNum
+}// end numberOfComments
+
+
+// GETS THE TOTAL NUMBER OF PAIRINGS
+// USED FOR THE PREV/NEXT BUTTONS TO PREVENT AN AJAX CALL
+// WHEN THE PAGE IS SHOWING THE FIRST OR THE LAST PAIRING
 const getNumberOfPairings = () => {
   $.getJSON( `/pairings`, function( data ) {
   }).done(function( data ) {
@@ -48,12 +53,17 @@ const getNumberOfPairings = () => {
 }//end getNumberOfPairings
 
 
-function createPairing(value){
+// CREATES A PAIRING IN OBJECT IN MEMORY BASED ON THE PAIRING PROTOTYPE CLASS
+const createPairing = value => {
   let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name,value.comments);
   return pairing
-};//end createPairing
+}// end createPairing
 
-function getNumberOfComments() {
+
+
+// GETS THE NUMBER OF COMMENTS FOR THE CURRENT PAIRING
+// USED TO INCREMENT THE COMMENT COUNT WHEN A COMMENT IS ADDED
+const getNumberOfComments = () => {
   let id = $("#pairing-id").attr('data-id');
   $.getJSON( `/pairings/${id}`, function( data ) {
   }).done(function( data ) {
@@ -63,43 +73,45 @@ function getNumberOfComments() {
 }//end getNumberOfPairings
 
 
-
-
 ///this function is called when a users show page is loaded
 /// gets all of the users pairings
-function createUserPairings(id){
+const createUserPairings = id => {
   $.getJSON( `/users/${id}/pairings`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
       createPairing(value);
     });//end .each
   });// end getJSON for pairing
-};// end createUserPairings
+}//end createUserPairings
 
+// GETS THE CURRENT PAIRING FOR THE PAIRING SHOW PAGE
+// CREATES JAVASCRIPT OBJECT AND STORES IT IN MEMORY
+/**
 function getPairing(id){
   $.getJSON( `/pairings/${id}`, function( data ) {
   }).done(function( data ) {
       let pairing = createPairing(data);
+      console.log(pairing)
       setCurrentPairing(pairing);
   });// end getJSON for pairing
-};// end createUserPairings
+};// end createUserPairings **/
 
 
 
 //this function gets an individual pairing based on the pairing id
 // only called when the user clicks prev or next
-  function getPairingForShow(id){
+  const getPairingForShow = id => {
     $.getJSON( `/pairings/${id}`, function( value ) {
     }).done(function( value ) {
       let pairing = createPairing(value)
       addPairing(pairing);// this is adding the pairing to the pairing show page
     });// end getJSON for pairing
-  };// end getPairings
+  }// end getPairingsForShow
 
 
 //GETS THE COMMENTS FOR A SPECIFIC PAIRING AND ADDS THEM TO THE DOM
-  function showPairingsComments(){
-    let id = $("#pairing-id").attr('data-id');
+  const showPairingsComments = () => {
+    id = $("#pairing-id").attr('data-id'); //RESET PAIRING ID TO CURRENT
     if ($("#comments ul li").length < 1) {
       $.getJSON( `/pairings/${id}/comments`, function( value ) {
       }).done(function( values ) {
@@ -111,14 +123,12 @@ function getPairing(id){
           $("#comments ul").append(commentHtml);
         });//end .each
       });// end getJSON for pairing
-
     };// end if
   };//end showPairingsComments
 
 
 //ALL THE FUNCTIONALITY FOR THE COMMENT FORM
-  function CommentForm(){
-
+  const commentForm = () => {
     // create pairing for this page as javascript object
     // then create the form
     // then handle form submission
@@ -131,14 +141,16 @@ function getPairing(id){
       handleFormSubmission(pairing)
     });// end getJSON for pairing
 
-    function createCommentForm(pairing){
-      createCommentForm = HandlebarsTemplates['create_comment_form'](
+    //ADDS THE COMMENT FORM TO THE PAGE WHEN ADD COMMENT BUTTON IS CLICKED
+    const createCommentForm = pairing => {
+      createCommentFormHtml = HandlebarsTemplates['create_comment_form'](
         pairing
       );
-      $("#comment-form-container").html(createCommentForm)
+      $("#comment-form-container").html(createCommentFormHtml)
     };//end createCommentForm
 
-    function addFormDataToDOM(comment){
+    // ADDS THE SUBMITTED COMMENT DATA TO THE DOM AFTER SUBMIT
+    const addFormDataToDOM = comment => {
       let returnHtml = `<h2>Here is your new comment ${comment.formatAuthorName()}:<br> ${comment.body}</h2><br><br>`
        $("#comment-form-container").html(returnHtml);
        if ($("#comments ul li").length > 0) {
@@ -147,33 +159,35 @@ function getPairing(id){
        };// end if
     }// end addFormDataToDOM
 
-    function handleFormSubmission(pairing){
-      /// HANDLE FORM SUBMISSION
+    const addPairingInfo = (pairing) => {
+      pairingShowHtml = HandlebarsTemplates['pairing_show'](
+        pairing
+      );
+      $("#pairing-info").html(pairingShowHtml);
+
+    }// end addPairingInfo
+
+    //SUBMITS FORM DATA WITH AJAX
+    //PERFORMS SOME VALIDATIONS
+    //UPDATES COMMENT COUNT
+    //UPDATES PAGE WITH PAIRING INFO
+    const handleFormSubmission = pairing => {
       $('form').submit(function(event) {
        event.preventDefault();
        // client side validation
        let commentBody = $( "#comment_body" ).val();
        if ( (commentBody.length < 2) || (commentBody.length > 50)){
          alert("The comment has to be at least 2 characters and no more than 50 characters");
-         CommentForm();//RECURSIVELY CALLS ITSELF IF VALIDATION FAILS
+         commentForm();//RECURSIVELY CALLS ITSELF IF VALIDATION FAILS
        } else {
-         let values = $(this).serialize();
-         let posting = $.post('/comments', values);
-         posting.done(function(value) {
-           let comment = createComment(value);
-           addFormDataToDOM(comment)
-           //grab the comments count and update it
-           //console.log(pairing.commentsCount)
-           //$("#comment-count h3").text("Comments: " +  (pairing.commentsCount + 1) )
-           pairing.commentsCount += 1
-           let pairingsDiv = $("#pairing-info");
-           pairingsDiv.empty();
-           $("#rating-info").empty();
-           $("#comment-count").empty();
-           pairingShowHtml = HandlebarsTemplates['pairing_show'](
-             pairing
-           );
-           pairingsDiv.html(pairingShowHtml);
+          let values = $(this).serialize();
+          let posting = $.post('/comments', values);
+          posting.done(function(value) {
+          let comment = createComment(value);
+          pairing.commentsCount += 1
+          addFormDataToDOM(comment)
+          clearDivs()
+          addPairingInfo(pairing)
           });//end posting.done
        };// end if/else
       });//end form submit

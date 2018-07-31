@@ -8,4 +8,7 @@ const clearDivs = () => {
   $("#allComments").empty();
   $("#allWines").empty();
   $("#allCookies").empty();
+  $("#pairing-info").empty();
+  $("#rating-info").empty();
+  $("#comment-count").empty();
 };

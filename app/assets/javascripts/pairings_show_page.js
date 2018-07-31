@@ -14,7 +14,8 @@ $( document ).ready(function() {
 
     /// CLICK FUNCTIONS
     $("#next").click(function(){
-      let id = $("#pairing-id").attr('data-id')
+      //reset pairing id
+      id = $("#pairing-id").attr('data-id')
       //account for the last pairing
       if (id < pairingsLength){
         let nextPairingId = parseInt(id, 10) + 1;
@@ -44,7 +45,7 @@ $( document ).ready(function() {
     });//end show-comments click function
 
     $("#add-comment").click(function(){
-      CommentForm();
+      commentForm();
     });//end add-comment click function
 
   }// if statement
