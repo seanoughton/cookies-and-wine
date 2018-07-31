@@ -1,6 +1,7 @@
 $( document ).ready(function() {
   let id = $('#comments').attr('data')// this is getting the userid
   //PRELOADS THE USERS PAIRINGS,COMMENTS,WINES,COOKIES
+  //ONLY DOES THIS FOR THE USER'S SHOW PAGE
   if(id){
     createUserComments(id);
     createUserPairings(id);

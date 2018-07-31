@@ -86,15 +86,14 @@ const createUserPairings = id => {
 
 // GETS THE CURRENT PAIRING FOR THE PAIRING SHOW PAGE
 // CREATES JAVASCRIPT OBJECT AND STORES IT IN MEMORY
-/**
+
 function getPairing(id){
   $.getJSON( `/pairings/${id}`, function( data ) {
   }).done(function( data ) {
       let pairing = createPairing(data);
-      console.log(pairing)
       setCurrentPairing(pairing);
   });// end getJSON for pairing
-};// end createUserPairings **/
+};// end createUserPairings
 
 
 

@@ -3,7 +3,8 @@ $( document ).ready(function() {
   if( $("#pairing-id").attr('data-id') ){ // ONLY LOADS THESE THINGS ON THE PAIRINGS SHOW PAGE
     getNumberOfPairings(); // GETS THE NUMBER OF PAIRINGS FOR THE NEXT CLICK FUNCTION
     getNumberOfComments(); // GETS THE NUMBER OF COMMENTS FOR THE NEXT CLICK FUNCTION
-
+    let id = $("#pairing-id").attr('data-id')
+    getPairing( parseInt(id, 10) )
     /////  ADD HANDLEBARS TEMPLATES
     prevNextBtnsHtml = HandlebarsTemplates['previous_next_btns'](
       {pairingId: $("#pairing-id").attr('data-id')}
@@ -14,24 +15,25 @@ $( document ).ready(function() {
 
     /// CLICK FUNCTIONS
     $("#next").click(function(){
-      //reset pairing id
-      id = $("#pairing-id").attr('data-id')
       //account for the last pairing
-      if (id < pairingsLength){
-        let nextPairingId = parseInt(id, 10) + 1;
+      if ( currentPairing.id < pairingsLength ){
+        let nextPairingId = currentPairing.id + 1;
         getPairingForShow(nextPairingId);
         $("#comments ul").empty();
       }; // end if
+      if (currentPairing.id < pairingsLength) {
+        getPairing( currentPairing.id + 1 )
+      }// end if
     });//end next click function
 
     $("#previous").click(function(){
-      let id = $("#pairing-id").attr('data-id')
       //account for first pairing
-      if (id>1){
-        let previousPairingId = parseInt(id, 10) - 1;
+      if (currentPairing.id > 1){
+        let previousPairingId = currentPairing.id - 1;
         getPairingForShow(previousPairingId);
         $("#comments ul").empty();
       };// end if
+      getPairing( currentPairing.id - 1 )
     });//end previous click function
 
     $("#show-comments").click(function(){
