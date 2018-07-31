@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-  if( $("#pairing-id").attr('data-id') ){
+  if( $("#pairing-id").attr('data-id') ){ // ONLY LOADS THESE THINGS ON THE PAIRINGS SHOW PAGE
     getNumberOfPairings(); // GETS THE NUMBER OF PAIRINGS FOR THE NEXT CLICK FUNCTION
     getNumberOfComments(); // GETS THE NUMBER OF COMMENTS FOR THE NEXT CLICK FUNCTION
 
@@ -52,29 +52,18 @@ $( document ).ready(function() {
 
 });//end document.ready
 
-//update the comments count on the page when you add a comment
-
 //this function adds pairing data to the pairing show page
-function addPairing(pairing){
-  let pairingsDiv = $("#pairing-info");
-  let editDeleteBtnsDiv = $("#edit-delete-buttons")
-  pairingsDiv.empty();
-  $("#rating-info").empty();
-  $("#comment-count").empty();
-  $("#comments-link").empty();
-  $("#edit-delete-buttons").empty();
-  //$("#show-comments-div").empty();
-  //$("#add-comments-div").empty();
+const addPairing = pairing => {
+  clearDivs()
 
   pairingShowHtml = HandlebarsTemplates['pairing_show'](
     pairing
   );
-  pairingsDiv.html(pairingShowHtml);
+  $("#pairing-info").html(pairingShowHtml);
 
   editDeleteBtnsHtml = HandlebarsTemplates['edit_delete_btns'](
     pairing
   );
-  editDeleteBtnsDiv.html(editDeleteBtnsHtml);
-
+  $("#edit-delete-buttons").html(editDeleteBtnsHtml);
 
 };// end addPairing

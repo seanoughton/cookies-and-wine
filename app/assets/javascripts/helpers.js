@@ -11,4 +11,6 @@ const clearDivs = () => {
   $("#pairing-info").empty();
   $("#rating-info").empty();
   $("#comment-count").empty();
+  $("#comments-link").empty();
+  $("#edit-delete-buttons").empty();
 };
