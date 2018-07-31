@@ -26,20 +26,23 @@ class Comment {
 
 //GLOBAL FUNCTIONS
 
-function createComment(value){
+const createComment = (value) => {
   return new Comment(value.id,value.body,value.user_id,value.pairing_id,value.user.user_name);
-}//end createComment
+};// end createComment
+
 
 
 //get all of this users comments when the page loads and store them in an array
-function createUserComments(id){
+const createUserComments = (id) =>{
   $.getJSON( `/users/${id}/comments`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
        let comment = createComment(value)
     });//end .each
   });// end getJSON
-}// end createComments
+}//end createComments
+
+
 
 
 
