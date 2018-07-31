@@ -1,7 +1,3 @@
-// hijack the  sort form
-// get the sort type and use it to get json data back from the sort route
-// clear the page and add the sorted pairings back on the page
-
 $( document ).ready(function() {
 
   $("#sort-form").submit(function(event) {
@@ -15,7 +11,7 @@ $( document ).ready(function() {
 });//end document.ready
 
 // adds sorted pairings to the DOM with handlebars template
-function addSortedPairings(pairing){
+const addSortedPairings = pairing => {
   pairingHtml = HandlebarsTemplates['pairing_list_template'](
     pairing
   );
@@ -24,7 +20,7 @@ function addSortedPairings(pairing){
 
 
 // gets the sorted pairings and adds them to the DOM
-function getSortedPairings(values){
+const getSortedPairings = values => {
   let pairingsArray = [];
   let get = $.getJSON('/sort', values);
   get.done(function(values) {
