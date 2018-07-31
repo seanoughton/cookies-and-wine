@@ -25,7 +25,7 @@ let commentsCount = 0;
 
 //GLOBAL FUNCTIONS
 
-
+// SETS THE CURRENT PAIRING
 function setCurrentPairing(pairing){
   currentPairing = pairing;
 };// end setCurrentPairing
@@ -39,12 +39,14 @@ function numberOfComments(commentsNum){
   return commentsCount = commentsNum;
 };
 
-function getNumberOfPairings() {
+
+const getNumberOfPairings = () => {
   $.getJSON( `/pairings`, function( data ) {
   }).done(function( data ) {
     numberOfPairings(data.length);
   });// end getJSON for pairing
 }//end getNumberOfPairings
+
 
 function createPairing(value){
   let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name,value.comments);

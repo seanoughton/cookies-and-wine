@@ -13,7 +13,6 @@ class Cookie {
 }//end class definition
 
 //get all of this users cookies when the page loads and store them in an array
-
 const createCookies = (id) => {
   $.getJSON( `/users/${id}/cookies`, function( data ) {
   }).done(function( data ) {
