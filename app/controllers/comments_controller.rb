@@ -8,7 +8,6 @@ class CommentsController < ApplicationController
     return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
     respond_to do |format|
       format.html { render :index }
-      #format.json { render json: @comments.to_json}
       format.json { render json: @comments}
     end
   end
@@ -19,9 +18,11 @@ class CommentsController < ApplicationController
   end
 
   def create
-    #@comment = Comment.new(comment_params)
     @comment = Comment.create(comment_params)
     @pairing = Pairing.find(params[:comment][:pairing_id])
+    ## added validation through jQuery/AJAX
+    ## but keeping this here for future reference
+    #@comment = Comment.new(comment_params)
     #validate_instance_and_redirect(@comment,@pairing,"new")
     render json: @comment, status: 201
   end
@@ -30,7 +31,6 @@ class CommentsController < ApplicationController
     return_instance_if_it_exists(Comment,params[:id])
     respond_to do |format|
       format.html { render :show }
-      #format.json { render json: @comments.to_json}
       format.json { render json: @comment}
     end
   end

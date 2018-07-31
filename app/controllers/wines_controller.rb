@@ -8,7 +8,6 @@ class WinesController < ApplicationController
     return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
     respond_to do |format|
       format.html { render :index }
-      #format.json { render json: @wines.to_json}
       format.json { render json: @wines}
     end
   end

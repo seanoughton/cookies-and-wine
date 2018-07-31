@@ -14,22 +14,10 @@ class PairingsController < ApplicationController
       format.html { render :index }
       format.json { render json: @pairings}
     end
-
-    ## below code works
-=begin
-    @pairings = Pairing.get_pairings(params)
-    return_instance_if_it_exists(User,params[:user_id]) if params[:user_id]
-    respond_to do |format|
-      format.html { render :index }
-      #format.json { render json: @pairings.to_json}
-      format.json { render json: @pairings}
-    end
-=end
   end
 
   def sort
     @pairings = Pairing.sort_order(params[:sort])
-    #render :index
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @pairings}
@@ -38,7 +26,6 @@ class PairingsController < ApplicationController
   end
 
   def new
-    #@pairing = Pairing.new(cookie_id: params[:cooky_id],wine_id: params[:wine_id])
     @pairing = Pairing.new
     return_instance_if_it_exists(Cookie,params[:cooky_id]) if params[:cooky_id]
     return_instance_if_it_exists(Wine,params[:wine_id]) if params[:wine_id]
