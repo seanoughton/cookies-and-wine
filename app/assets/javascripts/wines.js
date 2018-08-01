@@ -21,7 +21,7 @@ function createWines(id){
   $.getJSON( `/users/${id}/wines`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
-       let wine = new Wine(value.id,value.wine_name,value.grape_varietal,value.origin,value.description,value.user_id);
+       const wine = new Wine(value.id,value.wine_name,value.grape_varietal,value.origin,value.description,value.user_id);
     });//end .each
   });// end getJSON
 }// end createWines
