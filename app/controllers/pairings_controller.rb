@@ -15,7 +15,7 @@ class PairingsController < ApplicationController
       format.json { render json: @pairings}
     end
   end
-
+=begin
   def sort
     @pairings = Pairing.sort_order(params[:sort])
     respond_to do |format|
@@ -24,7 +24,7 @@ class PairingsController < ApplicationController
     end
 
   end
-
+=end
   def new
     @pairing = Pairing.new
     return_instance_if_it_exists(Cookie,params[:cooky_id]) if params[:cooky_id]

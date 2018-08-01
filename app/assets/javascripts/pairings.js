@@ -52,7 +52,7 @@ const getNumberOfPairings = () => {
 
 // CREATES A PAIRING IN OBJECT IN MEMORY BASED ON THE PAIRING PROTOTYPE CLASS
 const createPairing = value => {
-  let pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name,value.comments);
+  const pairing = new Pairing(value.id,value.wine_id,value.cookie_id,value.user_id,value.user_rating,value.comments_count,value.wine.wine_name,value.cookie.cookie_name,value.user.user_name,value.comments);
   return pairing
 }// end createPairing
 
@@ -88,7 +88,7 @@ function getPairing(id){
   const getPairingForShow = id => {
     $.getJSON( `/pairings/${id}`, function( value ) {
     }).done(function( value ) {
-      let pairing = createPairing(value)
+      const pairing = createPairing(value)
       addPairing(pairing);// this is adding the pairing to the pairing show page
       setCurrentPairing(pairing);
     });// end getJSON for pairing
@@ -102,7 +102,7 @@ function getPairing(id){
       $.getJSON( `/pairings/${id}/comments`, function( value ) {
       }).done(function( values ) {
         $.each( values, function( key, value ) {
-          let comment = createComment(value)
+          const comment = createComment(value)
           commentHtml = HandlebarsTemplates['pairing_comments_template'](
             comment
           );
@@ -121,7 +121,7 @@ function getPairing(id){
     let id = $("#pairing-id").attr("data-id")
     $.getJSON( `/pairings/${id}`, function( value ) {
     }).done(function( value ) {
-      let pairing = createPairing(value)
+      const pairing = createPairing(value)
       pairing.currentUser = $("#user-id").attr('data-id')
       createCommentForm(pairing)
       handleFormSubmission(pairing)
@@ -161,7 +161,7 @@ function getPairing(id){
       $('form').submit(function(event) {
        event.preventDefault();
        // client side validation
-       let commentBody = $( "#comment_body" ).val();
+       const commentBody = $( "#comment_body" ).val();
        if ( (commentBody.length < 2) || (commentBody.length > 50)){
          alert("The comment has to be at least 2 characters and no more than 50 characters");
          commentForm();//RECURSIVELY CALLS ITSELF IF VALIDATION FAILS
