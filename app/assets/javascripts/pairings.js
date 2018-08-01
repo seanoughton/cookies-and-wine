@@ -170,10 +170,11 @@ function getPairing(id){
           let posting = $.post('/comments', values);
           posting.done(function(value) {
           let comment = createComment(value);
-          pairing.commentsCount += 1
+          currentPairing.commentsCount += 1
+          //pairing.commentsCount += 1
           addFormDataToDOM(comment)
           clearDivs()
-          addPairingInfo(pairing)
+          addPairingInfo(currentPairing)
           });//end posting.done
        };// end if/else
       });//end form submit

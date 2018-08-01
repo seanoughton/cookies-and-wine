@@ -34,7 +34,6 @@ $( document ).ready(function() {
     });//end previous click function
 
     $("#show-comments").click(function(){
-      //console.log(currentPairing.commentsCount)
       if ( (currentPairing.commentsCount > 0) &&  ( $("#show-comments").text() === "Show Comments") ) {
         $("#show-comments").text("Hide Comments")
         showPairingsComments();
