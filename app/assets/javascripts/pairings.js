@@ -36,11 +36,6 @@ const numberOfPairings = length => {
   return pairingsLength = length
 }// end numberOfPairings
 
-// ASSIGNS AND RETURNS THE NUMBER OF COMMENTS ASSOCIATED WITH A PAIRING FOR THE PREV/NEXT BUTTONS
-const numberOfComments = commentsNum => {
-  return commentsCount = commentsNum
-}// end numberOfComments
-
 
 // GETS THE TOTAL NUMBER OF PAIRINGS
 // USED FOR THE PREV/NEXT BUTTONS TO PREVENT AN AJAX CALL
@@ -59,18 +54,6 @@ const createPairing = value => {
   return pairing
 }// end createPairing
 
-
-
-// GETS THE NUMBER OF COMMENTS FOR THE CURRENT PAIRING
-// USED TO INCREMENT THE COMMENT COUNT WHEN A COMMENT IS ADDED
-const getNumberOfComments = () => {
-  let id = $("#pairing-id").attr('data-id');
-  $.getJSON( `/pairings/${id}`, function( data ) {
-  }).done(function( data ) {
-    let pairing = createPairing(data)
-    numberOfComments(pairing.commentsCount)
-  });// end getJSON for pairing
-}//end getNumberOfPairings
 
 
 ///this function is called when a users show page is loaded
@@ -104,6 +87,7 @@ function getPairing(id){
     }).done(function( value ) {
       let pairing = createPairing(value)
       addPairing(pairing);// this is adding the pairing to the pairing show page
+      setCurrentPairing(pairing);
     });// end getJSON for pairing
   }// end getPairingsForShow
 

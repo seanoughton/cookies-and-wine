@@ -12,5 +12,5 @@ const clearDivs = () => {
   $("#rating-info").empty();
   $("#comment-count").empty();
   $("#comments-link").empty();
-  $("#edit-delete-buttons").empty();
+  //$("#edit-delete-buttons").empty();
 };

@@ -2,7 +2,7 @@ $( document ).ready(function() {
 
   if( $("#pairing-id").attr('data-id') ){ // ONLY LOADS THESE THINGS ON THE PAIRINGS SHOW PAGE
     getNumberOfPairings(); // GETS THE NUMBER OF PAIRINGS FOR THE NEXT CLICK FUNCTION
-    getNumberOfComments(); // GETS THE NUMBER OF COMMENTS FOR THE NEXT CLICK FUNCTION
+    //getNumberOfComments(); // GETS THE NUMBER OF COMMENTS FOR SHOW COMMENTS
     let id = $("#pairing-id").attr('data-id')
     getPairing( parseInt(id, 10) )
     /////  ADD HANDLEBARS TEMPLATES
@@ -21,9 +21,6 @@ $( document ).ready(function() {
         getPairingForShow(nextPairingId);
         $("#comments ul").empty();
       }; // end if
-      if (currentPairing.id < pairingsLength) {
-        getPairing( currentPairing.id + 1 )
-      }// end if
     });//end next click function
 
     $("#previous").click(function(){
@@ -37,7 +34,8 @@ $( document ).ready(function() {
     });//end previous click function
 
     $("#show-comments").click(function(){
-      if ( (commentsCount > 0) &&  ( $("#show-comments").text() === "Show Comments") ) {
+      //console.log(currentPairing.commentsCount)
+      if ( (currentPairing.commentsCount > 0) &&  ( $("#show-comments").text() === "Show Comments") ) {
         $("#show-comments").text("Hide Comments")
         showPairingsComments();
       } else if ( $("#show-comments").text() === "Hide Comments" ) {
