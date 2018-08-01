@@ -31,13 +31,15 @@ const setCurrentPairing = pairing => {
 }// end setCurrentPairing
 
 
-/// ASSIGNS AND RETURNS THE NUMBER OF PAIRINGS TO TEST THE LENGTH FOR THE PREVIOUS/NEXT BUTTONS
+/// ASSIGNS AND RETURNS THE TOTAL NUMBER OF PAIRINGS
+// TO TEST THE LENGTH FOR THE PREVIOUS/NEXT BUTTONS
 const numberOfPairings = length => {
   return pairingsLength = length
 }// end numberOfPairings
 
 
-// GETS THE TOTAL NUMBER OF PAIRINGS
+// GETS THE TOTAL NUMBER OF PAIRINGS FROM THE DB
+// CALLED WHEN THE PAIRINGS SHOW PAGE LOADS
 // USED FOR THE PREV/NEXT BUTTONS TO PREVENT AN AJAX CALL
 // WHEN THE PAGE IS SHOWING THE FIRST OR THE LAST PAIRING
 const getNumberOfPairings = () => {
@@ -56,8 +58,8 @@ const createPairing = value => {
 
 
 
-///this function is called when a users show page is loaded
-/// gets all of the users pairings
+///CALLED WHEN THE USER'S SHOW PAGE LOADS
+/// GETS ALL OF THE USER'S PAIRINGS AND INSTANTIATED JSCRIPT OBJECTS
 const createUserPairings = id => {
   $.getJSON( `/users/${id}/pairings`, function( data ) {
   }).done(function( data ) {
@@ -70,6 +72,7 @@ const createUserPairings = id => {
 // GETS THE CURRENT PAIRING FOR THE PAIRING SHOW PAGE
 // CREATES JAVASCRIPT OBJECT AND STORES IT IN MEMORY
 
+/**
 function getPairing(id){
   $.getJSON( `/pairings/${id}`, function( data ) {
   }).done(function( data ) {
@@ -77,7 +80,7 @@ function getPairing(id){
       setCurrentPairing(pairing);
   });// end getJSON for pairing
 };// end createUserPairings
-
+**/
 
 
 //this function gets an individual pairing based on the pairing id

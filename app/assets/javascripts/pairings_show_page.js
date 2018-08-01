@@ -2,16 +2,17 @@ $( document ).ready(function() {
 
   if( $("#pairing-id").attr('data-id') ){ // ONLY LOADS THESE THINGS ON THE PAIRINGS SHOW PAGE
     getNumberOfPairings(); // GETS THE NUMBER OF PAIRINGS FOR THE NEXT CLICK FUNCTION
-    //getNumberOfComments(); // GETS THE NUMBER OF COMMENTS FOR SHOW COMMENTS
+
+    // GETS THE CURRENT PAIRING WHEN THE PAGE FIRST LOADS
     let id = $("#pairing-id").attr('data-id')
-    getPairing( parseInt(id, 10) )
+    getPairingForShow ( parseInt(id, 10) )
+
     /////  ADD HANDLEBARS TEMPLATES
     prevNextBtnsHtml = HandlebarsTemplates['previous_next_btns'](
       {pairingId: $("#pairing-id").attr('data-id')}
     );
     $("#prev-next-buttons").html(prevNextBtnsHtml);
     /////// END HANDLEBARS TEMPLATES
-
 
     /// CLICK FUNCTIONS
     $("#next").click(function(){
@@ -30,7 +31,6 @@ $( document ).ready(function() {
         getPairingForShow(previousPairingId);
         $("#comments ul").empty();
       };// end if
-      getPairing( currentPairing.id - 1 )
     });//end previous click function
 
     $("#show-comments").click(function(){
