@@ -16,8 +16,8 @@ class Comment {
 
   // comment methods
   formatAuthorName(){
-    let nameArray = this.userName.split(" ");
-    let upperCase = nameArray.map( word => {return word.replace( word[0],word[0].toUpperCase() )} )
+    const nameArray = this.userName.split(" ");
+    const upperCase = nameArray.map( word => {return word.replace( word[0],word[0].toUpperCase() )} )
     return upperCase.join(" ");
   }// end formatAuthorName
 }//end class definition
@@ -37,7 +37,7 @@ const createUserComments = (id) =>{
   $.getJSON( `/users/${id}/comments`, function( data ) {
   }).done(function( data ) {
     $.each( data, function( key, value ) {
-       let comment = createComment(value)
+       const comment = createComment(value)
     });//end .each
   });// end getJSON
 }//end createComments
